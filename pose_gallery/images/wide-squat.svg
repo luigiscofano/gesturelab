@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="640" viewBox="0 0 480 640"><title>Agachamento aberto</title>
+<rect width="480" height="640" rx="20" fill="#f6f8fc"/>
+<ellipse cx="240" cy="579" rx="175" ry="10" fill="#ede4de"/>
+<circle cx="285" cy="230" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="350" cy="250" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 285 230 L 350 250" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="285" cy="230" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="350" cy="250" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 285 230 L 350 250" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="350" cy="250" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="380" cy="170" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 350 250 L 380 170" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="350" cy="250" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="380" cy="170" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 350 250 L 380 170" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="195" cy="230" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="130" cy="250" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 195 230 L 130 250" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="195" cy="230" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="130" cy="250" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 195 230 L 130 250" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="130" cy="250" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="100" cy="170" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 130 250 L 100 170" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="130" cy="250" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="100" cy="170" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 130 250 L 100 170" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="280" cy="390" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="360" cy="430" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 280 390 L 360 430" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="280" cy="390" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="360" cy="430" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 280 390 L 360 430" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="360" cy="430" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="360" cy="555" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 360 430 L 360 555" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="360" cy="430" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="360" cy="555" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 360 430 L 360 555" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="200" cy="390" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="120" cy="430" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 200 390 L 120 430" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="200" cy="390" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="120" cy="430" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 200 390 L 120 430" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<circle cx="120" cy="430" r="15" fill="rgb(37, 49, 68)"/>
+<circle cx="120" cy="555" r="15" fill="rgb(37, 49, 68)"/>
+<path d="M 120 430 L 120 555" fill="none" stroke="rgb(37, 49, 68)" stroke-width="30" stroke-linecap="round"/>
+<circle cx="120" cy="430" r="10" fill="rgb(114, 94, 176)"/>
+<circle cx="120" cy="555" r="10" fill="rgb(114, 94, 176)"/>
+<path d="M 120 430 L 120 555" fill="none" stroke="rgb(114, 94, 176)" stroke-width="20" stroke-linecap="round"/>
+<polygon points="195,230 285,230 280,390 200,390" fill="rgb(114, 94, 176)" stroke="rgb(37, 49, 68)" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="240" cy="230" r="9" fill="rgb(37, 49, 68)"/>
+<circle cx="240" cy="140" r="9" fill="rgb(37, 49, 68)"/>
+<path d="M 240 230 L 240 140" fill="none" stroke="rgb(37, 49, 68)" stroke-width="18" stroke-linecap="round"/>
+<circle cx="240" cy="140" r="37" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="5"/>
+<circle cx="228" cy="137" r="4" fill="rgb(37, 49, 68)"/>
+<circle cx="252" cy="137" r="4" fill="rgb(37, 49, 68)"/>
+<circle cx="232" cy="154" r="1" fill="rgb(37, 49, 68)"/>
+<circle cx="248" cy="154" r="1" fill="rgb(37, 49, 68)"/>
+<path d="M 232 154 L 248 154" fill="none" stroke="rgb(37, 49, 68)" stroke-width="3" stroke-linecap="round"/>
+<circle cx="285" cy="230" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="195" cy="230" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="350" cy="250" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="130" cy="250" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="380" cy="170" r="13" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="100" cy="170" r="13" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="280" cy="390" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="200" cy="390" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="360" cy="430" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="120" cy="430" r="8" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="360" cy="555" r="13" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+<circle cx="120" cy="555" r="13" fill="rgb(245, 207, 147)" stroke="rgb(37, 49, 68)" stroke-width="3"/>
+</svg>

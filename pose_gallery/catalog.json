@@ -1,0 +1,2527 @@
+{
+  "schema_version": 1,
+  "description": "Catálogo ilustrado original; não são fotografias",
+  "landmark_origin": "exact_drawing_geometry",
+  "references": [
+    {
+      "id": "arms-down",
+      "title": "Braços ao lado",
+      "image": "images/arms-down.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6354166666666666,
+          "y": 0.4375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3645833333333333,
+          "y": 0.4375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.65625,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.65625,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.65625,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.65625,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "arms-wide",
+      "title": "Braços abertos",
+      "image": "images/arms-wide.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "arms-up",
+      "title": "Braços para cima",
+      "image": "images/arms-up.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6458333333333334,
+          "y": 0.1875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3541666666666667,
+          "y": 0.1875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "one-arm-up",
+      "title": "Um braço levantado",
+      "image": "images/one-arm-up.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6458333333333334,
+          "y": 0.1875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3645833333333333,
+          "y": 0.4375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.6770833333333334,
+          "y": 0.0625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.34375,
+          "y": 0.5703125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "hands-on-hips",
+      "title": "Mãos na cintura",
+      "image": "images/hands-on-hips.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7083333333333334,
+          "y": 0.421875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2916666666666667,
+          "y": 0.421875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.515625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "elbows-bent",
+      "title": "Cotovelos dobrados",
+      "image": "images/elbows-bent.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7395833333333334,
+          "y": 0.34375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2604166666666667,
+          "y": 0.34375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7395833333333334,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2604166666666667,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7395833333333334,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2604166666666667,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7395833333333334,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2604166666666667,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7395833333333334,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2604166666666667,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "low-v",
+      "title": "Braços em V baixo",
+      "image": "images/low-v.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7291666666666666,
+          "y": 0.4453125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2708333333333333,
+          "y": 0.4453125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8645833333333334,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.13541666666666666,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8645833333333334,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.13541666666666666,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8645833333333334,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.13541666666666666,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8645833333333334,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.13541666666666666,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "wide-squat",
+      "title": "Agachamento aberto",
+      "image": "images/wide-squat.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.359375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.359375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7291666666666666,
+          "y": 0.390625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2708333333333333,
+          "y": 0.390625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7916666666666666,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.20833333333333334,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7916666666666666,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.20833333333333334,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7916666666666666,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.20833333333333334,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7916666666666666,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.20833333333333334,
+          "y": 0.265625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.609375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.609375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "side-step",
+      "title": "Passo lateral",
+      "image": "images/side-step.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7291666666666666,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2708333333333333,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.125,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.125,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.125,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.125,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7291666666666666,
+          "y": 0.6875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3958333333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.875,
+          "y": 0.8671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3229166666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "raised-knee",
+      "title": "Um joelho elevado",
+      "image": "images/raised-knee.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7083333333333334,
+          "y": 0.34375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2916666666666667,
+          "y": 0.34375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7708333333333334,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.22916666666666666,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7708333333333334,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.22916666666666666,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7708333333333334,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.22916666666666666,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7708333333333334,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.22916666666666666,
+          "y": 0.21875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7395833333333334,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "wide-lunge",
+      "title": "Avanço com braços abertos",
+      "image": "images/wide-lunge.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.59375,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.40625,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.75,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.10416666666666667,
+          "y": 0.3125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.7291666666666666,
+          "y": 0.671875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.578125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.796875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.796875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.796875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.796875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.8958333333333334,
+          "y": 0.796875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.25,
+          "y": 0.796875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    },
+    {
+      "id": "side-bend",
+      "title": "Inclinação lateral",
+      "image": "images/side-bend.png",
+      "source": "Ilustração original do GestureLab; geometria gerada pelo código",
+      "license": "MIT",
+      "credit": "GestureLab, com assistência de IA",
+      "width": 480,
+      "height": 640,
+      "landmarks": [
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5,
+          "y": 0.17,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4791666666666667,
+          "y": 0.3203125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2916666666666667,
+          "y": 0.390625,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5208333333333334,
+          "y": 0.1953125,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.2708333333333333,
+          "y": 0.5234375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3854166666666667,
+          "y": 0.09375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3020833333333333,
+          "y": 0.6484375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3854166666666667,
+          "y": 0.09375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3020833333333333,
+          "y": 0.6484375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3854166666666667,
+          "y": 0.09375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3020833333333333,
+          "y": 0.6484375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3854166666666667,
+          "y": 0.09375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.3020833333333333,
+          "y": 0.6484375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5625,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4375,
+          "y": 0.546875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5729166666666666,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4270833333333333,
+          "y": 0.7109375,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.5833333333333334,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        },
+        {
+          "x": 0.4166666666666667,
+          "y": 0.875,
+          "visibility": 1.0,
+          "presence": 1.0
+        }
+      ]
+    }
+  ]
+}
