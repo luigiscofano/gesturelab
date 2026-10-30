@@ -1,5 +1,8 @@
+from types import SimpleNamespace
+
 import pytest
 
+import app
 from app import parse_args
 
 
@@ -55,3 +58,29 @@ def test_canvas_is_only_available_for_airwrite():
 def test_invalid_smoothing_is_rejected(value):
     with pytest.raises(SystemExit):
         parse_args(["--mode", "airwrite", "--smooth-ms", value])
+
+
+def test_photo_export_does_not_overwrite_a_file_created_during_encoding(tmp_path, monkeypatch):
+    image = tmp_path / "input.png"
+    output = tmp_path / "output.png"
+    args = parse_args(["--image", str(image), "--output", str(output)])
+    frame = SimpleNamespace(shape=(2, 2, 3))
+    encoded = SimpleNamespace(
+        tobytes=lambda: b"new annotated image",
+        tofile=lambda path: path.write_bytes(b"new annotated image"),
+    )
+
+    def encode(extension, canvas):
+        # Outro processo ocupa o destino após o teste de existência inicial.
+        output.write_bytes(b"another process owns this file")
+        return True, encoded
+
+    cv2 = SimpleNamespace(imdecode=lambda *args: frame, IMREAD_COLOR=1, imencode=encode)
+    np = SimpleNamespace(fromfile=lambda *args, **kwargs: b"input", uint8=object())
+    monkeypatch.setattr(app, "process_frame", lambda *args: None)
+    monkeypatch.setattr(app, "draw_result", lambda *args: (frame, {}))
+
+    with pytest.raises(FileExistsError):
+        app.run_image(None, args, (cv2, None, np, None, None))
+
+    assert output.read_bytes() == b"another process owns this file"

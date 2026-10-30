@@ -1,8 +1,13 @@
+import json
 import math
+from contextlib import contextmanager
+from datetime import datetime
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
+import app
 from airwriting import AirWriter, writing_pose
 from app import update_airwriter
 
@@ -204,3 +209,64 @@ def test_landmark_adapter_applies_display_mirroring_to_tip_and_export():
     tip = update_airwriter(writer, result, 0)
     assert tip == pytest.approx((999 - 80, 70))
     assert writer.snapshot()["strokes"][0]["points"][0]["x"] == pytest.approx(919)
+
+
+@pytest.fixture
+def export_environment(tmp_path, monkeypatch):
+    """Codificador substituído: valida arquivos e falhas, sem instalar OpenCV."""
+    monkeypatch.setattr(app, "ROOT", tmp_path)
+    monkeypatch.setattr(app, "datetime", SimpleNamespace(now=lambda: datetime(2026, 1, 2, 3, 4, 5)))
+    monkeypatch.setattr(app.uuid, "uuid4", lambda: SimpleNamespace(hex="0123456789abcdef"))
+    writer = AirWriter(640, 480)
+    args = SimpleNamespace(pen_width=5)
+    cv2 = SimpleNamespace(imencode=lambda *args: (True, SimpleNamespace(tobytes=lambda: b"png")))
+    np = SimpleNamespace(full=lambda *args, **kwargs: None, uint8=object())
+    return writer, args, cv2, np
+
+
+def test_airwrite_export_preserves_json_metadata(export_environment):
+    png_path, json_path = app.save_airwriting(*export_environment)
+    assert png_path.read_bytes() == b"png"
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+    assert data["frame_size"] == {"width": 640, "height": 480}
+    assert data["coordinate_space"] == "display_pixels"
+    assert data["pen_width_px"] == 5
+    assert data["strokes"] == []
+
+
+def test_json_collision_preserves_existing_file_and_removes_new_png(
+    export_environment, tmp_path,
+):
+    folder = tmp_path / "outputs"
+    folder.mkdir()
+    existing = folder / "airwrite_20260102_030405_01234567.json"
+    existing.write_bytes(b"existing trajectories")
+
+    with pytest.raises(FileExistsError):
+        app.save_airwriting(*export_environment)
+
+    assert list(folder.iterdir()) == [existing]
+    assert existing.read_bytes() == b"existing trajectories"
+
+
+def test_failed_json_write_removes_both_partial_export_files(
+    export_environment, tmp_path, monkeypatch,
+):
+    original_open = Path.open
+
+    @contextmanager
+    def fail_json_write(path, mode="r", *args, **kwargs):
+        with original_open(path, mode, *args, **kwargs) as output:
+            if path.suffix == ".json" and mode.startswith("x"):
+                def write(data):
+                    output.write(data[:5])
+                    raise OSError("simulated disk full")
+                yield SimpleNamespace(write=write)
+            else:
+                yield output
+
+    monkeypatch.setattr(Path, "open", fail_json_write)
+    with pytest.raises(OSError, match="simulated disk full"):
+        app.save_airwriting(*export_environment)
+
+    assert list((tmp_path / "outputs").iterdir()) == []
