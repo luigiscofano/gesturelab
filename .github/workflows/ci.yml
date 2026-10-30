@@ -32,12 +32,13 @@ jobs:
       - name: Lint
         run: python -m ruff check .
       - name: Compile Python sources
-        run: python -m compileall -q app.py core.py airwriting.py scripts tests
+        run: python -m compileall -q app.py core.py airwriting.py file_io.py pose_matching.py pose_match_app.py pose_gallery scripts tests
       - name: Check CLI entry points without vision dependencies
         run: |
           python app.py --help
           python scripts/download_models.py --help
           python scripts/check_environment.py --help
+          python scripts/build_pose_catalog.py --help
       - name: Test deterministic logic
         run: python -m pytest -q
 

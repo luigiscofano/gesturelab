@@ -1,9 +1,10 @@
-"""GestureLab: landmarks e gestos de mão com OpenCV + MediaPipe Tasks.
+"""GestureLab: mãos, escrita no ar e busca de imagens por pose corporal.
 
 Exemplos:
     python app.py --mode hands
     python app.py --mode gestures
     python app.py --mode airwrite
+    python app.py --mode posematch
     python app.py --mode hands --image foto.jpg --output resultado.jpg
 """
 
@@ -19,6 +20,7 @@ from datetime import datetime
 from pathlib import Path
 
 from airwriting import AirWriter, writing_pose
+from file_io import write_new_files
 from core import (
     HAND_CONNECTIONS,
     FrameClock,
@@ -32,6 +34,7 @@ MODEL_NAMES = {
     "hands": "hand_landmarker.task",
     "gestures": "gesture_recognizer.task",
     "airwrite": "hand_landmarker.task",
+    "posematch": "pose_landmarker_lite.task",
 }
 
 
@@ -60,7 +63,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=MODEL_NAMES, default="hands")
     parser.add_argument("--camera", type=int, default=0, help="Índice da webcam, normalmente 0.")
-    parser.add_argument("--num-hands", type=positive_int, default=2)
+    parser.add_argument("--num-hands", type=positive_int, default=2,
+                        help="Quantidade máxima nos modos de mãos.")
     parser.add_argument("--threshold", type=probability, default=0.65,
                         help="Limiar do score de gesto; 0.65 é só ponto de partida.")
     parser.add_argument("--mirror", action=argparse.BooleanOptionalAction, default=True,
@@ -77,6 +81,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="Em airwrite, constante de suavização EMA em ms; 0 desliga.")
     parser.add_argument("--pen-width", type=positive_int, default=5,
                         help="Em airwrite, espessura do traço em pixels.")
+    parser.add_argument("--gallery", type=Path,
+                        help="Em posematch, catálogo JSON de imagens e poses.")
+    parser.add_argument("--match-threshold", type=nonnegative_float,
+                        help="Em posematch, distância máxima aceita; padrão experimental: 0.8.")
     args = parser.parse_args(argv)
     if args.output and not args.image:
         parser.error("--output só é permitido junto com --image.")
@@ -86,6 +94,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         parser.error("airwrite precisa de uma sequência da webcam; --image não é compatível.")
     if args.canvas and args.mode != "airwrite":
         parser.error("--canvas só está disponível em --mode airwrite.")
+    if args.mode != "posematch" and (args.gallery is not None or args.match_threshold is not None):
+        parser.error("--gallery e --match-threshold só estão disponíveis em --mode posematch.")
+    if args.gallery is None:
+        args.gallery = ROOT / "pose_gallery" / "catalog.json"
+    if args.match_threshold is None:
+        args.match_threshold = 0.8
     return args
 
 
@@ -203,28 +217,6 @@ def put_text(canvas, text, point, cv2):
     cv2.putText(canvas, text, point, font, scale, (245, 245, 245), 1, cv2.LINE_AA)
 
 
-def _write_new_files(files: dict[Path, bytes]) -> None:
-    """Cria saídas exclusivas e remove as desta tentativa se a gravação falhar.
-
-    O rollback trata exceções, mas não é uma transação resistente à queda de
-    energia. Arquivos que já existiam nunca entram na lista de remoção.
-    """
-    created = []
-    try:
-        for path, data in files.items():
-            with path.open("xb") as output:
-                created.append(path)
-                output.write(data)
-    except BaseException:
-        for path in reversed(created):
-            try:
-                path.unlink(missing_ok=True)
-            except OSError as exc:
-                print(f"Não foi possível remover a saída incompleta {path}: {exc}",
-                      file=sys.stderr)
-        raise
-
-
 def run_image(task, args, deps):
     cv2, _, np, _, _ = deps
     # Leitura em bytes + imdecode aceitam caminhos Windows que contêm acentos.
@@ -253,7 +245,7 @@ def run_image(task, args, deps):
         if not ok:
             raise RuntimeError("Não foi possível codificar a imagem anotada.")
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        _write_new_files({args.output: encoded.tobytes()})
+        write_new_files({args.output: encoded.tobytes()})
         summary["output"] = str(args.output)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
@@ -327,7 +319,7 @@ def save_airwriting(writer, args, cv2, np):
     data["pen_width_px"] = args.pen_width
     # Serializa antes de criar arquivos e evita deixar um par parcial em falhas comuns.
     json_bytes = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
-    _write_new_files({png_path: encoded.tobytes(), json_path: json_bytes})
+    write_new_files({png_path: encoded.tobytes(), json_path: json_bytes})
     print(f"Desenho salvo: {png_path}\nTrajetórias salvas: {json_path}")
     return png_path, json_path
 
@@ -404,11 +396,15 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     try:
         dependencies = load_dependencies()
-        with create_task(args, dependencies[3], dependencies[4]) as task:
-            if args.image:
-                run_image(task, args, dependencies)
-            else:
-                run_camera(task, args, dependencies)
+        if args.mode == "posematch":
+            from pose_match_app import run_posematch
+            run_posematch(args, dependencies)
+        else:
+            with create_task(args, dependencies[3], dependencies[4]) as task:
+                if args.image:
+                    run_image(task, args, dependencies)
+                else:
+                    run_camera(task, args, dependencies)
     except KeyboardInterrupt:
         return 0
     except (RuntimeError, OSError, ValueError) as exc:
