@@ -203,9 +203,31 @@ def put_text(canvas, text, point, cv2):
     cv2.putText(canvas, text, point, font, scale, (245, 245, 245), 1, cv2.LINE_AA)
 
 
+def _write_new_files(files: dict[Path, bytes]) -> None:
+    """Cria saídas exclusivas e remove as desta tentativa se a gravação falhar.
+
+    O rollback trata exceções, mas não é uma transação resistente à queda de
+    energia. Arquivos que já existiam nunca entram na lista de remoção.
+    """
+    created = []
+    try:
+        for path, data in files.items():
+            with path.open("xb") as output:
+                created.append(path)
+                output.write(data)
+    except BaseException:
+        for path in reversed(created):
+            try:
+                path.unlink(missing_ok=True)
+            except OSError as exc:
+                print(f"Não foi possível remover a saída incompleta {path}: {exc}",
+                      file=sys.stderr)
+        raise
+
+
 def run_image(task, args, deps):
     cv2, _, np, _, _ = deps
-    # imdecode/tofile funcionam também com caminhos Windows que contêm acentos.
+    # Leitura em bytes + imdecode aceitam caminhos Windows que contêm acentos.
     try:
         frame = cv2.imdecode(np.fromfile(args.image, dtype=np.uint8), cv2.IMREAD_COLOR)
     except (OSError, ValueError) as exc:
@@ -231,7 +253,7 @@ def run_image(task, args, deps):
         if not ok:
             raise RuntimeError("Não foi possível codificar a imagem anotada.")
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        encoded.tofile(args.output)
+        _write_new_files({args.output: encoded.tobytes()})
         summary["output"] = str(args.output)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
@@ -303,11 +325,9 @@ def save_airwriting(writer, args, cv2, np):
     png_path, json_path = folder / f"{stem}.png", folder / f"{stem}.json"
     data = writer.snapshot()
     data["pen_width_px"] = args.pen_width
-    # Modo exclusivo evita substituir qualquer arquivo existente, mesmo em colisão de nome.
-    with png_path.open("xb") as output:
-        output.write(encoded.tobytes())
-    with json_path.open("x", encoding="utf-8") as output:
-        json.dump(data, output, ensure_ascii=False, indent=2)
+    # Serializa antes de criar arquivos e evita deixar um par parcial em falhas comuns.
+    json_bytes = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
+    _write_new_files({png_path: encoded.tobytes(), json_path: json_bytes})
     print(f"Desenho salvo: {png_path}\nTrajetórias salvas: {json_path}")
     return png_path, json_path
 
