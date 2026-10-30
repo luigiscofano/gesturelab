@@ -134,6 +134,7 @@ esses parâmetros.
 | [app.py](../../app.py) | Validar a CLI e encaminhar o quarto modo |
 | [pose_matching.py](../../pose_matching.py) | Descritor, distância, ranking e validação do catálogo, apenas biblioteca padrão |
 | [pose_match_app.py](../../pose_match_app.py) | Modelo corporal, câmera/foto, seleção temporal e composição da interface |
+| [vision_runtime.py](../../vision_runtime.py) | Dependências nomeadas e operações de imagem/câmera compartilhadas |
 | [file_io.py](../../file_io.py) | Criar saídas sem sobrescrita, compartilhado com os modos existentes |
 | [scripts/build_pose_catalog.py](../../scripts/build_pose_catalog.py) | Indexar fotos locais com o detector corporal |
 | [pose_gallery](../../pose_gallery/README.md) | Imagens e landmarks das referências iniciais |

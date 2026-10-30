@@ -2,10 +2,14 @@
 
 ## Estado implementado
 
-`app.py` coordena o programa. `core.py` contém funções puras que podem ser testadas
-sem câmera e sem carregar o modelo. O programa usa exatamente uma tarefa por
-execução: Hand Landmarker em `hands` e `airwrite`, Gesture Recognizer em `gestures`
-ou Pose Landmarker em `posematch`.
+`app.py` valida os argumentos e inicia o modo escolhido. `hand_app.py` executa
+os modos de mãos e escrita; `pose_match_app.py` executa a busca corporal.
+`vision_runtime.py` reúne as dependências de visão e as operações compartilhadas
+de imagem e câmera. Os módulos de geometria e estado continuam independentes
+dessas bibliotecas.
+
+O programa usa exatamente uma tarefa por execução: Hand Landmarker em `hands`
+e `airwrite`, Gesture Recognizer em `gestures` ou Pose Landmarker em `posematch`.
 
 ![Fluxo do projeto](assets/pipeline.png)
 
@@ -36,7 +40,7 @@ histórico por mão, implemente associação temporal ou limite a experiência a
 
 `airwriting.py` recebe posições e condições de escrita, mantém traços separados,
 aplica suavização e encerra a continuidade ao perder a pose, a mão ou a condição
-de rastreamento. A interface em `app.py` exibe os traços sobre vídeo ou branco,
+de rastreamento. A interface em `hand_app.py` exibe os traços sobre vídeo ou branco,
 processa atalhos e exporta PNG + JSON quando solicitado.
 
 O PNG contém só a tinta. O JSON preserva os traços, pontos, tempos e convenção de
@@ -65,6 +69,20 @@ circular entre os modos e mantém uma única implementação da proteção de sa
 
 Leia [posematch/README.md](posematch/README.md) para o contrato da comparação e
 [o README do catálogo](../pose_gallery/README.md) para os dados de referência.
+
+## Dependências e manutenção
+
+`VisionDependencies` dá nomes aos módulos carregados em tempo de execução. O
+acesso a OpenCV, NumPy e MediaPipe não depende da posição de um item em uma tupla.
+Ajuda da CLI e testes de lógica continuam funcionando sem importar essas bibliotecas.
+
+O código compartilhado fica nas operações com o mesmo contrato, como preparar
+uma imagem RGB e liberar a câmera. As decisões de cada modo permanecem no seu
+runtime: controles da caneta, confirmação da referência e desenho dos painéis.
+
+Os testes cobrem os contratos públicos e os casos de falha relevantes. Ruff
+padroniza a formatação e verifica imports, sintaxe, simplificações e erros comuns.
+As convenções estão no [guia de contribuição](../CONTRIBUTING.md#estilo-de-código).
 
 ## Evolução planejada
 

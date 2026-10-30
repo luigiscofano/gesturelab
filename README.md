@@ -214,7 +214,9 @@ de Libras. A tela usa texto sem acentos por uma limitação das fontes do OpenCV
 
 | Caminho | Responsabilidade |
 | --- | --- |
-| `app.py` | CLI, câmera, MediaPipe, desenho e processamento de foto |
+| `app.py` | Validar a CLI e iniciar o modo escolhido |
+| `hand_app.py` | Executar os modos de mãos e escrita, desenhar resultados e exportar saídas |
+| `vision_runtime.py` | Carregar dependências de visão e compartilhar leitura, conversão e recursos da câmera |
 | `core.py` | Geometria do desenho, nomes, rejeição por score e timestamps |
 | `airwriting.py` | Pose de escrita, separação de traços, suavização e estado da caneta |
 | `pose_matching.py` | Normalização, validação do catálogo e ranking geométrico, sem dependências de visão |
@@ -249,13 +251,14 @@ Gesture Recognizer, que já retorna landmarks: não roda dois modelos em paralel
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m ruff format --check .
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check .
 ```
 
 Os testes verificam coordenadas espelhadas, limites da imagem, rejeição de gestos,
 distinção entre classes conhecidas e desconhecidas, timestamps e restrições da CLI.
-Não medem a qualidade do modelo. O workflow executa a análise de código e os testes
+Não medem a qualidade do modelo. O workflow confere formatação, análise de código e testes
 em Windows e Linux. A [primeira execução no GitHub Actions](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460)
 foi aprovada nos dois sistemas; o badge acima acompanha o estado atual.
 O [README de testes](tests/README.md) explica os cenários cobertos e como distinguir

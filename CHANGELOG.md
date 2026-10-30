@@ -2,6 +2,23 @@
 
 ## 30 de outubro de 2026
 
+### Clareza do código e responsabilidades
+
+- `app.py` concentra a CLI e a escolha do modo; `hand_app.py` reúne a execução
+  das mãos e da escrita, preservando os comandos existentes.
+- `vision_runtime.py` centraliza dependências nomeadas, conversão RGB, leitura e
+  gravação de imagens e liberação da câmera.
+- Geometria dos dedos, continuidade da caneta, comparação de poses, validação
+  de catálogos e desenho dos painéis separados em funções com responsabilidades claras.
+- Scripts e gerador revisados, com nomes explícitos, unidades e constantes;
+  modelos, hashes e imagens do catálogo preservados.
+- Formatação Ruff em todo o Python e regras adicionais de imports, sintaxe,
+  simplificação e erros comuns verificadas pelo CI em Windows/Ubuntu.
+- Oito casos de regressão adicionais para inferência e recursos de câmera;
+  suíte local com 132 testes aprovados.
+- Comparações com a versão anterior verificaram geometria, estados, renderização,
+  saídas dos modelos reais e geração do catálogo. Detalhes em `docs/VALIDACAO.md`.
+
 ### Busca de imagens por pose corporal
 
 - Quarto modo independente, `posematch`, com Pose Landmarker corporal e imagem

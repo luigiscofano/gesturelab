@@ -328,7 +328,7 @@ Teste cenários comparáveis: mão próxima e distante, esquerda e direita, uma 
 
 Informe se a métrica foi calculada por frame, por apresentação ou por evento. Uma pose mantida por mais tempo não deve ganhar peso extra sem essa escolha ficar explícita. Para uma interação, conte quantas apresentações independentes produziram a ação correta e quantas falharam por ausência de detecção.
 
-O kit solicita 960 por 540 pixels em `app.py`, nas chamadas `CAP_PROP_FRAME_WIDTH` e `CAP_PROP_FRAME_HEIGHT`. Para experimentar outra resolução, ajuste esses valores. A câmera pode entregar outro tamanho: registre a resolução efetiva obtida em `frame.shape`, não apenas a solicitada.
+O aplicativo solicita 960 por 540 pixels pelas constantes `CAMERA_WIDTH` e `CAMERA_HEIGHT`, em `vision_runtime.py`. Para experimentar outra resolução, ajuste esses valores. A câmera pode entregar outro tamanho: registre a resolução efetiva obtida em `frame.shape`, não apenas a solicitada.
 
 ## 11. Escrita no ar e reconhecimento da escrita
 

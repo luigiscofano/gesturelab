@@ -20,6 +20,7 @@ os exemplos abaixo criam um ambiente separado apenas para testes.
 ```powershell
 py -3.12 -m venv .venv-tests
 .\.venv-tests\Scripts\python.exe -m pip install pytest==9.2.0 ruff==0.17.3
+.\.venv-tests\Scripts\python.exe -m ruff format --check .
 .\.venv-tests\Scripts\python.exe -m pytest -q
 .\.venv-tests\Scripts\python.exe -m ruff check .
 ```
@@ -29,6 +30,7 @@ py -3.12 -m venv .venv-tests
 ```bash
 python3.12 -m venv .venv-tests
 .venv-tests/bin/python -m pip install pytest==9.2.0 ruff==0.17.3
+.venv-tests/bin/python -m ruff format --check .
 .venv-tests/bin/python -m pytest -q
 .venv-tests/bin/python -m ruff check .
 ```
@@ -48,6 +50,7 @@ virtual. Não é necessário ativar esse ambiente nem alterar a política do Pow
 | [test_pose_matching.py](test_pose_matching.py) | Normalização, proporção da imagem, espelhamento, ranking, visibilidade e validação do catálogo. |
 | [test_pose_match_app.py](test_pose_match_app.py) | Confirmação temporal, limpeza da referência, fluxo da câmera/foto e composição com dependências substitutas. |
 | [test_pose_catalog.py](test_pose_catalog.py) | Preparação de catálogos e tratamento de imagens não utilizáveis, sem modelo na suíte de lógica. |
+| [test_vision_runtime.py](test_vision_runtime.py) | Roteamento IMAGE/VIDEO dos modos de mãos e liberação da câmera e das janelas quando o processamento falha. |
 
 Você pode executar um subconjunto durante uma alteração:
 

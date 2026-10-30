@@ -220,3 +220,41 @@ avaliação local.
 As verificações do CI continuam limitadas à lógica e às CLIs, sem instalação
 das bibliotecas de visão. O teste real de modelo e imagens descrito nesta seção
 foi executado localmente no ambiente de preparação.
+
+## Refatoração e consistência do código
+
+Em 30/10/2026, o código foi revisado para separar responsabilidades e facilitar
+a leitura. A comparação usou como base o commit
+[`79b71c5`](https://github.com/luigiscofano/gesturelab/commit/79b71c5051313a423864108e3f629453c2c74e3e).
+Os comandos, os formatos de saída, os modelos e os limiares permaneceram os mesmos.
+
+`app.py` passou a cuidar da CLI e do encaminhamento. `hand_app.py` reúne os modos
+de mãos e escrita; `vision_runtime.py` concentra dependências nomeadas e operações
+com o mesmo contrato. A revisão também abrangeu o núcleo puro, os scripts, o
+gerador do catálogo e os testes. As convenções foram registradas em `CONTRIBUTING.md`.
+
+| Verificação | Resultado observado |
+| --- | --- |
+| Suíte local completa | **132 testes passaram**, incluindo oito casos novos de roteamento IMAGE/VIDEO e liberação de recursos |
+| Formatação e análise | `ruff format --check` e `ruff check` aprovados com as regras ampliadas |
+| Compilação | Os 20 arquivos Python compilados sem erro |
+| Ajuda sem dependências de visão | Quatro entradas executadas com `python -S ... --help` |
+| Núcleo corporal | 2.500 entradas determinísticas comparadas; 1.794 utilizáveis; descritores, rankings e espelhamento iguais à base |
+| Regra de escrita | 2.000 poses de mão produziram as mesmas decisões |
+| Estado da caneta | 10.000 transições com snapshots, status e estados iguais |
+| Renderização corporal | 32 combinações de estados e espelhamento com pixels e resumos JSON iguais |
+| Desenho de mãos e escrita | Comparações com OpenCV real preservaram pixels e resumos, incluindo fundos branco e de câmera |
+| Inferência real em fotografias | `hands`, `gestures` e `posematch` produziram PNGs idênticos byte a byte e JSONs iguais, desconsiderando tempo de inferência e caminhos locais |
+| Gerador do catálogo | 12 PNG, 12 SVG e `catalog.json` reproduzidos byte a byte em pasta temporária |
+| Modelos | Nomes, URLs e hashes iguais aos da versão anterior |
+| Indexador real | Fotografia oficial aceita, com uma referência e 12 articulações utilizáveis |
+| Documentação | 161 links relativos verificados, sem destinos ausentes |
+
+Os testes de inferência reutilizaram as fotografias oficiais de mão e corpo
+citadas nas seções anteriores. Entradas, saídas e cópias temporárias da versão
+anterior ficaram fora do repositório.
+
+Essas comparações verificam preservação de comportamento nos casos executados.
+Não são uma nova avaliação de acurácia, desempenho ou webcam física. A revisão
+e as alterações tiveram assistência de IA, incluindo leituras independentes entre
+agentes; não representam aprovação humana independente.
