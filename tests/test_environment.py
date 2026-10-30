@@ -1,4 +1,4 @@
-"""Contratos de diagnóstico sem dependências de visão, rede ou câmera."""
+"""Verifica a instalação com substitutos, sem bibliotecas de visão, rede ou câmera."""
 
 import hashlib
 from importlib import metadata
@@ -9,6 +9,8 @@ from scripts import check_environment as environment
 
 
 def installed_versions(monkeypatch, versions):
+    """Simula versões instaladas; monkeypatch restaura a consulta original após cada teste."""
+
     def version(name):
         if name not in versions:
             raise metadata.PackageNotFoundError(name)
@@ -18,6 +20,7 @@ def installed_versions(monkeypatch, versions):
 
 
 def test_missing_mismatched_and_matching_packages_are_distinguished(monkeypatch):
+    # A tabela controlada permite distinguir pacote ausente, versão errada e versão correta.
     installed_versions(monkeypatch, {"numpy": "2.0", "mediapipe": "1.2"})
     checks = environment.check_dependencies(
         {"numpy": "2.1", "mediapipe": "1.2", "opencv-contrib-python": "5.0"}
@@ -31,6 +34,7 @@ def test_missing_mismatched_and_matching_packages_are_distinguished(monkeypatch)
 
 
 def test_opencv_conflict_is_rejected_even_when_requested_version_matches(monkeypatch):
+    """Duas distribuições que fornecem cv2 são um conflito, mesmo com versões compatíveis."""
     installed_versions(
         monkeypatch, {"opencv-contrib-python": "5.0", "opencv-python-headless": "5.0"}
     )
@@ -41,12 +45,14 @@ def test_opencv_conflict_is_rejected_even_when_requested_version_matches(monkeyp
 
 
 def test_reference_python_and_architecture_are_checked_independently(monkeypatch):
+    # Simula um Python diferente do recomendado e um processo de 32 bits.
     monkeypatch.setattr(environment.sys, "version_info", (3, 13, 0))
     monkeypatch.setattr(environment.sys, "maxsize", 2**31 - 1)
     assert all(not check.passed for check in environment.check_python())
 
 
 def test_pinned_requirements_allow_comments_but_reject_silent_skips(tmp_path):
+    # tmp_path fornece uma pasta isolada; nenhum arquivo de instalação real é modificado.
     path = tmp_path / "requirements.txt"
     path.write_text("# comentário\nnumpy==2.5.4 # versão\n", encoding="utf-8")
     assert environment.read_requirements(path) == {"numpy": "2.5.4"}
@@ -56,6 +62,7 @@ def test_pinned_requirements_allow_comments_but_reject_silent_skips(tmp_path):
 
 
 def test_missing_and_corrupt_models_fail_without_modifying_files(monkeypatch, tmp_path):
+    """Um hash conhecido diferencia o arquivo corrompido do modelo que nem foi baixado."""
     content = b"modelo de teste"
     expected = hashlib.sha256(content).hexdigest()
     monkeypatch.setattr(
@@ -77,6 +84,7 @@ def test_missing_and_corrupt_models_fail_without_modifying_files(monkeypatch, tm
 
 
 def test_model_selection_checks_only_requested_file(monkeypatch, tmp_path):
+    # O modelo ausente não deve afetar o diagnóstico quando outro foi selecionado.
     content = b"modelo de teste"
     monkeypatch.setattr(
         environment,
@@ -93,6 +101,7 @@ def test_model_selection_checks_only_requested_file(monkeypatch, tmp_path):
 
 
 def test_native_library_error_is_reported_and_other_imports_continue(monkeypatch):
+    """Uma falha de biblioteca nativa entra no relatório sem interromper as demais verificações."""
     imported = []
 
     def import_module(name):
@@ -111,6 +120,7 @@ def test_native_library_error_is_reported_and_other_imports_continue(monkeypatch
 def test_default_cli_checks_metadata_without_importing_or_checking_models(
     monkeypatch, capsys, missing, expected_exit
 ):
+    # As funções opcionais são substituídas por uma falha para detectar chamadas indevidas.
     monkeypatch.setattr(environment, "check_python", lambda: [])
     monkeypatch.setattr(environment, "read_requirements", lambda path: {"numpy": "2.5.4"})
     installed_versions(monkeypatch, {} if missing else {"numpy": "2.5.4"})
@@ -125,6 +135,7 @@ def test_default_cli_checks_metadata_without_importing_or_checking_models(
 
 
 def test_cli_routes_requested_import_and_model_checks(monkeypatch, tmp_path):
+    """Registra as chamadas para conferir que as opções chegam às verificações corretas."""
     monkeypatch.setattr(environment, "check_python", lambda: [])
     monkeypatch.setattr(environment, "read_requirements", lambda path: {})
     installed_versions(monkeypatch, {})

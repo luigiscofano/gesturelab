@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parent
 
 
 def probability(value: str) -> float:
+    """Converte uma opção do terminal em um valor entre zero e um."""
     number = float(value)
     if not 0.0 <= number <= 1.0:
         raise argparse.ArgumentTypeError("Use um número entre 0 e 1.")
@@ -30,6 +31,7 @@ def probability(value: str) -> float:
 
 
 def positive_int(value: str) -> int:
+    """Aceita apenas contagens positivas, como o limite de frames."""
     number = int(value)
     if number <= 0:
         raise argparse.ArgumentTypeError("Use um inteiro positivo.")
@@ -37,6 +39,7 @@ def positive_int(value: str) -> int:
 
 
 def nonnegative_float(value: str) -> float:
+    """Valida medidas que podem ser zero, mas não negativas nem infinitas."""
     number = float(value)
     if not math.isfinite(number) or number < 0:
         raise argparse.ArgumentTypeError("Use um número finito maior ou igual a zero.")
@@ -44,7 +47,9 @@ def nonnegative_float(value: str) -> float:
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Lê as opções do terminal, aplica padrões e rejeita combinações incompatíveis."""
     parser = argparse.ArgumentParser(description=__doc__)
+    # Opções gerais escolhem o modo, a câmera e a apresentação dos resultados.
     parser.add_argument("--mode", choices=MODEL_NAMES, default="hands")
     parser.add_argument("--camera", type=int, default=0, help="Índice da webcam, normalmente 0.")
     parser.add_argument(
@@ -64,6 +69,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--show-indices", action="store_true", help="Mostra os índices 0 a 20.")
     parser.add_argument("--model", type=Path, help="Substitui o arquivo .task do modo escolhido.")
+    # Uma foto é processada uma vez; a webcam precisa de um ciclo de captura.
     parser.add_argument("--image", type=Path, help="Processa uma foto sem abrir a webcam/janela.")
     parser.add_argument("--output", type=Path, help="Salva a foto anotada; exige --image.")
     parser.add_argument(
@@ -72,6 +78,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--max-frames", type=positive_int, help="Encerra após este número de frames."
     )
+    # Controles da caneta: fundo, suavização do movimento e espessura do traço.
     parser.add_argument(
         "--canvas",
         action="store_true",
@@ -89,6 +96,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=5,
         help="Em airwrite, espessura do traço em pixels.",
     )
+    # A busca corporal escolhe uma galeria e um limite de distância entre poses.
     parser.add_argument(
         "--gallery", type=Path, help="Em posematch, catálogo JSON de imagens e poses."
     )
@@ -98,6 +106,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Em posematch, distância máxima aceita; padrão experimental: 0.8.",
     )
     args = parser.parse_args(argv)
+    # Estas verificações acontecem antes de carregar modelos ou abrir a câmera.
     if args.output and not args.image:
         parser.error("--output só é permitido junto com --image.")
     if args.headless and not args.image and not args.max_frames:
@@ -116,6 +125,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Inicia o modo escolhido e devolve ao terminal zero para sucesso ou um para erro."""
     args = parse_args(argv)
     try:
         dependencies = load_dependencies()
@@ -132,4 +142,5 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    # Importar este módulo não inicia a câmera; executar o arquivo chama main().
     raise SystemExit(main())

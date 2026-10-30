@@ -15,6 +15,7 @@ from pathlib import Path
 DEFAULT_DIRECTORY = Path(__file__).resolve().parents[1] / "models"
 CHUNK_SIZE_BYTES = 1024 * 1024
 DOWNLOAD_TIMEOUT_SECONDS = 60
+# Cada modelo define o nome local, a origem e o hash esperado dos seus bytes.
 MODELS = {
     "hands": (
         "hand_landmarker.task",
@@ -35,14 +36,17 @@ MODELS = {
 
 
 def sha256(path: Path) -> str:
+    """Calcula um resumo do arquivo para conferir sua integridade."""
     digest = hashlib.sha256()
     with path.open("rb") as stream:
+        # A leitura em blocos evita carregar o modelo inteiro na memória.
         for chunk in iter(lambda: stream.read(CHUNK_SIZE_BYTES), b""):
             digest.update(chunk)
     return digest.hexdigest()
 
 
 def download(name: str, directory: Path) -> None:
+    """Reutiliza um modelo válido ou baixa e verifica uma nova cópia."""
     filename, url, expected_hash = MODELS[name]
     target = directory / filename
     if target.exists():
@@ -52,6 +56,7 @@ def download(name: str, directory: Path) -> None:
             )
         print(f"OK (já existe): {filename}")
         return
+    # O arquivo incompleto fica separado do modelo que o aplicativo pode carregar.
     temporary = directory / (filename + ".part")
     try:
         request = urllib.request.Request(url, headers={"User-Agent": "GestureLab/0.1"})
@@ -64,13 +69,16 @@ def download(name: str, directory: Path) -> None:
         actual_hash = sha256(temporary)
         if actual_hash != expected_hash:
             raise ValueError(f"SHA-256 não confere para {filename}: {actual_hash}")
+        # Só publica o nome definitivo depois que o conteúdo foi conferido.
         temporary.replace(target)
         print(f"OK: {filename} ({target.stat().st_size} bytes)\nSHA-256: {actual_hash}")
     finally:
+        # Remove sobras de uma transferência ou verificação interrompida.
         temporary.unlink(missing_ok=True)
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Lê as opções do terminal e baixa os modelos solicitados."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--only", choices=MODELS, help="Baixa só o modelo escolhido.")
     parser.add_argument("--directory", type=Path, default=DEFAULT_DIRECTORY)

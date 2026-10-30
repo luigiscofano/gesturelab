@@ -11,6 +11,7 @@ import sys
 from contextlib import suppress
 from pathlib import Path
 
+# A execução direta precisa localizar os módulos que ficam na raiz do projeto.
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -24,6 +25,7 @@ MAX_IMAGE_SIDE = 960
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Lê as pastas, o modelo e os créditos que acompanharão as imagens."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, type=Path, help="Pasta das fotos; não recursiva.")
     parser.add_argument(
@@ -58,6 +60,7 @@ def reference_from_result(
     landmarks = result.pose_landmarks[0]
     if extract_pose(landmarks, width, height) is None:
         return None
+    # Guarda os pontos e a proporção da foto para comparações futuras.
     return {
         "id": name,
         "title": name,
@@ -95,6 +98,7 @@ def write_catalog(
             "landmark_origin": "mediapipe_pose_landmarker",
             "references": references,
         }
+        # Prepara imagens e metadados antes de iniciar a gravação exclusiva.
         payloads = {image_dir / name: content for name, content in images.items()}
         payloads[output_dir / "catalog.json"] = (
             json.dumps(data, ensure_ascii=False, indent=2) + "\n"
@@ -115,6 +119,7 @@ def read_frame(path: Path, cv2, np):
     if frame is None:
         raise ValueError("imagem ilegível")
     height, width = frame.shape[:2]
+    # Usa a mesma escala nos dois eixos para preservar a proporção do corpo.
     scale = min(1.0, MAX_IMAGE_SIDE / max(width, height))
     if scale < 1:
         size = (max(1, round(width * scale)), max(1, round(height * scale)))
@@ -123,6 +128,7 @@ def read_frame(path: Path, cv2, np):
 
 
 def _input_images(args: argparse.Namespace) -> list[Path]:
+    """Valida os caminhos e lista as imagens da pasta em ordem estável."""
     if not args.input.is_dir():
         raise ValueError(f"Pasta de entrada não encontrada: {args.input}")
     if args.output.exists():
@@ -148,6 +154,7 @@ def _index_image(
     task,
     dependencies: VisionDependencies,
 ) -> tuple[dict[str, object], bytes] | None:
+    """Extrai uma pose utilizável e prepara a imagem em PNG para o catálogo."""
     frame = read_frame(path, dependencies.cv2, dependencies.numpy)
     height, width = frame.shape[:2]
     result = task.detect(to_mediapipe_image(frame, dependencies))
@@ -169,16 +176,19 @@ def _index_image(
 
 
 def build_catalog(args: argparse.Namespace) -> Path:
+    """Analisa as fotos e grava um catálogo com as referências aceitas."""
     paths = _input_images(args)
     dependencies = load_dependencies()
     vision = dependencies.vision
     options = vision.PoseLandmarkerOptions(
         base_options=dependencies.tasks.BaseOptions(model_asset_path=str(args.model)),
         running_mode=vision.RunningMode.IMAGE,
+        # Detectar duas pessoas permite rejeitar a cena em vez de escolher uma.
         num_poses=2,
     )
     references = []
     images = {}
+    # Reutiliza o modelo nas fotos e libera seus recursos ao terminar.
     with vision.PoseLandmarker.create_from_options(options) as task:
         for index, path in enumerate(paths, 1):
             name = f"pose-{index:03d}"
@@ -194,11 +204,13 @@ def build_catalog(args: argparse.Namespace) -> Path:
                 references.append(reference)
                 print(f"Aceita: {path.name}")
             except (OSError, ValueError, dependencies.cv2.error) as exc:
+                # Uma imagem inválida não impede a análise das demais.
                 print(f"Ignorada {path.name}: {exc}")
     return write_catalog(args.output, references, images)
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Executa a indexação e apresenta o destino criado ou a falha encontrada."""
     args = parse_args(argv)
     try:
         path = build_catalog(args)

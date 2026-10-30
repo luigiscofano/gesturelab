@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from importlib import metadata
 from pathlib import Path
 
+# Aceita tanto a execução direta do script quanto a importação pelos testes.
 if __package__:
     from .download_models import DEFAULT_DIRECTORY, MODELS, sha256
 else:
@@ -30,12 +31,15 @@ OPENCV_DISTRIBUTIONS = (
 
 @dataclass(frozen=True)
 class Check:
+    """Resultado de uma verificação, usado para montar o relatório final."""
+
     name: str
     passed: bool
     message: str
 
 
 def check_python() -> list[Check]:
+    """Confere a versão de referência e se o Python é de 64 bits."""
     version = ".".join(map(str, sys.version_info[:3]))
     reference_version = ".".join(map(str, REFERENCE_PYTHON))
     return [
@@ -49,6 +53,7 @@ def check_python() -> list[Check]:
 
 
 def read_requirements(path: Path) -> dict[str, str]:
+    """Lê as versões fixadas no projeto, ignorando comentários e linhas vazias."""
     requirements = {}
     for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         line = raw_line.partition("#")[0].strip()
@@ -62,6 +67,7 @@ def read_requirements(path: Path) -> dict[str, str]:
 
 
 def _installed_version(name: str) -> str | None:
+    """Consulta os metadados do pacote sem carregar suas bibliotecas."""
     try:
         return metadata.version(name)
     except metadata.PackageNotFoundError:
@@ -69,6 +75,7 @@ def _installed_version(name: str) -> str | None:
 
 
 def check_dependencies(requirements: dict[str, str]) -> list[Check]:
+    """Compara as versões instaladas com as esperadas pelo projeto."""
     checks = []
     for name, expected_version in requirements.items():
         installed_version = _installed_version(name)
@@ -83,6 +90,7 @@ def check_dependencies(requirements: dict[str, str]) -> list[Check]:
                 )
             )
 
+    # Esses pacotes fornecem o mesmo módulo cv2 e podem conflitar entre si.
     installed_opencv = [
         name for name in OPENCV_DISTRIBUTIONS if _installed_version(name) is not None
     ]
@@ -94,6 +102,7 @@ def check_dependencies(requirements: dict[str, str]) -> list[Check]:
 
 
 def check_imports() -> list[Check]:
+    """Carrega as bibliotecas para revelar falhas que os metadados não mostram."""
     checks = []
     for name in ("numpy", "cv2", "mediapipe.tasks.python.vision"):
         try:
@@ -107,6 +116,7 @@ def check_imports() -> list[Check]:
 
 
 def check_models(selection: str, directory: Path) -> list[Check]:
+    """Confere a existência e o hash dos modelos selecionados, sem baixá-los."""
     checks = []
     selected_models = MODELS if selection == "all" else [selection]
     for name in selected_models:
@@ -127,6 +137,7 @@ def check_models(selection: str, directory: Path) -> list[Check]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Reúne as verificações solicitadas e informa se alguma delas falhou."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--imports",
@@ -153,6 +164,7 @@ def main(argv: list[str] | None = None) -> int:
         checks.append(Check("requirements.txt", False, str(exc)))
     else:
         checks.extend(check_dependencies(requirements))
+    # As verificações mais pesadas só acontecem quando pedidas explicitamente.
     if args.imports:
         checks.extend(check_imports())
     if args.models:
@@ -167,6 +179,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print("\nTodas as verificações solicitadas passaram.")
     print("A câmera, a janela e a qualidade das detecções ainda precisam de teste manual.")
+    # O terminal recebe 0 em caso de sucesso e 1 quando há falhas.
     return int(bool(failures))
 
 

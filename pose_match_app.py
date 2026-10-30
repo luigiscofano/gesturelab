@@ -34,6 +34,7 @@ from vision_runtime import (
 
 ROOT = Path(__file__).resolve().parent
 WINDOW = "GestureLab | Pose parecida"
+# Medidas em pixels dos painéis de câmera e referência, incluindo suas margens.
 CAMERA_PANEL_WIDTH = 640
 REFERENCE_PANEL_WIDTH = 440
 PANEL_HEIGHT = 400
@@ -45,6 +46,8 @@ REFERENCE_X = CAMERA_PANEL_WIDTH + 2 * PANEL_GAP
 
 @dataclass(frozen=True)
 class PoseSearch:
+    """Guarda o estado da busca, as candidatas ordenadas e os pontos usados no desenho."""
+
     pose_count: int
     status: str
     candidates: tuple[PoseMatch, ...] = ()
@@ -64,6 +67,7 @@ def search_result(
     query = extract_pose(landmarks, width, height)
     if query is None:
         return PoseSearch(1, "MOSTRE O CORPO: OMBROS, QUADRIS E MEMBROS", landmarks=landmarks)
+    # O catálogo é local; até três referências passam para a etapa de seleção.
     candidates = tuple(rank_matches(query, references, top_k=3, max_distance=threshold))
     if not candidates:
         return PoseSearch(1, "SEM IMAGEM SUFICIENTEMENTE PARECIDA", landmarks=landmarks)
@@ -85,6 +89,7 @@ class MatchConfirmation:
         self._previous_timestamp_ms: int | None = None
 
     def update(self, candidate: PoseMatch | None, timestamp_ms: int) -> PoseMatch | None:
+        """Libera a candidata após o tempo de confirmação e reinicia ao perder a pose."""
         if self._previous_timestamp_ms is not None and timestamp_ms <= self._previous_timestamp_ms:
             raise ValueError("Timestamps da confirmação devem ser crescentes.")
         tracking_gap = (
@@ -95,6 +100,7 @@ class MatchConfirmation:
         if candidate is None:
             self._candidate_key = None
             return None
+        # Trocar a imagem ou sua orientação exige uma nova confirmação.
         key = (candidate.reference.id, candidate.mirrored)
         if tracking_gap or key != self._candidate_key:
             self._candidate_key = key
@@ -103,9 +109,10 @@ class MatchConfirmation:
 
 
 def match_summary(search: PoseSearch, selected: PoseMatch | None, mirror: bool) -> dict:
-    """A distância é geométrica, não probabilidade ou garantia de semelhança."""
+    """Prepara o resumo JSON; a distância é geométrica e não uma probabilidade."""
 
     def describe(match):
+        """Organiza uma correspondência junto com a origem e os créditos da imagem."""
         return {
             "id": match.reference.id,
             "title": match.reference.title,
@@ -134,6 +141,7 @@ def match_summary(search: PoseSearch, selected: PoseMatch | None, mirror: bool) 
 
 
 def create_pose_task(args, python, vision):
+    """Abre o modelo corporal no modo de fotografia ou sequência de vídeo."""
     model = args.model or ROOT / "models" / MODEL_NAMES["posematch"]
     if not model.is_file():
         raise FileNotFoundError(
@@ -144,7 +152,7 @@ def create_pose_task(args, python, vision):
     options = vision.PoseLandmarkerOptions(
         base_options=python.BaseOptions(model_asset_path=str(model)),
         running_mode=mode,
-        num_poses=2,
+        num_poses=2,  # Uma segunda pessoa detectada permite rejeitar a cena ambígua.
         min_pose_detection_confidence=0.5,
         min_pose_presence_confidence=0.5,
         min_tracking_confidence=0.5,
@@ -154,6 +162,7 @@ def create_pose_task(args, python, vision):
 
 
 def process_pose_frame(task, frame, timestamp_ms, dependencies: VisionDependencies):
+    """Prepara a imagem e escolhe a inferência com ou sem tempo de captura."""
     image = to_mediapipe_image(frame, dependencies)
     return (
         task.detect(image) if timestamp_ms is None else task.detect_for_video(image, timestamp_ms)
@@ -170,6 +179,7 @@ class ReferenceImageCache:
         self._image = None
 
     def get(self, match: PoseMatch | None):
+        """Reutiliza a imagem em memória enquanto a referência escolhida não mudar."""
         if match is None:
             return None
         path = match.reference.image_path
@@ -181,6 +191,7 @@ class ReferenceImageCache:
 
 
 def draw_panel_text(canvas, text, point, cv2, color=(230, 235, 242), max_width=None):
+    """Escreve um rótulo no painel, encurtando o texto para caber no espaço disponível."""
     # As fontes Hershey não cobrem acentos; o JSON mantém os textos originais.
     text = unicodedata.normalize("NFKD", str(text)).encode("ascii", "ignore").decode()
     max_width = max_width or canvas.shape[1] - point[0] - 12
@@ -193,7 +204,7 @@ def draw_panel_text(canvas, text, point, cv2, color=(230, 235, 242), max_width=N
 
 
 def fit_image(image, width: int, height: int, cv2, np):
-    """Letterbox: preserva a proporção e não recorta a pose da referência."""
+    """Encaixa a imagem no painel com margens, preservando proporção e conteúdo."""
     box = np.full((height, width, 3), (26, 32, 42), dtype=np.uint8)
     original_height, original_width = image.shape[:2]
     ratio = min(width / original_width, height / original_height)
@@ -207,11 +218,13 @@ def fit_image(image, width: int, height: int, cv2, np):
 
 
 def draw_body_landmarks(frame, landmarks, mirror: bool, cv2):
+    """Sobrepõe os pontos e as conexões do corpo à visualização da câmera."""
     camera = cv2.flip(frame, 1) if mirror else frame.copy()
     if landmarks is None:
         return camera
     height, width = camera.shape[:2]
     points = {}
+    # Pontos pouco confiáveis ou fora do quadro ficam de fora do desenho.
     for index in BODY_JOINTS:
         if index >= len(landmarks):
             continue
@@ -238,6 +251,7 @@ def draw_body_landmarks(frame, landmarks, mirror: bool, cv2):
 
 
 def draw_reference_panel(canvas, selected, reference_image, mirror: bool, cv2, np) -> None:
+    """Mostra a referência e seus créditos, ou orienta o usuário enquanto aguarda uma pose."""
     if selected is None or reference_image is None:
         draw_panel_text(
             canvas,
@@ -255,6 +269,7 @@ def draw_reference_panel(canvas, selected, reference_image, mirror: bool, cv2, n
         )
         return
 
+    # Combina o espelho da câmera com a orientação encontrada na comparação.
     flipped = bool(mirror) != selected.mirrored
     reference_image = cv2.flip(reference_image, 1) if flipped else reference_image
     canvas[
@@ -275,6 +290,7 @@ def draw_reference_panel(canvas, selected, reference_image, mirror: bool, cv2, n
 
 
 def draw_pose_match(frame, search, selected, args, cv2, np, reference_image=None):
+    """Monta os dois painéis e acrescenta o estado da busca e as instruções."""
     camera = draw_body_landmarks(frame, search.landmarks, args.mirror, cv2)
     canvas = np.full(
         (
@@ -315,12 +331,14 @@ def draw_pose_match(frame, search, selected, args, cv2, np, reference_image=None
 
 
 def run_pose_image(task, args, dependencies: VisionDependencies, references):
+    """Compara uma fotografia, imprime o resumo e salva a composição quando solicitado."""
     cv2, np = dependencies.cv2, dependencies.numpy
     if args.output and args.output.resolve() == args.image.resolve():
         raise ValueError("Escolha --output diferente da imagem original.")
     frame = read_image(args.image, cv2, np)
     result = process_pose_frame(task, frame, None, dependencies)
     search = search_result(result, frame.shape[1], frame.shape[0], references, args.match_threshold)
+    # Uma foto isolada não precisa da confirmação temporal usada na webcam.
     selected = search.candidates[0] if search.candidates else None
     reference = ReferenceImageCache(cv2, np).get(selected)
     canvas, summary = draw_pose_match(frame, search, selected, args, cv2, np, reference)
@@ -338,6 +356,7 @@ def run_pose_image(task, args, dependencies: VisionDependencies, references):
 
 
 def run_pose_camera(task, args, dependencies: VisionDependencies, references):
+    """Atualiza a busca a cada quadro e exibe apenas referências confirmadas."""
     cv2, np = dependencies.cv2, dependencies.numpy
     frames = 0
     summary = None
@@ -358,6 +377,7 @@ def run_pose_camera(task, args, dependencies: VisionDependencies, references):
                 args.match_threshold,
             )
             candidate = search.candidates[0] if search.candidates else None
+            # A melhor candidata precisa permanecer consistente antes de aparecer na tela.
             selected = confirmation.update(candidate, timestamp)
             summary = match_summary(search, selected, args.mirror)
             frames += 1

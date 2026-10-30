@@ -1,4 +1,4 @@
-"""Contratos de consulta, confirmação e ciclo de câmera do modo posematch."""
+"""Testa a busca, o tempo de confirmação e a captura do modo posematch."""
 
 from types import SimpleNamespace
 
@@ -9,6 +9,7 @@ from vision_runtime import VisionDependencies
 
 
 def match(identifier="pose-a", *, distance=0.15, mirrored=False):
+    """Monta uma candidata simples para testar a interface sem uma busca geométrica real."""
     reference = SimpleNamespace(
         id=identifier,
         title="Pose de exemplo",
@@ -23,6 +24,7 @@ def match(identifier="pose-a", *, distance=0.15, mirrored=False):
 
 @pytest.mark.parametrize("count", [0, 2])
 def test_absent_or_multiple_people_do_not_reuse_a_match(count, monkeypatch):
+    # O substituto falha se o programa tentar comparar uma cena sem pessoa única.
     def unexpected(*args, **kwargs):
         raise AssertionError("Não deve escolher uma pessoa pela posição na lista.")
 
@@ -35,6 +37,7 @@ def test_absent_or_multiple_people_do_not_reuse_a_match(count, monkeypatch):
 
 
 def test_low_visibility_does_not_run_retrieval(monkeypatch):
+    """Uma pose incompleta deve orientar o usuário antes de procurar referências."""
     monkeypatch.setattr(runtime, "extract_pose", lambda *args: None)
     monkeypatch.setattr(
         runtime, "rank_matches", lambda *args, **kwargs: pytest.fail("busca indevida")
@@ -46,6 +49,7 @@ def test_low_visibility_does_not_run_retrieval(monkeypatch):
 
 
 def test_search_passes_original_aspect_and_exact_zero_threshold(monkeypatch):
+    # Registra os argumentos para conferir proporção da imagem e um limiar válido igual a zero.
     calls = []
     query, landmarks, references = object(), [object()], [object()]
     candidate = match()
@@ -78,6 +82,7 @@ def test_a_pose_without_close_reference_has_no_displayed_image(monkeypatch):
 
 
 def test_confirmation_uses_current_distance_and_resets_on_person_loss():
+    """A imagem aparece após 180 ms estáveis, com a distância da observação mais recente."""
     confirmation = runtime.MatchConfirmation(confirm_ms=180)
     assert confirmation.update(match(), 0) is None
     assert confirmation.update(match(), 100) is None
@@ -90,6 +95,7 @@ def test_confirmation_uses_current_distance_and_resets_on_person_loss():
 
 @pytest.mark.parametrize("candidate", [match("other"), match(mirrored=True)])
 def test_changed_reference_or_orientation_clears_previous_image(candidate):
+    # Trocar a imagem ou seu espelhamento exige uma nova confirmação.
     confirmation = runtime.MatchConfirmation()
     confirmation.update(match(), 0)
     assert confirmation.update(match(), 180) is not None
@@ -98,6 +104,7 @@ def test_changed_reference_or_orientation_clears_previous_image(candidate):
 
 
 def test_tracking_gap_requires_new_confirmation():
+    """Uma pausa longa quebra a continuidade; timestamps repetidos são recusados."""
     confirmation = runtime.MatchConfirmation()
     confirmation.update(match(), 0)
     assert confirmation.update(match(), 180) is not None
@@ -120,6 +127,7 @@ def test_reference_orientation_tracks_display_and_match_mirroring(
     match_mirror,
     display_flip,
 ):
+    # Os dois espelhamentos se combinam: aplicar ambos conserva a orientação original.
     candidate = match(mirrored=match_mirror)
     search = runtime.PoseSearch(1, "IMAGEM ENCONTRADA", (candidate,))
     summary = runtime.match_summary(search, candidate, camera_mirror)
@@ -131,6 +139,7 @@ def test_reference_orientation_tracks_display_and_match_mirroring(
 
 @pytest.mark.parametrize("image,mode", [(None, "VIDEO"), ("photo.png", "IMAGE")])
 def test_body_task_detects_two_people_and_uses_correct_mode(tmp_path, image, mode):
+    """Inspeciona as opções do detector sem carregar o modelo marcador da pasta temporária."""
     model = tmp_path / "pose.task"
     model.write_bytes(b"fake model; creation is substituted")
     options = []
@@ -150,6 +159,7 @@ def test_body_task_detects_two_people_and_uses_correct_mode(tmp_path, image, mod
 
 
 def test_video_inference_receives_original_frame_and_timestamp():
+    # A inferência recebe RGB e o tempo do frame; o espelhamento fica para a exibição.
     frame, rgb = object(), object()
     seen = []
 
@@ -175,6 +185,8 @@ def test_video_inference_receives_original_frame_and_timestamp():
 
 
 class FakeCapture:
+    """Câmera falsa que registra leituras e liberação, com falhas configuráveis."""
+
     def __init__(self, *, opened=True, read_ok=True):
         self.opened, self.read_ok = opened, read_ok
         self.released = False
@@ -184,6 +196,7 @@ class FakeCapture:
         return self.opened
 
     def set(self, *args):
+        # Aceita a configuração de resolução sem precisar simular um dispositivo completo.
         pass
 
     def read(self):
@@ -195,6 +208,7 @@ class FakeCapture:
 
 
 def camera_deps(capture):
+    """Fornece apenas as operações de câmera usadas pelos testes sem janela."""
     return VisionDependencies(
         cv2=SimpleNamespace(
             VideoCapture=lambda index: capture, CAP_PROP_FRAME_WIDTH=1, CAP_PROP_FRAME_HEIGHT=2
@@ -207,6 +221,7 @@ def camera_deps(capture):
 
 
 def test_headless_capture_stops_and_releases_without_gui_or_saving(monkeypatch, capsys):
+    """O limite de frames encerra a execução sem janela e libera a câmera falsa."""
     capture = FakeCapture()
     timestamps = []
 
@@ -215,6 +230,7 @@ def test_headless_capture_stops_and_releases_without_gui_or_saving(monkeypatch, 
         return SimpleNamespace(pose_landmarks=[])
 
     monkeypatch.setattr(runtime, "process_pose_frame", process)
+    # A ausência de operações gráficas nas dependências também detecta uma chamada de GUI indevida.
     args = SimpleNamespace(camera=0, headless=True, max_frames=2, mirror=True, match_threshold=0.8)
     summary = runtime.run_pose_camera(None, args, camera_deps(capture), [])
     assert capture.reads == 2
@@ -228,6 +244,7 @@ def test_headless_capture_stops_and_releases_without_gui_or_saving(monkeypatch, 
 
 @pytest.mark.parametrize("opened,read_ok", [(False, True), (True, False)])
 def test_camera_resource_is_released_after_open_or_capture_failure(opened, read_ok):
+    # Reproduz separadamente uma falha ao abrir a câmera e outra ao ler o primeiro frame.
     capture = FakeCapture(opened=opened, read_ok=read_ok)
     args = SimpleNamespace(camera=0, headless=True, max_frames=2, mirror=True, match_threshold=0.8)
     with pytest.raises(RuntimeError):
@@ -236,6 +253,7 @@ def test_camera_resource_is_released_after_open_or_capture_failure(opened, read_
 
 
 def test_photo_cannot_overwrite_the_input_even_before_processing(tmp_path):
+    """A proteção da foto original deve acontecer antes de carregar ou processar a imagem."""
     path = tmp_path / "photo.png"
     args = SimpleNamespace(image=path, output=path)
     with pytest.raises(ValueError, match="imagem original"):
@@ -243,6 +261,7 @@ def test_photo_cannot_overwrite_the_input_even_before_processing(tmp_path):
 
 
 def test_pose_comparison_export_preserves_existing_output(tmp_path, monkeypatch):
+    # A renderização é substituída para isolar a proteção de um arquivo de saída existente.
     output = tmp_path / "comparison.png"
     output.write_bytes(b"existing output")
     args = SimpleNamespace(
