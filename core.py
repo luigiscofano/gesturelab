@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 
-# Índices oficiais dos 21 landmarks. Cada par descreve uma aresta da mão.
+# Landmarks são pontos de referência. Cada par liga dois dos 21 pontos da mão.
 HAND_CONNECTIONS = (
     (0, 1),
     (1, 2),
@@ -43,8 +43,9 @@ HANDEDNESS_NAMES = {"Left": "Esquerda", "Right": "Direita"}
 
 
 def pixel_point(x: float, y: float, width: int, height: int, mirror: bool) -> tuple[int, int]:
-    """Converte coordenadas normalizadas ao canvas e espelha só a visualização.
+    """Converte posições relativas à imagem em pixels e espelha só a visualização.
 
+    Na faixa esperada, 0 e 1 correspondem às bordas da imagem em cada eixo.
     Limitar os pixels protege o desenho quando a estimativa sai da imagem.
     O x espelhado é exatamente width - 1 - x_pixel, como no cv2.flip.
     """
@@ -82,6 +83,8 @@ class FrameClock:
         self.last_ms = -1
 
     def tick(self, elapsed_seconds: float) -> int:
+        """Converte segundos para milissegundos sem repetir o instante anterior."""
+        # Dois frames rápidos podem chegar no mesmo milissegundo.
         timestamp_ms = max(self.last_ms + 1, int(elapsed_seconds * 1000))
         self.last_ms = timestamp_ms
         return timestamp_ms

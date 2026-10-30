@@ -1,4 +1,4 @@
-"""Catálogo portátil e indexador: contratos sem baixar imagens nem usar a câmera."""
+"""Testa a criação do catálogo e o tratamento de imagens sem baixar modelos ou usar câmera."""
 
 import json
 from contextlib import contextmanager
@@ -15,11 +15,13 @@ from vision_runtime import VisionDependencies
 
 
 def result_with_people(count):
+    """Imita a saída do detector com uma quantidade controlada de pessoas."""
     points = [SimpleNamespace(**point) for point in normalized_landmarks(BASE)]
     return SimpleNamespace(pose_landmarks=[points for _ in range(count)])
 
 
 def reference(result=None):
+    """Cria os metadados de uma referência usando a geometria conhecida das ilustrações."""
     return reference_from_result(
         result or result_with_people(1),
         name="pose-001",
@@ -32,6 +34,7 @@ def reference(result=None):
 
 @pytest.mark.parametrize("people", [0, 2])
 def test_indexer_does_not_select_an_arbitrary_person(people):
+    # Tanto a ausência quanto a presença de duas pessoas impedem a indexação da imagem.
     assert reference(result_with_people(people)) is None
 
 
@@ -42,6 +45,7 @@ def test_indexer_skips_people_without_reliable_torso():
 
 
 def test_new_catalog_is_portable_and_preserves_provenance(tmp_path):
+    """A galeria gerada usa caminhos relativos e mantém origem e condição de uso das fotos."""
     output = tmp_path / "minhas-poses"
     path = write_catalog(output, [reference()], {"pose-001.png": b"test placeholder"})
     refs = load_catalog(path)
@@ -55,6 +59,7 @@ def test_new_catalog_is_portable_and_preserves_provenance(tmp_path):
 
 
 def test_output_directory_must_be_new_and_existing_data_is_untouched(tmp_path):
+    # O arquivo marcador permite verificar que a recusa não apaga o conteúdo anterior.
     marker = tmp_path / "previous.txt"
     marker.write_text("keep me", encoding="utf-8")
     with pytest.raises(FileExistsError):
@@ -71,6 +76,7 @@ def test_no_accepted_pose_does_not_create_an_empty_catalog(tmp_path):
 
 
 def test_catalog_write_failure_cleans_only_its_new_output(tmp_path, monkeypatch):
+    """Simula uma gravação parcial e verifica que arquivos alheios à tentativa permanecem intactos."""
     output = tmp_path / "new"
     marker = tmp_path / "keep.txt"
     marker.write_bytes(b"keep")
@@ -82,6 +88,7 @@ def test_catalog_write_failure_cleans_only_its_new_output(tmp_path, monkeypatch)
             if path.suffix == ".json" and mode == "xb":
 
                 def write(data):
+                    # A falha acontece depois de criar o arquivo, exercitando a limpeza da saída.
                     stream.write(data[:5])
                     raise OSError("simulated disk full")
 
@@ -97,6 +104,7 @@ def test_catalog_write_failure_cleans_only_its_new_output(tmp_path, monkeypatch)
 
 
 def test_bundled_illustrations_have_distinct_poses_and_valid_paths():
+    # Cada pose do catálogo deve recuperar sua própria imagem como primeira referência.
     path = Path(__file__).resolve().parents[1] / "pose_gallery" / "catalog.json"
     references = load_catalog(path)
     assert len(references) == 12
@@ -109,6 +117,7 @@ def test_bundled_illustrations_have_distinct_poses_and_valid_paths():
 
 
 def test_indexer_defaults_do_not_claim_ownership_of_user_images(tmp_path):
+    """Os valores padrão não presumem autoria ou licença para as fotos fornecidas."""
     args = parse_args(["--input", str(tmp_path), "--output", str(tmp_path / "out")])
     assert args.source == "Imagem fornecida pelo usuário"
     assert "verificar antes de redistribuir" in args.license
@@ -116,6 +125,7 @@ def test_indexer_defaults_do_not_claim_ownership_of_user_images(tmp_path):
 
 @pytest.mark.parametrize("width,height", [(1, 2000), (2000, 1)])
 def test_thin_images_keep_a_nonzero_side_when_resized(width, height):
+    # Fotografias muito estreitas podem arredondar para zero se o resize não limitar o mínimo.
     frame = SimpleNamespace(shape=(height, width, 3))
 
     def resize(frame, size, interpolation):
@@ -130,7 +140,11 @@ def test_thin_images_keep_a_nonzero_side_when_resized(width, height):
 
 
 def test_opencv_error_skips_one_image_and_continues_the_catalog(tmp_path, monkeypatch, capsys):
+    """Uma imagem ilegível deve ser ignorada sem impedir a indexação da próxima."""
+
     class CvError(Exception):
+        """Substitui a exceção de decodificação do OpenCV sem importar a biblioteca."""
+
         pass
 
     source = tmp_path / "input"
@@ -164,6 +178,7 @@ def test_opencv_error_skips_one_image_and_continues_the_catalog(tmp_path, monkey
 
     @contextmanager
     def create_task(options):
+        # O contexto simula a abertura e o fechamento do detector, sem carregar pesos.
         yield SimpleNamespace(detect=lambda image: result_with_people(1))
 
     vision = SimpleNamespace(
@@ -171,6 +186,7 @@ def test_opencv_error_skips_one_image_and_continues_the_catalog(tmp_path, monkey
         PoseLandmarkerOptions=lambda **kwargs: kwargs,
         PoseLandmarker=SimpleNamespace(create_from_options=create_task),
     )
+    # As dependências falsas isolam o tratamento de erro; capsys captura o aviso impresso.
     dependencies = VisionDependencies(cv2, mp, np, python, vision)
     monkeypatch.setattr(builder, "load_dependencies", lambda: dependencies)
     path = builder.build_catalog(args)

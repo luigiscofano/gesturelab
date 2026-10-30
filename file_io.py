@@ -16,7 +16,9 @@ def write_new_files(files: Mapping[Path, bytes]) -> None:
     created_paths: list[Path] = []
     try:
         for path, contents in files.items():
+            # 'x' recusa arquivos existentes; 'b' permite gravar o conteúdo como bytes.
             with path.open("xb") as output:
+                # Só entram na limpeza os arquivos que esta chamada conseguiu criar.
                 created_paths.append(path)
                 output.write(contents)
     except BaseException:

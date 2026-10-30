@@ -1,3 +1,5 @@
+"""Exercita a pose de escrita, os estados da caneta e a exportação com dados controlados."""
+
 import json
 import math
 from contextlib import contextmanager
@@ -13,7 +15,7 @@ from hand_app import update_airwriter
 
 
 def hand_points():
-    # Configuração esquemática: indicador reto e outros dedos formando uma dobra.
+    """Cria uma mão esquemática com o indicador reto e os outros dedos dobrados."""
     points = [(120.0, 300.0)] * 21
     points[1:5] = [(90, 250), (60, 230), (40, 200), (20, 180)]
     points[5:9] = [(80, 220), (80, 160), (80, 115), (80, 70)]
@@ -23,12 +25,14 @@ def hand_points():
 
 
 def begin(writer, point=(100.0, 100.0), start=0, hand="Right"):
+    """Mantém a pose por 100 ms para iniciar um traço nos testes que usam o tempo padrão."""
     writer.update(point, True, start, hand_tag=hand)
     writer.update(point, True, start + 100, hand_tag=hand)
     assert writer.writing
 
 
 def test_index_pose_ignores_thumb():
+    # Mover apenas o polegar não deve alterar a decisão de usar o indicador como caneta.
     points = hand_points()
     assert writing_pose(points)
     points[1:5] = [(500, -50), (30, 90), (0, 0), (400, 400)]
@@ -37,6 +41,7 @@ def test_index_pose_ignores_thumb():
 
 @pytest.mark.parametrize("angle,scale", [(90, 0.4), (180, 2.0), (-35, 1.2)])
 def test_pose_is_invariant_to_in_plane_rotation_translation_and_scale(angle, scale):
+    """Transforma a mesma mão para verificar que a regra depende de sua forma, não da posição."""
     radians = math.radians(angle)
     points = [
         (
@@ -66,6 +71,7 @@ def test_degenerate_or_nonfinite_landmarks_are_rejected():
 
 
 def test_brief_pose_noise_does_not_create_a_dot():
+    # Uma detecção que desaparece antes da confirmação não deve deixar tinta no desenho.
     writer = AirWriter(1000, 600)
     writer.update((100, 100), True, 0)
     writer.update((105, 100), True, 50)
@@ -75,6 +81,7 @@ def test_brief_pose_noise_does_not_create_a_dot():
 
 
 def test_reposition_after_pen_up_does_not_bridge_or_reuse_filter_history():
+    """Levantar a caneta separa os traços e reinicia a suavização na nova posição."""
     writer = AirWriter(1000, 600, smooth_ms=100)
     begin(writer)
     writer.update((150, 100), True, 150, hand_tag="Right")
@@ -88,6 +95,7 @@ def test_reposition_after_pen_up_does_not_bridge_or_reuse_filter_history():
 
 
 def test_missing_hand_immediately_ends_the_trace():
+    # Perder a mão interrompe a escrita sem esperar outro período de confirmação.
     writer = AirWriter(1000, 600)
     begin(writer)
     writer.update(None, False, 101, unavailable="SEM MAO DETECTADA")
@@ -98,6 +106,7 @@ def test_missing_hand_immediately_ends_the_trace():
 
 @pytest.mark.parametrize("break_kind", ["gap", "jump", "hand_change"])
 def test_discontinuities_require_new_confirmation_and_separate_stroke(break_kind):
+    """Repete o cenário para atraso entre frames, salto de posição e troca de mão."""
     writer = AirWriter(1000, 600)
     begin(writer)
     point = (800, 100) if break_kind == "jump" else (110, 100)
@@ -111,6 +120,7 @@ def test_discontinuities_require_new_confirmation_and_separate_stroke(break_kind
 
 
 def test_pause_discards_candidate_and_does_not_accrue_confirmation_time():
+    # O tempo passado em pausa não conta para confirmar a pose ao retomar.
     writer = AirWriter(1000, 600)
     begin(writer)
     writer.toggle_pause()
@@ -128,6 +138,7 @@ def test_pause_discards_candidate_and_does_not_accrue_confirmation_time():
 
 
 def test_clear_and_undo_reset_an_active_pen():
+    """As ações de edição encerram o traço ativo antes de alterar o desenho."""
     writer = AirWriter(1000, 600)
     begin(writer)
     writer.lift()
@@ -145,6 +156,7 @@ def test_clear_and_undo_reset_an_active_pen():
 
 
 def test_time_based_smoothing_is_consistent_at_different_frame_rates():
+    # As duas sequências cobrem 100 ms; uma delas fornece uma atualização intermediária.
     slow = AirWriter(1000, 600, smooth_ms=50, confirm_ms=0)
     fast = AirWriter(1000, 600, smooth_ms=50, confirm_ms=0)
     slow.update((100, 100), True, 0)
@@ -165,6 +177,7 @@ def test_zero_smoothing_tracks_input_without_lag():
 
 
 def test_snapshot_records_coordinate_convention_and_stroke_boundaries():
+    """O registro exportado guarda tamanho, espelhamento e separação entre os traços."""
     writer = AirWriter(1000, 600, mirrored=False)
     begin(writer)
     writer.lift()
@@ -179,6 +192,7 @@ def test_snapshot_records_coordinate_convention_and_stroke_boundaries():
 
 
 def test_outside_frame_or_nonfinite_tip_lifts_without_clamping_a_false_line():
+    # Na escrita, limitar um ponto inválido à borda poderia criar uma linha que não foi feita.
     writer = AirWriter(1000, 600)
     begin(writer)
     writer.update((-1, 100), True, 110, hand_tag="Right")
@@ -196,6 +210,7 @@ def test_nonincreasing_timestamps_are_rejected():
 
 
 def test_two_detected_hands_pause_writing_instead_of_picking_a_list_index():
+    """Duas mãos tornam a escolha ambígua; o adaptador deve interromper a caneta."""
     writer = AirWriter(1000, 600)
     begin(writer)
     two_hands = SimpleNamespace(hand_landmarks=[[], []], handedness=[])
@@ -205,6 +220,7 @@ def test_two_detected_hands_pause_writing_instead_of_picking_a_list_index():
 
 
 def test_landmark_adapter_applies_display_mirroring_to_tip_and_export():
+    # SimpleNamespace imita o resultado do detector com os campos usados pelo adaptador.
     result = SimpleNamespace(
         hand_landmarks=[[SimpleNamespace(x=x / 999, y=y / 599) for x, y in hand_points()]],
         handedness=[[SimpleNamespace(category_name="Right")]],
@@ -218,6 +234,7 @@ def test_landmark_adapter_applies_display_mirroring_to_tip_and_export():
 @pytest.fixture
 def export_environment(tmp_path, monkeypatch):
     """Codificador substituído: valida arquivos e falhas, sem instalar OpenCV."""
+    # A fixture prepara cada teste; data e identificador fixos tornam os nomes previsíveis.
     monkeypatch.setattr(hand_app, "ROOT", tmp_path)
     monkeypatch.setattr(
         hand_app, "datetime", SimpleNamespace(now=lambda: datetime(2026, 1, 2, 3, 4, 5))
@@ -231,6 +248,7 @@ def export_environment(tmp_path, monkeypatch):
 
 
 def test_airwrite_export_preserves_json_metadata(export_environment):
+    # Os bytes "png" são um marcador de teste; o conteúdo validado aqui é o JSON e sua gravação.
     png_path, json_path = hand_app.save_airwriting(*export_environment)
     assert png_path.read_bytes() == b"png"
     data = json.loads(json_path.read_text(encoding="utf-8"))
@@ -244,6 +262,7 @@ def test_json_collision_preserves_existing_file_and_removes_new_png(
     export_environment,
     tmp_path,
 ):
+    """Se o JSON já existe, a tentativa deve preservar esse arquivo e remover seu novo PNG."""
     folder = tmp_path / "outputs"
     folder.mkdir()
     existing = folder / "airwrite_20260102_030405_01234567.json"
@@ -261,6 +280,7 @@ def test_failed_json_write_removes_both_partial_export_files(
     tmp_path,
     monkeypatch,
 ):
+    """Uma gravação interrompida não deve deixar o par PNG/JSON incompleto."""
     original_open = Path.open
 
     @contextmanager
@@ -269,6 +289,7 @@ def test_failed_json_write_removes_both_partial_export_files(
             if path.suffix == ".json" and mode.startswith("x"):
 
                 def write(data):
+                    # Grava só o início do JSON antes de simular falta de espaço no disco.
                     output.write(data[:5])
                     raise OSError("simulated disk full")
 

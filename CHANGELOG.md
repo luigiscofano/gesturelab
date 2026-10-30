@@ -2,6 +2,14 @@
 
 ## 30 de outubro de 2026
 
+### Comentários em português
+
+- Explicações breves nas funções, classes e etapas principais dos 20 arquivos
+  Python, incluindo câmera, geometria, escrita, busca de poses, scripts e testes.
+- Comentários sobre dados simulados, substituição de dependências e cenários de
+  falha ajudam a acompanhar os testes sem executar modelos ou abrir a câmera.
+- Alteração restrita a comentários e docstrings; comportamento e comandos preservados.
+
 ### Clareza do código e responsabilidades
 
 - `app.py` concentra a CLI e a escolha do modo; `hand_app.py` reúne a execução

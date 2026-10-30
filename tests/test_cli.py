@@ -1,3 +1,5 @@
+"""Valida os comandos de entrada e usa substitutos para testar o encaminhamento dos modos."""
+
 from types import SimpleNamespace
 
 import pytest
@@ -9,6 +11,7 @@ from vision_runtime import VisionDependencies
 
 
 def test_default_mode_matches_first_milestone():
+    """Executar sem opções deve abrir o modo de mãos com os padrões documentados."""
     args = parse_args([])
     assert args.mode == "hands"
     assert args.camera == 0
@@ -17,11 +20,13 @@ def test_default_mode_matches_first_milestone():
 
 
 def test_headless_camera_requires_a_stop_condition():
+    # Sem janela para receber Q/Esc, é preciso definir um limite de frames.
     with pytest.raises(SystemExit):
         parse_args(["--headless"])
 
 
 def test_cannot_accidentally_save_webcam_output():
+    # O argparse encerra com SystemExit quando uma combinação de opções é inválida.
     with pytest.raises(SystemExit):
         parse_args(["--output", "foto.png"])
 
@@ -34,11 +39,13 @@ def test_can_process_photo_without_mirroring():
 
 @pytest.mark.parametrize("value", ["-0.1", "1.1", "nan"])
 def test_invalid_confidence_threshold_is_rejected(value):
+    """Repete a validação para valores fora da faixa e para um número indefinido."""
     with pytest.raises(SystemExit):
         parse_args(["--threshold", value])
 
 
 def test_airwrite_uses_temporal_capture_and_supports_canvas_options():
+    # As opções da caneta são verificadas sem iniciar a captura da câmera.
     args = parse_args(["--mode", "airwrite", "--canvas", "--smooth-ms", "0", "--pen-width", "7"])
     assert args.mode == "airwrite"
     assert args.canvas is True
@@ -47,6 +54,7 @@ def test_airwrite_uses_temporal_capture_and_supports_canvas_options():
 
 
 def test_a_single_photo_cannot_record_an_airwriting_trajectory():
+    """A escrita precisa de posições ao longo do tempo, não apenas de uma fotografia."""
     with pytest.raises(SystemExit):
         parse_args(["--mode", "airwrite", "--image", "foto.jpg"])
 
@@ -63,6 +71,7 @@ def test_invalid_smoothing_is_rejected(value):
 
 
 def test_posematch_accepts_its_own_gallery_and_a_photo():
+    """A busca corporal aceita um catálogo próprio e também funciona com uma foto."""
     args = parse_args(
         [
             "--mode",
@@ -84,6 +93,7 @@ def test_posematch_accepts_its_own_gallery_and_a_photo():
     "option,value", [("--gallery", "catalog.json"), ("--match-threshold", "0.5")]
 )
 def test_posematch_options_are_rejected_in_hand_modes(option, value):
+    # Opções exclusivas da busca corporal não devem ser ignoradas silenciosamente.
     with pytest.raises(SystemExit):
         parse_args(["--mode", "hands", option, value])
 
@@ -95,6 +105,7 @@ def test_posematch_rejects_invalid_distances(value):
 
 
 def test_posematch_dispatch_does_not_create_a_hand_task(monkeypatch):
+    """Substitui os executores para observar qual modo seria iniciado, sem carregar modelos."""
     calls = []
     dependencies = object()
     monkeypatch.setattr(app, "load_dependencies", lambda: dependencies)
@@ -105,6 +116,7 @@ def test_posematch_dispatch_does_not_create_a_hand_task(monkeypatch):
 
 
 def test_photo_export_does_not_overwrite_a_file_created_during_encoding(tmp_path, monkeypatch):
+    """Simula outro processo criando o destino durante a preparação da imagem."""
     image = tmp_path / "input.png"
     output = tmp_path / "output.png"
     args = parse_args(["--image", str(image), "--output", str(output)])
@@ -119,6 +131,7 @@ def test_photo_export_does_not_overwrite_a_file_created_during_encoding(tmp_path
         output.write_bytes(b"another process owns this file")
         return True, encoded
 
+    # Estes objetos imitam só as operações usadas pelo teste; não decodificam uma foto real.
     cv2 = SimpleNamespace(imdecode=lambda *args: frame, IMREAD_COLOR=1, imencode=encode)
     np = SimpleNamespace(fromfile=lambda *args, **kwargs: b"input", uint8=object())
     monkeypatch.setattr(hand_app, "process_frame", lambda *args: None)

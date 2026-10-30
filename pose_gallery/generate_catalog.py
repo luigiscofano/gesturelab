@@ -17,6 +17,7 @@ type PosePoints = dict[int, Point]
 
 WIDTH, HEIGHT = 480, 640
 ROOT = Path(__file__).resolve().parent
+# Os índices seguem o corpo do MediaPipe; só estas 12 articulações entram na busca.
 BODY = [11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28]
 LIMB_CONNECTIONS = (
     (11, 13),
@@ -30,6 +31,7 @@ LIMB_CONNECTIONS = (
 )
 HAND_AND_FOOT_JOINTS = {15, 16, 27, 28}
 SKIN_COLOR = (245, 207, 147)
+# A pose de braços ao lado serve de base para as demais ilustrações.
 BASE = {
     11: (285, 200),
     12: (195, 200),
@@ -44,6 +46,7 @@ BASE = {
     27: (280, 560),
     28: (200, 560),
 }
+# Cada entrada informa identificador, título e pontos que substituem a pose base.
 POSES = [
     ("arms-down", "Braços ao lado", {}),
     (
@@ -152,6 +155,7 @@ COLORS = [
 
 
 def normalized_landmarks(points: PosePoints) -> list[dict[str, float]]:
+    """Converte pixels do desenho em coordenadas proporcionais à largura e altura."""
     # Landmarks não usados na busca têm posições ilustrativas junto à cabeça/mãos/pés.
     landmarks = [{"x": 0.5, "y": 0.17, "visibility": 1.0, "presence": 1.0} for _ in range(33)]
     for index, (x, y) in points.items():
@@ -173,11 +177,13 @@ def normalized_landmarks(points: PosePoints) -> list[dict[str, float]]:
 
 
 def render(points: PosePoints, color: Color, title: str) -> tuple[str, bytes]:
+    """Desenha a mesma referência em SVG vetorial e PNG feito de pixels."""
     import cv2
     import numpy as np
 
     ink = (37, 49, 68)
     background = (246, 248, 252)
+    # As cores estão em RGB; o OpenCV recebe a ordem inversa, BGR.
     image = np.full((HEIGHT, WIDTH, 3), background[::-1], dtype=np.uint8)
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
@@ -192,6 +198,7 @@ def render(points: PosePoints, color: Color, title: str) -> tuple[str, bytes]:
         stroke: Color | None = None,
         thickness: int = 0,
     ) -> None:
+        """Acrescenta um círculo às duas versões do desenho."""
         cv2.circle(image, point, radius, fill[::-1], -1, cv2.LINE_AA)
         if stroke:
             cv2.circle(image, point, radius, stroke[::-1], thickness, cv2.LINE_AA)
@@ -201,6 +208,7 @@ def render(points: PosePoints, color: Color, title: str) -> tuple[str, bytes]:
         svg.append(f'<circle cx="{point[0]}" cy="{point[1]}" r="{radius}"{style}/>')
 
     def line(start: Point, end: Point, fill: Color, thickness: int) -> None:
+        """Desenha um segmento com extremidades arredondadas nos dois formatos."""
         cv2.line(image, start, end, fill[::-1], thickness, cv2.LINE_AA)
         circle(start, thickness // 2, fill)
         circle(end, thickness // 2, fill)
@@ -210,6 +218,7 @@ def render(points: PosePoints, color: Color, title: str) -> tuple[str, bytes]:
             'stroke-linecap="round"/>'
         )
 
+    # A cabeça acompanha a direção do tronco, inclusive nas poses inclinadas.
     shoulder_center = tuple(round((points[11][axis] + points[12][axis]) / 2) for axis in (0, 1))
     hip_center = tuple(round((points[23][axis] + points[24][axis]) / 2) for axis in (0, 1))
     torso_length = math.dist(shoulder_center, hip_center)
@@ -222,9 +231,11 @@ def render(points: PosePoints, color: Color, title: str) -> tuple[str, bytes]:
     ground = max(points[27][1], points[28][1]) + 24
     cv2.ellipse(image, (240, ground), (175, 10), 0, 0, 360, (222, 228, 237), -1)
     svg.append(f'<ellipse cx="240" cy="{ground}" rx="175" ry="10" fill="#ede4de"/>')
+    # Uma linha mais larga por baixo cria o contorno dos braços e das pernas.
     for start_index, end_index in LIMB_CONNECTIONS:
         line(points[start_index], points[end_index], ink, 30)
         line(points[start_index], points[end_index], color, 20)
+    # Ombros e quadris delimitam o polígono que forma a roupa do tronco.
     torso = [points[index] for index in (12, 11, 23, 24)]
     torso_polygon = np.array(torso, dtype=np.int32)
     cv2.fillPoly(image, [torso_polygon], color[::-1], cv2.LINE_AA)
@@ -251,10 +262,12 @@ def render(points: PosePoints, color: Color, title: str) -> tuple[str, bytes]:
 
 
 def generate_catalog(output_directory: Path) -> int:
+    """Grava as ilustrações e o JSON que relaciona cada imagem à sua pose."""
     images = output_directory / "images"
     images.mkdir(parents=True, exist_ok=True)
     references = []
     for (name, title, overrides), color in zip(POSES, COLORS, strict=True):
+        # Mantém os pontos da base que esta pose não altera.
         points = BASE | overrides
         svg, png = render(points, color, title)
         (images / f"{name}.svg").write_text(svg, encoding="utf-8")
@@ -285,6 +298,7 @@ def generate_catalog(output_directory: Path) -> int:
 
 
 def main() -> None:
+    """Regenera as referências na pasta do catálogo incluído no projeto."""
     count = generate_catalog(ROOT)
     print(f"{count} ilustrações e catálogo gerados em {ROOT}")
 

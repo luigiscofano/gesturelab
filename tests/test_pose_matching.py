@@ -1,4 +1,4 @@
-"""Contratos geométricos e de catálogo sem câmera, modelo ou bibliotecas de visão."""
+"""Confere a geometria e a leitura de catálogos sem carregar câmera ou modelos de visão."""
 
 import json
 import math
@@ -19,6 +19,7 @@ from pose_matching import (
 
 
 def landmarks(*, raised_left=False, raised_right=False):
+    """Monta 33 pontos sintéticos e permite levantar cada braço separadamente."""
     points = [{"x": 0.5, "y": 0.3, "visibility": 1.0, "presence": 1.0} for _ in range(33)]
     positions = {
         11: (0.4, 0.3),
@@ -44,12 +45,14 @@ def landmarks(*, raised_left=False, raised_right=False):
 
 
 def reference(identifier, points):
+    """Transforma os pontos em uma referência pronta para comparar, sem ler uma imagem."""
     return PoseReference(
         identifier, identifier, Path(f"{identifier}.png"), extract_pose(points, 640, 480)
     )
 
 
 def test_scale_and_translation_do_not_change_nearest_pose():
+    # A consulta é a mesma pose deslocada e reduzida dentro da imagem.
     original = landmarks(raised_left=True)
     transformed = [
         {**point, "x": point["x"] * 0.6 + 0.1, "y": point["y"] * 0.6 + 0.2} for point in original
@@ -71,6 +74,7 @@ def test_image_dimensions_correct_normalized_coordinate_aspect_ratio():
 
 
 def test_mirror_matches_opposite_raised_arm_and_can_be_disabled():
+    """A comparação espelhada reconhece a equivalência entre os braços opostos."""
     query = extract_pose(landmarks(raised_left=True), 640, 480)
     ref = reference("right-up", landmarks(raised_right=True))
     match = rank_matches(query, [ref], max_distance=0.05)[0]
@@ -82,11 +86,13 @@ def test_mirror_matches_opposite_raised_arm_and_can_be_disabled():
 
 
 def test_identical_symmetric_pose_prefers_unmirrored_display():
+    # Em empate, evita espelhar a imagem de referência sem necessidade.
     ref = reference("rest", landmarks())
     assert rank_matches(ref.pose, [ref])[0].mirrored is False
 
 
 def test_poor_matches_are_rejected_and_results_have_deterministic_top_k():
+    """Rejeita poses distantes e usa o identificador para desempatar resultados equivalentes."""
     query = extract_pose(landmarks(raised_left=True, raised_right=True), 640, 480)
     assert rank_matches(query, [reference("rest", landmarks())], max_distance=0.05) == []
     refs = [
@@ -106,12 +112,14 @@ def test_poor_matches_are_rejected_and_results_have_deterministic_top_k():
     ],
 )
 def test_missing_or_unreliable_torso_rejects_the_pose(index, field, value):
+    # Cada caso compromete um ponto do tronco, necessário para centralizar e ajustar a escala.
     points = landmarks()
     points[index][field] = value
     assert extract_pose(points, 640, 480) is None
 
 
 def test_partial_pose_needs_eight_reliable_joints_and_shared_coverage():
+    """As poses precisam compartilhar pontos suficientes, não apenas tê-los separadamente."""
     points = landmarks()
     for index in (13, 14, 15, 16):
         points[index]["visibility"] = 0.1
@@ -120,6 +128,7 @@ def test_partial_pose_needs_eight_reliable_joints_and_shared_coverage():
     match = rank_matches(query, [reference("rest", landmarks())])[0]
     assert match.joint_count == 8
     other = landmarks()
+    # A consulta perdeu os braços; esta referência perde as pernas, reduzindo a parte comum.
     for index in (25, 26, 27, 28):
         other[index]["visibility"] = 0.1
     assert rank_matches(query, [reference("upper-only", other)]) == []
@@ -128,6 +137,7 @@ def test_partial_pose_needs_eight_reliable_joints_and_shared_coverage():
 
 
 def test_mediapipe_like_objects_are_accepted_and_degenerate_torso_is_rejected():
+    # O núcleo aceita tanto dicionários quanto objetos com atributos, como os do detector.
     objects = [SimpleNamespace(**point) for point in landmarks()]
     assert extract_pose(objects, 640, 480).joint_count == len(BODY_JOINTS)
     assert extract_pose([{"x": 0.5, "y": 0.5}] * 33, 640, 480) is None
@@ -141,6 +151,7 @@ def test_invalid_rank_options_are_reported(kwargs):
 
 
 def catalog_data(tmp_path):
+    """Prepara um catálogo mínimo e um arquivo marcador para testar caminhos e metadados."""
     (tmp_path / "reference.png").write_bytes(b"image validation belongs to the renderer")
     return {
         "schema_version": 1,
@@ -161,12 +172,14 @@ def catalog_data(tmp_path):
 
 
 def write_catalog(tmp_path, data):
+    """Grava o JSON na pasta temporária fornecida pelo pytest."""
     path = tmp_path / "catalog.json"
     path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     return path
 
 
 def test_catalog_loads_portable_paths_and_preserves_attribution(tmp_path):
+    # Caminhos relativos são resolvidos a partir do catálogo; origem e créditos são mantidos.
     refs = load_catalog(write_catalog(tmp_path, catalog_data(tmp_path)))
     assert refs[0].image_path == (tmp_path / "reference.png").resolve()
     assert refs[0].source == "Ilustração do projeto"
@@ -179,6 +192,7 @@ def test_catalog_loads_portable_paths_and_preserves_attribution(tmp_path):
     "image", ["../outside.png", "/tmp/outside.png", "C:/outside.png", "..\\outside.png"]
 )
 def test_catalog_cannot_escape_its_directory(tmp_path, image):
+    """Rejeita caminhos externos escritos em formatos comuns de Linux e Windows."""
     data = catalog_data(tmp_path)
     data["references"][0]["image"] = image
     with pytest.raises(ValueError):
@@ -186,6 +200,7 @@ def test_catalog_cannot_escape_its_directory(tmp_path, image):
 
 
 def test_catalog_rejects_duplicate_ids_and_missing_images(tmp_path):
+    # Primeiro provoca uma colisão de identificadores; depois remove a imagem referenciada.
     data = catalog_data(tmp_path)
     data["references"].append(dict(data["references"][0]))
     with pytest.raises(ValueError, match="únicos"):
@@ -198,6 +213,7 @@ def test_catalog_rejects_duplicate_ids_and_missing_images(tmp_path):
 
 @pytest.mark.parametrize("change", ["version", "landmarks", "torso", "dimensions"])
 def test_catalog_rejects_incompatible_or_unusable_records(tmp_path, change):
+    """Altera um requisito por vez para conferir a validação de cada entrada do catálogo."""
     data = catalog_data(tmp_path)
     item = data["references"][0]
     if change == "version":
@@ -213,6 +229,7 @@ def test_catalog_rejects_incompatible_or_unusable_records(tmp_path, change):
 
 
 def test_weights_are_used_without_turning_distance_into_probability():
+    # Deslocar um dos 12 pontos por uma unidade produz RMS sqrt(1/12), não uma porcentagem.
     query = extract_pose(landmarks(), 640, 480)
     changed = list(query.points)
     changed[4] = (changed[4][0] + 1, changed[4][1])

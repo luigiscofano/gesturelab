@@ -1,8 +1,9 @@
 """Busca geométrica de poses humanas em um catálogo local de imagens.
 
 O descritor usa 12 articulações em pixels, centradas no quadril e divididas pelo
-tamanho do tronco. A distância é RMS ponderada, não probabilidade de acerto.
-Somente a biblioteca padrão é usada: testes e leitura do catálogo não carregam CV.
+tamanho do tronco. A distância é a raiz da média ponderada dos erros quadráticos
+(RMS), não probabilidade de acerto. Testes e leitura do catálogo usam somente a
+biblioteca padrão, sem carregar bibliotecas de visão.
 """
 
 from __future__ import annotations
@@ -13,6 +14,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
+# Pares de ombros, cotovelos, punhos, quadris, joelhos e tornozelos.
 BODY_JOINTS = (11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28)
 TORSO_JOINTS = (11, 12, 23, 24)
 POSE_CONNECTIONS = (
@@ -44,15 +46,19 @@ class PoseVector:
     """Pontos na ordem de BODY_JOINTS; None indica uma articulação descartada."""
 
     points: tuple[Point | None, ...]
+    # A confiança determina o peso de cada articulação na comparação.
     weights: tuple[float, ...]
 
     @property
     def joint_count(self) -> int:
+        """Conta somente os pontos que passaram pela validação."""
         return sum(point is not None for point in self.points)
 
 
 @dataclass(frozen=True)
 class PoseReference:
+    """Reúne uma imagem do catálogo, sua pose e os metadados de origem."""
+
     id: str
     title: str
     image_path: Path
@@ -64,6 +70,8 @@ class PoseReference:
 
 @dataclass(frozen=True)
 class PoseMatch:
+    """Guarda uma correspondência, sua distância e a orientação escolhida."""
+
     reference: PoseReference
     distance: float
     mirrored: bool
@@ -71,12 +79,14 @@ class PoseMatch:
 
 
 def _landmark_field(landmark: object, key: str, default: object = None) -> object:
+    """Lê um campo de ponto, seja ele um dicionário JSON ou um objeto MediaPipe."""
     if isinstance(landmark, Mapping):
         return landmark.get(key, default)
     return getattr(landmark, key, default)
 
 
 def _finite_number(value: object) -> float | None:
+    """Descarta booleanos e números indefinidos ou infinitos."""
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         return None
     return float(value) if math.isfinite(value) else None
@@ -88,6 +98,7 @@ def _read_joint(
     height: int,
     min_visibility: float,
 ) -> tuple[Point, float] | None:
+    """Valida o ponto e retorna sua posição em pixels com o peso de confiança."""
     x = _finite_number(_landmark_field(landmark, "x"))
     y = _finite_number(_landmark_field(landmark, "y"))
     visibility = _landmark_field(landmark, "visibility", 1.0)
@@ -105,6 +116,7 @@ def _read_joint(
         or not 0 <= presence <= 1
     ):
         return None
+    # Os dois indicadores precisam atingir o mínimo para o ponto ser aproveitado.
     weight = min(visibility, presence)
     if weight <= 0 or weight < min_visibility:
         return None
@@ -112,10 +124,12 @@ def _read_joint(
 
 
 def _midpoint(first: Point, second: Point) -> Point:
+    """Encontra o centro entre duas articulações."""
     return (first[0] + second[0]) / 2, (first[1] + second[1]) / 2
 
 
 def _torso_frame(points: Mapping[int, Point]) -> tuple[Point, float]:
+    """Obtém a origem no quadril e a medida usada para ajustar a escala."""
     left_shoulder, right_shoulder = points[11], points[12]
     left_hip, right_hip = points[23], points[24]
     pelvis = _midpoint(left_hip, right_hip)
@@ -161,6 +175,8 @@ def extract_pose(
     pelvis, scale = _torso_frame(points)
     if scale < _MIN_TORSO_SCALE_PX:
         return None
+    # Centralizar e ajustar a escala reduz diferenças de posição e tamanho entre fotos.
+    # A ordem dos pontos é fixa; articulações ausentes continuam representadas por None.
     normalized = tuple(
         ((points[index][0] - pelvis[0]) / scale, (points[index][1] - pelvis[1]) / scale)
         if index in points
@@ -182,6 +198,7 @@ def mirror_pose(pose: PoseVector) -> PoseVector:
 
 
 def _pose_distance(query: PoseVector, reference: PoseVector) -> tuple[float, int] | None:
+    """Calcula a distância usando articulações presentes nas duas poses."""
     shared_indices = [
         index
         for index in range(len(BODY_JOINTS))
@@ -192,6 +209,7 @@ def _pose_distance(query: PoseVector, reference: PoseVector) -> tuple[float, int
     weighted_squared_error = 0.0
     total_weight = 0.0
     for index in shared_indices:
+        # Um ponto pouco confiável em qualquer imagem contribui menos para a distância.
         weight = min(query.weights[index], reference.weights[index])
         weighted_squared_error += (
             weight * math.dist(query.points[index], reference.points[index]) ** 2
@@ -207,6 +225,7 @@ def _best_orientation(
     reference: PoseReference,
     allow_mirror: bool,
 ) -> PoseMatch | None:
+    """Testa as orientações permitidas e conserva a de menor distância."""
     orientations = [(False, reference.pose)]
     if allow_mirror:
         orientations.append((True, mirror_pose(reference.pose)))
@@ -247,10 +266,12 @@ def rank_matches(
         match = _best_orientation(query, reference, allow_mirror)
         if match is not None and match.distance <= max_distance:
             matches.append(match)
+    # O identificador desempata distâncias iguais, mantendo a ordenação reproduzível.
     return sorted(matches, key=lambda match: (match.distance, match.reference.id))[:top_k]
 
 
 def _catalog_text(data: Mapping, key: str, *, required: bool = False) -> str:
+    """Lê um metadado textual e verifica se campos obrigatórios estão preenchidos."""
     value = data.get(key, "")
     if not isinstance(value, str) or (required and not value.strip()):
         qualifier = " não vazio" if required else ""
@@ -259,6 +280,7 @@ def _catalog_text(data: Mapping, key: str, *, required: bool = False) -> str:
 
 
 def _resolve_image_path(image: str, directory: Path, identifier: str) -> Path:
+    """Confere o formato e limita as referências à pasta do catálogo."""
     relative = PurePosixPath(image)
     if (
         relative.is_absolute()
@@ -269,6 +291,7 @@ def _resolve_image_path(image: str, directory: Path, identifier: str) -> Path:
     ):
         raise ValueError(f"Referência {identifier}: use um caminho relativo PNG/JPG/WebP sem '..'.")
     directory = Path(directory).resolve()
+    # Links simbólicos também precisam apontar para dentro da pasta permitida.
     image_path = (directory / relative).resolve()
     if not image_path.is_relative_to(directory):
         raise ValueError(f"Referência {identifier}: a imagem escapa da pasta do catálogo.")
@@ -320,6 +343,7 @@ def load_catalog(path: str | Path) -> list[PoseReference]:
     if not isinstance(entries, list) or not entries:
         raise ValueError("Catálogo precisa conter ao menos uma referência.")
     references = [reference_from_dict(entry, path.parent) for entry in entries]
+    # Identificadores únicos permitem distinguir referências durante a busca e a exibição.
     ids = [reference.id for reference in references]
     if len(ids) != len(set(ids)):
         raise ValueError("Os identificadores das referências precisam ser únicos.")

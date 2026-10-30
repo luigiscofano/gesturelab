@@ -25,10 +25,12 @@ from vision_runtime import (
 
 ROOT = Path(__file__).resolve().parent
 WINDOW = "GestureLab"
+# Cores no OpenCV seguem a ordem azul, verde e vermelho (BGR).
 INK_COLOR = (220, 60, 25)
 
 
 def create_task(args, python, vision):
+    """Configura o modelo de pontos da mão ou de gestos para foto ou sequência."""
     model_path = args.model or ROOT / "models" / MODEL_NAMES[args.mode]
     if not model_path.is_file():
         raise FileNotFoundError(
@@ -52,6 +54,7 @@ def create_task(args, python, vision):
 
 
 def process_frame(task, frame, mode, timestamp_ms, dependencies: VisionDependencies):
+    """Envia um quadro ao modelo; timestamps permitem acompanhar uma sequência."""
     image = to_mediapipe_image(frame, dependencies)
     if timestamp_ms is None:
         return task.detect(image) if mode in {"hands", "airwrite"} else task.recognize(image)
@@ -61,6 +64,7 @@ def process_frame(task, frame, mode, timestamp_ms, dependencies: VisionDependenc
 
 
 def result_summary(result, args) -> dict:
+    """Organiza pontos, lateralidade e gestos em dados que podem ser exportados como JSON."""
     hands = []
     for index, landmarks in enumerate(result.hand_landmarks):
         handedness = result.handedness[index][0] if result.handedness[index] else None
@@ -72,6 +76,7 @@ def result_summary(result, args) -> dict:
         }
         if args.mode == "gestures":
             candidates = result.gestures[index] if index < len(result.gestures) else []
+            # Escolhe a categoria mais pontuada; gesture_label ainda aplica a rejeição.
             category = max(candidates, key=lambda item: item.score) if candidates else None
             score = category.score if category else 0.0
             name = category.category_name if category else None
@@ -87,6 +92,7 @@ def result_summary(result, args) -> dict:
 
 
 def draw_result(frame, result, args, cv2, fps: float | None = None):
+    """Desenha as conexões da mão e os rótulos sobre uma cópia da captura."""
     # O resultado é calculado na imagem original; só agora espelhamos o canvas.
     canvas = cv2.flip(frame, 1) if args.mirror else frame.copy()
     height, width = canvas.shape[:2]
@@ -127,6 +133,7 @@ def draw_result(frame, result, args, cv2, fps: float | None = None):
 
 
 def put_text(canvas, text, point, cv2):
+    """Escreve um rótulo com fundo para manter o contraste sobre a imagem."""
     # Fundo escuro e escala adaptativa mantêm rótulos legíveis em fotos pequenas.
     font = cv2.FONT_HERSHEY_SIMPLEX
     base_width = cv2.getTextSize(text, font, 1.0, 1)[0][0]
@@ -143,6 +150,7 @@ def put_text(canvas, text, point, cv2):
 
 
 def run_image(task, args, dependencies: VisionDependencies):
+    """Processa uma foto, imprime seus dados e salva a versão anotada quando solicitado."""
     cv2, np = dependencies.cv2, dependencies.numpy
     frame = read_image(args.image, cv2, np, invalid_message="Formato de imagem não suportado")
     started = time.perf_counter()
@@ -169,6 +177,7 @@ def run_image(task, args, dependencies: VisionDependencies):
 
 def update_airwriter(writer, result, timestamp_ms):
     """Conecta resultados de visão ao motor sem usar índice como identidade."""
+    # A escrita usa uma mão por vez para não misturar posições de pessoas ou mãos diferentes.
     count = len(result.hand_landmarks)
     if count != 1:
         reason = "SEM MAO DETECTADA" if count == 0 else "DEIXE APENAS UMA MAO VISIVEL"
@@ -176,6 +185,7 @@ def update_airwriter(writer, result, timestamp_ms):
         return None
     landmarks = result.hand_landmarks[0]
     points = [(p.x * (writer.width - 1), p.y * (writer.height - 1)) for p in landmarks]
+    # O ponto 8 é a ponta do indicador, usada como posição da caneta.
     tip = points[8]
     if writer.mirrored:
         tip = (writer.width - 1 - tip[0], tip[1])
@@ -211,6 +221,7 @@ def draw_strokes(canvas, strokes, cv2, pen_width):
 
 
 def draw_airwriting(frame, writer, tip, args, cv2, np, fps, white_background):
+    """Combina os traços, o cursor e as instruções sobre vídeo ou fundo branco."""
     if white_background:
         canvas = np.full_like(frame, 255)
     else:
@@ -249,6 +260,7 @@ def save_airwriting(writer, args, cv2, np):
         raise RuntimeError("Não foi possível codificar o desenho.")
     folder = ROOT / "outputs"
     folder.mkdir(parents=True, exist_ok=True)
+    # Data e identificador diferenciam as exportações feitas na mesma sessão.
     stem = f"airwrite_{datetime.now():%Y%m%d_%H%M%S}_{uuid.uuid4().hex[:8]}"
     png_path, json_path = folder / f"{stem}.png", folder / f"{stem}.json"
     data = writer.snapshot()
@@ -261,6 +273,7 @@ def save_airwriting(writer, args, cv2, np):
 
 
 def handle_airwriting_key(key, writer, args, dependencies, white_background):
+    """Aplica o atalho pressionado e devolve a preferência atual de fundo."""
     if key == ord(" "):
         writer.toggle_pause()
     elif key in (ord("c"), ord("C")):
@@ -276,6 +289,7 @@ def handle_airwriting_key(key, writer, args, dependencies, white_background):
 
 
 def prepare_airwriter(writer, frame, args):
+    """Cria a caneta no primeiro quadro e confere se a resolução continua compatível."""
     height, width = frame.shape[:2]
     if writer is None:
         return AirWriter(width, height, smooth_ms=args.smooth_ms, mirrored=args.mirror)
@@ -286,6 +300,7 @@ def prepare_airwriter(writer, frame, args):
 
 
 def run_camera(task, args, dependencies: VisionDependencies):
+    """Repete captura, inferência e desenho até um comando de saída ou limite de quadros."""
     cv2, np = dependencies.cv2, dependencies.numpy
     with camera_session(cv2, args.camera, headless=args.headless) as capture:
         started = time.perf_counter()
@@ -297,6 +312,7 @@ def run_camera(task, args, dependencies: VisionDependencies):
         while True:
             loop_start = time.perf_counter()
             frame = read_camera_frame(capture)
+            # O relógio produz tempos crescentes, exigidos pelo modo VIDEO do MediaPipe.
             timestamp = clock.tick(time.perf_counter() - started)
             result = process_frame(task, frame, args.mode, timestamp, dependencies)
             if args.mode == "airwrite":
@@ -307,6 +323,7 @@ def run_camera(task, args, dependencies: VisionDependencies):
                 canvas, _ = draw_result(frame, result, args, cv2, fps)
             frames += 1
             if not args.headless:
+                # A janela e os atalhos só existem na execução com interface.
                 cv2.imshow(WINDOW, canvas)
                 key = cv2.waitKey(1) & 0xFF
                 if key in QUIT_KEYS:
@@ -323,6 +340,7 @@ def run_camera(task, args, dependencies: VisionDependencies):
                     break
             elapsed = time.perf_counter() - loop_start
             current_fps = 1.0 / max(elapsed, 1e-9)
+            # Suaviza o indicador de FPS para reduzir a oscilação entre quadros.
             fps = current_fps if fps is None else 0.9 * fps + 0.1 * current_fps
             if args.max_frames and frames >= args.max_frames:
                 break
@@ -330,6 +348,7 @@ def run_camera(task, args, dependencies: VisionDependencies):
 
 
 def run_hand_mode(args, dependencies: VisionDependencies) -> None:
+    """Abre a tarefa de visão e escolhe entre uma foto e a captura contínua."""
     with create_task(args, dependencies.tasks, dependencies.vision) as task:
         if args.image:
             run_image(task, args, dependencies)
