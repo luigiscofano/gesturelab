@@ -1,0 +1,5 @@
+# Dependências diretas verificadas em 30/10/2026, Python 3.12.
+# Instale apenas esta distribuição de OpenCV: todas compartilham o módulo cv2.
+mediapipe==1.2.0
+opencv-contrib-python==5.0.0.93
+numpy==2.5.4

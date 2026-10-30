@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="540" height="375" preserveAspectRatio="xMinYMin meet" viewBox="0 0 540 375" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="540" height="375"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-375)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="540" height="375" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="143.703857421875" y="353" style="font-family: DejaVuBold; font-size: 13px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,706) scale(1,-1)">Um modelo por modo de execução</text>
+			<rect x="165" y="290" width="210" height="42" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="224.05517578125" y="316.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,632) scale(1,-1)">Webcam ou foto</text>
+			<text x="218.612060546875" y="300.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,600) scale(1,-1)">OpenCV lê o frame BGR</text>
+			<rect x="165" y="220" width="210" height="42" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="212.39501953125" y="246.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,492) scale(1,-1)">Conversão para RGB</text>
+			<text x="203.146337890625" y="230.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,460) scale(1,-1)">Imagem original, sem espelhar</text>
+			<rect x="7" y="130" width="166" height="50" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="55.7861328125" y="160.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,320) scale(1,-1)">Modo hands</text>
+			<text x="51.32939453125" y="144.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,288) scale(1,-1)">Hand Landmarker</text>
+			<rect x="187" y="130" width="166" height="50" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="228.10546875" y="160.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,320) scale(1,-1)">Modo gestures</text>
+			<text x="227.64248046875" y="144.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,288) scale(1,-1)">Gesture Recognizer</text>
+			<rect x="367" y="130" width="166" height="50" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="410.70068359375" y="160.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,320) scale(1,-1)">Modo airwrite</text>
+			<text x="411.32939453125" y="144.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,288) scale(1,-1)">Hand Landmarker</text>
+			<rect x="7" y="55" width="166" height="44" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="37.2900390625" y="82.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,164) scale(1,-1)">Pontos e conexões</text>
+			<text x="52.49677734375" y="66.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,132) scale(1,-1)">Estrutura da mão</text>
+			<rect x="187" y="55" width="166" height="44" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="201.80419921875" y="82.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,164) scale(1,-1)">Pontos e nome do gesto</text>
+			<text x="218.95849609375" y="66.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,132) scale(1,-1)">Classificação disponível</text>
+			<rect x="367" y="55" width="166" height="44" rx="7" ry="7" style="stroke: rgb(83%,87%,88%); stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,96%,96%); fill-rule: evenodd;"/>
+			<text x="385.3857421875" y="82.0" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,164) scale(1,-1)">Trajetória do indicador</text>
+			<text x="382.466064453125" y="66.0" style="font-family: DejaVu; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,132) scale(1,-1)">Traços separados e exportação</text>
+			<path d="M 270,290 L 270,262 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="270 262, 272.6098 267.4027, 267.3902 267.4027" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<path d="M 205,220 L 90,180 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="90 180, 95.96019 179.31, 94.24545 184.2398" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<path d="M 270,220 L 270,180 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="270 180, 272.6098 185.4027, 267.3902 185.4027" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<path d="M 335,220 L 450,180 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="450 180, 445.7546 184.2398, 444.0398 179.31" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<path d="M 90,130 L 90,99 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="90 99, 92.60979 104.4027, 87.39021 104.4027" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<path d="M 270,130 L 270,99 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="270 99, 272.6098 104.4027, 267.3902 104.4027" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<path d="M 450,130 L 450,99 Z" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="450 99, 452.6098 104.4027, 447.3902 104.4027" style="stroke: rgb(35%,41%,45%); stroke-linecap: butt; stroke-width: 1; fill: rgb(35%,41%,45%); fill-rule: evenodd;"/>
+			<text x="143.7451171875" y="21" style="font-family: DejaVu; font-size: 9px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,42) scale(1,-1)">A visualização pode ser espelhada depois da inferência.</text>
+		</g>
+	</g>
+</svg>

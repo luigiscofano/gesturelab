@@ -1,0 +1,32 @@
+# Ambientes e caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Configuração local e segredos
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Modelos e dados: obtenha pelo script; não publique gravações sem revisão
+models/*.task
+models/*.part
+data/
+outputs/
+*.mp4
+*.avi
+*.mov
+
+# Resultados temporários e empacotamento
+*.log
+*.zip
+build/
+dist/
+*.egg-info/

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="540" height="395" preserveAspectRatio="xMinYMin meet" viewBox="0 0 540 395" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="540" height="395"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-395)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="540" height="395" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="166.90771484375" y="374" style="font-family: DejaVuBold; font-size: 13px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,748) scale(1,-1)">Mapa dos 21 pontos da mão</text>
+			<path d="M 194,35 L 150,73 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 150,73 L 111,112 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 111,112 L 77,144 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 77,144 L 48,177 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 194,35 L 150,152 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 150,152 L 139,222 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 139,222 L 136,269 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 136,269 L 134,310 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 150,152 L 197,164 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 197,164 L 195,248 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 195,248 L 194,300 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 194,300 L 193,342 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 197,164 L 241,154 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 241,154 L 253,234 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 253,234 L 260,279 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 260,279 L 265,317 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 241,154 L 282,137 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 194,35 L 282,137 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 282,137 L 309,194 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 309,194 L 324,232 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 324,232 L 335,265 Z" style="stroke: rgb(62%,71%,74%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="194" cy="35" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,47%,42%); fill-rule: evenodd;"/>
+			<text x="191.4951171875" y="32" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,64) scale(1,-1)">0</text>
+			<circle cx="150" cy="73" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="147.4951171875" y="70" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,140) scale(1,-1)">1</text>
+			<circle cx="111" cy="112" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="108.4951171875" y="109" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,218) scale(1,-1)">2</text>
+			<circle cx="77" cy="144" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="74.4951171875" y="141" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,282) scale(1,-1)">3</text>
+			<circle cx="48" cy="177" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,47%,42%); fill-rule: evenodd;"/>
+			<text x="45.4951171875" y="174" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,348) scale(1,-1)">4</text>
+			<circle cx="150" cy="152" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="147.4951171875" y="149" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,298) scale(1,-1)">5</text>
+			<circle cx="139" cy="222" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="136.4951171875" y="219" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,438) scale(1,-1)">6</text>
+			<circle cx="136" cy="269" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="133.4951171875" y="266" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,532) scale(1,-1)">7</text>
+			<circle cx="134" cy="310" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,47%,42%); fill-rule: evenodd;"/>
+			<text x="131.4951171875" y="307" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,614) scale(1,-1)">8</text>
+			<circle cx="197" cy="164" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="194.4951171875" y="161" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,322) scale(1,-1)">9</text>
+			<circle cx="195" cy="248" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="189.990234375" y="245" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,490) scale(1,-1)">10</text>
+			<circle cx="194" cy="300" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="188.990234375" y="297" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,594) scale(1,-1)">11</text>
+			<circle cx="193" cy="342" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,47%,42%); fill-rule: evenodd;"/>
+			<text x="187.990234375" y="339" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,678) scale(1,-1)">12</text>
+			<circle cx="241" cy="154" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="235.990234375" y="151" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,302) scale(1,-1)">13</text>
+			<circle cx="253" cy="234" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="247.990234375" y="231" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,462) scale(1,-1)">14</text>
+			<circle cx="260" cy="279" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="254.990234375" y="276" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,552) scale(1,-1)">15</text>
+			<circle cx="265" cy="317" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,47%,42%); fill-rule: evenodd;"/>
+			<text x="259.990234375" y="314" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,628) scale(1,-1)">16</text>
+			<circle cx="282" cy="137" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="276.990234375" y="134" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,268) scale(1,-1)">17</text>
+			<circle cx="309" cy="194" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="303.990234375" y="191" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,382) scale(1,-1)">18</text>
+			<circle cx="324" cy="232" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,29%,38%); fill-rule: evenodd;"/>
+			<text x="318.990234375" y="229" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,458) scale(1,-1)">19</text>
+			<circle cx="335" cy="265" r="9" style="stroke: rgb(100%,100%,100%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,47%,42%); fill-rule: evenodd;"/>
+			<text x="329.990234375" y="262" style="font-family: DejaVuBold; font-size: 7.2px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,524) scale(1,-1)">20</text>
+			<text x="375" y="309" style="font-family: DejaVuBold; font-size: 8.6px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,618) scale(1,-1)">PONTOS DE REFERÊNCIA</text>
+			<text x="375" y="281" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(13%,47%,42%); stroke:none;" transform="translate(0,562) scale(1,-1)">0</text>
+			<text x="399" y="281" style="font-family: DejaVu; font-size: 9px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,562) scale(1,-1)">Punho</text>
+			<text x="375" y="256" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(13%,47%,42%); stroke:none;" transform="translate(0,512) scale(1,-1)">4</text>
+			<text x="399" y="256" style="font-family: DejaVu; font-size: 9px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,512) scale(1,-1)">Ponta do polegar</text>
+			<text x="375" y="231" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(13%,47%,42%); stroke:none;" transform="translate(0,462) scale(1,-1)">8</text>
+			<text x="399" y="231" style="font-family: DejaVu; font-size: 9px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,462) scale(1,-1)">Ponta do indicador</text>
+			<text x="375" y="206" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(13%,47%,42%); stroke:none;" transform="translate(0,412) scale(1,-1)">12</text>
+			<text x="399" y="206" style="font-family: DejaVu; font-size: 9px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,412) scale(1,-1)">Ponta do médio</text>
+			<text x="375" y="181" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(13%,47%,42%); stroke:none;" transform="translate(0,362) scale(1,-1)">16</text>
+			<text x="399" y="181" style="font-family: DejaVu; font-size: 9px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,362) scale(1,-1)">Ponta do anelar</text>
+			<text x="375" y="156" style="font-family: DejaVuBold; font-size: 10px;fill: rgb(13%,47%,42%); stroke:none;" transform="translate(0,312) scale(1,-1)">20</text>
+			<text x="399" y="156" style="font-family: DejaVu; font-size: 9px;fill: rgb(9%,13%,17%); stroke:none;" transform="translate(0,312) scale(1,-1)">Ponta do mínimo</text>
+			<text x="375" y="103" style="font-family: DejaVu; font-size: 8.5px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,206) scale(1,-1)">Esquema geométrico.</text>
+			<text x="375" y="87" style="font-family: DejaVu; font-size: 8.5px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,174) scale(1,-1)">Não representa medidas</text>
+			<text x="375" y="71" style="font-family: DejaVu; font-size: 8.5px;fill: rgb(35%,41%,45%); stroke:none;" transform="translate(0,142) scale(1,-1)">anatômicas exatas.</text>
+		</g>
+	</g>
+</svg>
