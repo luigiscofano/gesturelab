@@ -6,12 +6,27 @@ Protótipo em Python para detectar **21 pontos por mão**, desenhar conexões so
 webcam, dar nome a gestos conhecidos e **escrever no ar com o indicador**. Usa modelos prontos do
 MediaPipe Tasks; o projeto não treina um detector do zero.
 
-[Guia completo](docs/GUIA_COMPLETO.md) · [Escrita no ar](docs/ESCRITA_NO_AR.md) ·
-[Roadmap](docs/ROADMAP.md) · [Validação](docs/VALIDACAO.md)
+[Documentação](docs/README.md) · [Guia completo](docs/GUIA_COMPLETO.md) ·
+[Escrita no ar](docs/ESCRITA_NO_AR.md) · [Roadmap](docs/ROADMAP.md) ·
+[Validação](docs/VALIDACAO.md) · [Contribuir](CONTRIBUTING.md)
 
 **Autor do projeto:** Luigi Scofano de Araujo. Este starter foi preparado com apoio
 de IA. Antes de apresentar como projeto concluído, execute, estude, adapte e registre
 os seus próprios resultados.
+
+## Por onde começar
+
+| Quero... | Começo por... |
+| --- | --- |
+| Rodar a webcam pela primeira vez | [Instalação no Windows](#instalação-no-windows) ou [macOS/Linux](#macos-ou-linux) |
+| Desenhar com o dedo e salvar o resultado | [Escrever no ar](#escrever-no-ar) |
+| Entender os módulos e as decisões | [Arquitetura](docs/ARQUITETURA.md) |
+| Estudar o projeto e preparar o portfólio | [Guia completo](docs/GUIA_COMPLETO.md) e [índice da documentação](docs/README.md) |
+| Executar ou ampliar os testes | [README de testes](tests/README.md) |
+| Propor uma melhoria em um pull request | [Guia de contribuição](CONTRIBUTING.md) |
+
+O aplicativo roda no seu computador e abre uma janela do OpenCV. O GitHub hospeda
+o código e a documentação; não há um aplicativo de webcam publicado no navegador.
 
 ## O que já está implementado
 
@@ -43,14 +58,17 @@ git clone https://github.com/luigiscofano/gesturelab.git
 cd gesturelab
 ```
 
-Você também pode baixar o ZIP pelo botão **Code → Download ZIP** no GitHub e abrir
-a pasta extraída no VS Code. Em seguida:
+Você também pode baixar o ZIP pelo botão **Code → Download ZIP** no GitHub.
+Extraia o arquivo e abra no VS Code a pasta que contém diretamente `app.py` e
+`requirements.txt`, normalmente `gesturelab-main`. Execute os comandos no terminal
+dessa pasta, não de dentro do ZIP nem da pasta que o contém. Em seguida:
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe scripts/download_models.py
+.\.venv\Scripts\python.exe scripts/check_environment.py --imports --models all
 .\.venv\Scripts\python.exe app.py --mode hands
 ```
 
@@ -58,13 +76,18 @@ Se `py -3.12` não encontrar o Python, instale essa versão ou substitua por um
 executável Python 3.12 disponível no seu computador. No VS Code, selecione
 `.venv\Scripts\python.exe` em **Python: Select Interpreter**.
 
+O diagnóstico verifica versões, importação das bibliotecas e integridade dos
+modelos. Ele não abre a webcam; as opções estão no [README dos scripts](scripts/README.md).
+
 Para nomear gestos:
 
 ```powershell
 .\.venv\Scripts\python.exe app.py --mode gestures
 ```
 
-Pressione **Q** ou **Esc** para sair. O programa não grava a webcam por padrão.
+O modo é escolhido ao iniciar: feche a janela atual com **Q** ou **Esc** antes de
+executar outro comando. Os atalhos funcionam com a **janela do GestureLab em foco**;
+clique nela se as teclas não responderem. O programa não grava a webcam por padrão.
 No modo de gestos, `score` é a pontuação do modelo; não é uma probabilidade
 calibrada de acerto. O limiar inicial de 0,65 precisa ser avaliado no seu cenário.
 
@@ -88,6 +111,11 @@ o traço se a mão some ou se detectar duas mãos.
 | S | Salvar PNG do desenho + JSON das trajetórias em outputs |
 | Q ou Esc | Sair |
 
+**Pressione S antes de sair para guardar o desenho.** Não há salvamento automático
+nem reabertura de uma sessão anterior. Cada salvamento cria um par de arquivos com
+nome próprio em `outputs/`, pasta criada no primeiro salvamento. Clique na janela
+do GestureLab antes de usar os atalhos.
+
 O modo `airwrite` precisa de uma sequência; não aceita `--image`. Os arquivos
 exportados não contêm a webcam. Ainda não há conversão automática de desenhos em
 letras. Veja o [guia de escrita no ar](docs/ESCRITA_NO_AR.md) para funcionamento,
@@ -100,6 +128,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python scripts/download_models.py
+.venv/bin/python scripts/check_environment.py --imports --models all
 .venv/bin/python app.py --mode hands
 ```
 
@@ -156,12 +185,17 @@ de Libras. A tela usa texto sem acentos por uma limitação das fontes do OpenCV
 | `core.py` | Geometria do desenho, nomes, rejeição por score e timestamps |
 | `airwriting.py` | Pose de escrita, separação de traços, suavização e estado da caneta |
 | `scripts/download_models.py` | Modelos oficiais versionados e integridade SHA-256 |
-| `models/README.md` | Procedência dos modelos |
-| `tests/` | Testes determinísticos sem webcam |
-| `.github/workflows/ci.yml` | Testes em runners Windows e Linux depois do push |
+| [`scripts/README.md`](scripts/README.md) | Uso dos utilitários de preparação e diagnóstico |
+| [`models/README.md`](models/README.md) | Procedência, download e integridade dos modelos |
+| [`tests/README.md`](tests/README.md) | Como executar a suíte e interpretar seus limites |
+| [`.github/README.md`](.github/README.md) | Workflows e organização das contribuições no GitHub |
 | `requirements.txt` | Versões fixas das dependências diretas |
-| `docs/GUIA_COMPLETO.md` | Roteiro de estudo, evolução e portfólio |
-| `docs/ESCRITA_NO_AR.md` | Uso da escrita no ar e próximos passos para reconhecer caracteres |
+| [`docs/README.md`](docs/README.md) | Índice de guias, planos e registros de validação |
+| [`docs/assets/README.md`](docs/assets/README.md) | Diagramas, fontes vetoriais e manutenção das imagens |
+
+Cada pasta documenta seu próprio conteúdo. O roteiro de estudo e portfólio está no
+[guia completo](docs/GUIA_COMPLETO.md); o comportamento da caneta e sua evolução
+para reconhecer caracteres estão no [guia de escrita no ar](docs/ESCRITA_NO_AR.md).
 
 O frame original é convertido de BGR para RGB e entregue ao modelo. O desenho
 espelhado usa `x_exibido = largura - 1 - x_original_em_pixels`. Assim o texto
@@ -187,6 +221,8 @@ distinção entre classes conhecidas e desconhecidas, timestamps e restrições 
 Não medem a qualidade do modelo. O workflow executa a análise de código e os testes
 em Windows e Linux. A [primeira execução no GitHub Actions](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460)
 foi aprovada nos dois sistemas; o badge acima acompanha o estado atual.
+O [README de testes](tests/README.md) explica os cenários cobertos e como distinguir
+verificação de lógica de validação da webcam e dos modelos.
 
 `requirements.txt` fixa dependências diretas. Para registrar também o ambiente
 completo depois de funcionar na sua máquina:
@@ -227,6 +263,8 @@ Um `pip freeze` de Linux não é automaticamente um lockfile universal para Wind
 | Modelo não encontrado | Execute `scripts/download_models.py` e confira a pasta `models`. |
 | Webcam indisponível | Permissão do sistema, outro app usando câmera, `--camera 0` ou `--camera 1`. |
 | Janela não abre | Execute localmente; não use `opencv-python-headless` para esta interface. |
+| Teclas não respondem | Clique na janela do GestureLab; atalhos não são comandos para digitar no terminal. |
+| Desenho não aparece em `outputs/` | Use S com a janela em foco antes de sair; a aplicação não salva automaticamente. |
 | Pacotes OpenCV conflitantes | Recrie `.venv` e instale apenas `requirements.txt`. |
 | Mãos esquerda/direita invertidas | Verifique se o driver já espelha a captura antes do aplicativo. |
 | Gesto troca de nome continuamente | Teste iluminação, distância e limiar; estabilização é uma etapa futura. |
@@ -244,3 +282,5 @@ Referências consultadas em 30/10/2026:
 Código próprio sob [MIT](LICENSE). Dependências, modelos e quaisquer imagens de
 teste mantêm suas respectivas licenças. Ao publicar sua evolução, mantenha os
 créditos das referências e explique quais partes implementou, mediu e modificou.
+Consulte os [créditos e componentes de terceiros](THIRD_PARTY_NOTICES.md) para a
+procedência das bibliotecas e dos modelos.
