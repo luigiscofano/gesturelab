@@ -1,7 +1,6 @@
 # PoseMatch — encontrar uma imagem com pose parecida
 
-[Projeto](../../README.md) · [Catálogo e imagens](../../pose_gallery/README.md) ·
-[Arquitetura](../ARQUITETURA.md) · [Testes](../../tests/README.md)
+[Início](../../README.md) · [Documentação](../README.md) · [Catálogo de poses](../../pose_gallery/README.md)
 
 O modo `posematch` estima a pose corporal de uma pessoa, compara sua geometria
 com as referências de um catálogo local e mostra a imagem mais próxima aceita
@@ -12,6 +11,16 @@ escrita no ar. A imagem recuperada já existe no catálogo; não é gerada a cad
 
 *Esta prévia usa pontos sintéticos e uma ilustração original. Não é uma captura
 de webcam nem uma avaliação do detector.*
+
+**Nesta página**
+
+- [Executar](#executar)
+- [Opções úteis](#opções-úteis)
+- [Ampliar o catálogo com fotografias](#ampliar-o-catálogo-com-fotografias)
+- [Como a comparação funciona](#como-a-comparação-funciona)
+- [Espelhamento e continuidade da tela](#espelhamento-e-continuidade-da-tela)
+- [Organização do código](#organização-do-código)
+- [Limites e avaliação](#limites-e-avaliação)
 
 ## Executar
 
@@ -170,3 +179,7 @@ mantendo uma avaliação final separada.
 - [Pose Landmarker para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python)
 - [Implementação oficial da tarefa](https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/python/vision/pose_landmarker.py)
 - [Modelos e hashes usados no projeto](../../models/README.md)
+
+---
+
+**Próxima leitura:** [montar um catálogo](../../pose_gallery/README.md), [resolver problemas](../SOLUCAO_DE_PROBLEMAS.md) e [entender os módulos](../MAPA_DO_PROJETO.md).

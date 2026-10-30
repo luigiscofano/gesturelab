@@ -1,92 +1,95 @@
-# Documentação do GestureLab
+# Central de documentação
 
-Este índice ajuda a escolher o próximo documento sem confundir o que o aplicativo
-já faz com os experimentos e recursos ainda planejados. Para instalar e executar,
-comece pelo [README principal](../README.md).
+[Início do projeto](../README.md) · [Instalação](INSTALACAO.md) ·
+[Como usar](USO.md) · [Solução de problemas](SOLUCAO_DE_PROBLEMAS.md)
 
-## Guias do aplicativo
+**Escolha o que você quer fazer.** Os guias práticos ajudam a executar o GestureLab;
+os documentos técnicos explicam suas decisões; os registros mostram as evidências
+e as próximas entregas.
 
-| Documento | Quando consultar | Conteúdo |
+## Comece pelo seu objetivo
+
+| Quero... | Abra esta página |
+| --- | --- |
+| **Rodar pela primeira vez** | [Instalação do zero](INSTALACAO.md): programas, Git ou ZIP, ambiente e primeira janela |
+| **Experimentar os quatro modos** | [Como usar](USO.md): comandos, controles, fotos e saídas |
+| **Resolver algo que deu errado** | [Solução de problemas](SOLUCAO_DE_PROBLEMAS.md): sintomas e verificações |
+| **Encontrar uma parte do código** | [Mapa do projeto](MAPA_DO_PROJETO.md): pastas, módulos e onde alterar cada comportamento |
+| **Entender as decisões técnicas** | [Arquitetura](ARQUITETURA.md): captura, inferência, estado e separação dos módulos |
+| **Aprender e apresentar o projeto** | [Guia completo](GUIA_COMPLETO.md): conceitos, desenvolvimento, GitHub e portfólio |
+
+## Explore uma funcionalidade
+
+| Funcionalidade | Usar agora | Entender ou personalizar |
 | --- | --- | --- |
-| [README principal](../README.md) | Primeiro uso | Instalação, modos, comandos, atalhos e erros comuns |
-| [Guia completo](GUIA_COMPLETO.md) | Estudar e evoluir o projeto | Conceitos de visão computacional, ferramentas, desenvolvimento, GitHub e portfólio |
-| [Arquitetura](ARQUITETURA.md) | Entender ou alterar o código | Responsabilidade dos módulos, inferência, espelhamento e estado da escrita |
-| [Escrita no ar](ESCRITA_NO_AR.md) | Usar ou modificar a caneta | Pose, confirmação, suavização, traços separados, exportação e limitações |
-| [Busca por pose corporal](posematch/README.md) | Encontrar uma imagem de pose parecida | Comparação, interface, catálogo e limites do modo posematch |
-| [Recursos visuais](assets/README.md) | Editar os diagramas dos guias | Arquivos SVG e PNG, finalidade e cuidados de atualização |
+| Mãos | [Pontos e conexões](USO.md#mãos--hands) | [Índices dos pontos](assets/hand_landmarks.png) · [Arquitetura](ARQUITETURA.md) |
+| Gestos | [Classes e limiar](USO.md#gestos--gestures) | [Reconhecimento e regras](GUIA_COMPLETO.md#6-identificar-e-nomear-gestos) |
+| Escrita no ar | [Caneta e atalhos](USO.md#escrita-no-ar--airwrite) | [Traços, suavização e exportação](ESCRITA_NO_AR.md) |
+| PoseMatch | [Buscar uma referência](USO.md#poses-parecidas--posematch) | [Como as poses são comparadas](posematch/README.md) · [Catálogo e fotos próprias](../pose_gallery/README.md) |
 
-Os modos `hands`, `gestures`, `airwrite` e `posematch` estão implementados. A escrita produz
-desenhos e trajetórias; ela ainda não reconhece letras. O reconhecimento de gestos
-usa classes de um modelo pronto. A busca corporal usa distâncias geométricas
-entre referências locais, sem classificar universalmente movimentos. Essas distinções devem aparecer também em
-demonstrações e descrições do portfólio.
+Precisa de um parâmetro? A [referência de opções](USO.md#referência-de-opções)
+reúne todos os argumentos de `app.py`, com padrões e restrições.
 
-## Evidências e próximas entregas
+## Encontre cada pasta
 
-| Documento | Natureza do conteúdo | Como usar |
+| Área | O que você encontra | Onde começar |
 | --- | --- | --- |
-| [Validação](VALIDACAO.md) | Registro de verificações executadas | Consultar ambiente, resultados e limites dos testes já realizados |
-| [Roadmap](ROADMAP.md) | Propostas de evolução | Escolher uma entrega e seu critério de conclusão |
-| [Experimentos](EXPERIMENTOS.md) | Modelo de registro a preencher | Documentar hipótese, alteração, comparação e resultado observado |
-| [Avaliação](AVALIACAO.md) | Protocolo a executar | Planejar medições e registrar equipamento, cenários e métricas |
-| [Dataset](DATASET.md) | Planejamento para uma etapa futura | Definir classes, participantes, sessões e divisão de dados antes do treino |
-| [Histórico de alterações](../CHANGELOG.md) | Resumo de mudanças realizadas | Entender a evolução funcional e consultar o histórico do repositório |
+| Aplicação | CLI, inferência, regras e interface | [Mapa dos módulos](MAPA_DO_PROJETO.md) |
+| `scripts/` | Download, diagnóstico e indexação de fotos | [Guia dos utilitários](../scripts/README.md) |
+| `models/` | Origem, nomes e integridade dos modelos | [Guia dos modelos](../models/README.md) |
+| `pose_gallery/` | Catálogo inicial e geração das ilustrações | [Guia do catálogo](../pose_gallery/README.md) |
+| `tests/` | Cenários automatizados e comandos de teste | [Guia dos testes](../tests/README.md) |
+| `.github/` | GitHub Actions, issues e pull requests | [Automação e colaboração](../.github/AUTOMACAO.md) |
+| `docs/assets/` | Identidade visual, diagramas e prévia | [Guia dos recursos visuais](assets/README.md) |
 
-Os campos vazios nos planos são trabalho pendente. Eles não representam dados
-coletados, acurácia medida ou testes de hardware concluídos. Os registros de
-validação devem identificar a versão testada e distinguir teste automatizado,
-inferência com imagem e observação em webcam real.
+## Qualidade, evidências e evolução
 
-## Leituras por objetivo
+| Documento | O que ele representa |
+| --- | --- |
+| [Validação](VALIDACAO.md) | Verificações já realizadas, ambiente, resultados e limites |
+| [Testes](../tests/README.md) | Como executar a suíte e entender o que ela verifica |
+| [Histórico de alterações](../CHANGELOG.md) | Mudanças que já entraram no projeto |
+| [Roadmap](ROADMAP.md) | Entregas planejadas e critérios de conclusão |
+| [Experimentos](EXPERIMENTOS.md) | Modelo para registrar uma hipótese e o resultado observado |
+| [Avaliação](AVALIACAO.md) | Protocolo para medir o comportamento no seu equipamento |
+| [Dataset](DATASET.md) | Planejamento de dados para o futuro classificador próprio |
 
-### Quero executar pela primeira vez
+Os campos ainda não preenchidos em experimentos, avaliação e dataset são
+**planos de trabalho**. Os resultados já obtidos ficam em **Validação**, com o
+contexto necessário para interpretá-los.
 
-1. Siga a instalação do [README principal](../README.md) na pasta que contém
-   `app.py` e `requirements.txt`.
-2. Use o [README dos scripts](../scripts/README.md) para preparar os modelos e
-   conferir os utilitários disponíveis.
-3. Abra `hands`, encerre com Q ou Esc e experimente `gestures`, `airwrite` e `posematch`.
-4. No modo de escrita, mantenha a janela em foco e pressione S antes de sair.
-   Não há salvamento automático.
+## Três caminhos de leitura
 
-### Quero entender e modificar
+### Quero apenas executar
 
-1. Leia a [arquitetura](ARQUITETURA.md) e localize o módulo responsável pela mudança.
-2. Consulte o [README dos testes](../tests/README.md) e execute a suíte existente.
-3. Siga o [guia de contribuição](../CONTRIBUTING.md) para preparar uma branch e um
-   pull request. O [README do GitHub](../.github/README.md) explica a automação.
-4. Faça uma mudança delimitada, descreva seu efeito e registre a validação pertinente.
+1. [Prepare o ambiente](INSTALACAO.md).
+2. [Escolha um modo](USO.md#escolha-um-modo).
+3. Consulte a [solução de problemas](SOLUCAO_DE_PROBLEMAS.md) se precisar.
+
+### Quero estudar ou modificar
+
+1. [Localize os módulos](MAPA_DO_PROJETO.md).
+2. [Entenda o fluxo](ARQUITETURA.md) e aprofunde a funcionalidade desejada.
+3. [Execute os testes](../tests/README.md) e siga o [fluxo de contribuição](../CONTRIBUTING.md).
 
 ### Quero apresentar no portfólio
 
-1. Use o [guia completo](GUIA_COMPLETO.md) como roteiro de apresentação.
-2. Execute a versão escolhida no próprio equipamento e registre os resultados em
-   [Experimentos](EXPERIMENTOS.md) ou [Avaliação](AVALIACAO.md).
-3. Grave uma demonstração com suas próprias imagens e mostre também os limites
-   observados, como perda de rastreamento ou atraso do cursor.
-4. Explique quais partes você estudou e alterou, o uso de modelos pré-treinados e
-   a assistência de IA registrada nos [créditos](../THIRD_PARTY_NOTICES.md).
+1. Leia o [roteiro de apresentação](GUIA_COMPLETO.md#16-transformar-em-uma-peça-de-portfólio).
+2. Execute no seu equipamento e registre um [experimento](EXPERIMENTOS.md).
+3. Mostre uma demonstração própria, as decisões que entendeu e os limites observados.
+4. Inclua os [créditos e a procedência dos componentes](../THIRD_PARTY_NOTICES.md).
 
-## Documentação por pasta
+## Ajuda e manutenção
 
-- [Scripts](../scripts/README.md): preparação e diagnóstico do ambiente.
-- [Modelos](../models/README.md): artefatos, origem e verificação de integridade.
-- [Testes](../tests/README.md): execução, cobertura de cenários e limites.
-- [GitHub](../.github/README.md): automação e organização do trabalho.
-- [Recursos visuais](assets/README.md): diagramas usados nos documentos.
-- [Busca por pose](posematch/README.md): uso e arquitetura do quarto modo.
-- [Catálogo de poses](../pose_gallery/README.md): imagens de referência e indexação.
+Para relatar um erro ou sugerir uma melhoria, use os
+[formulários de issues](https://github.com/luigiscofano/gesturelab/issues/new/choose).
+Para alterar código ou documentação, consulte [Como contribuir](../CONTRIBUTING.md).
 
-## Como manter estes documentos
+Mantenha a documentação junto da mudança: instalação em `INSTALACAO.md`, comandos
+e controles em `USO.md`, explicações de implementação nos guias técnicos. Atualize
+este índice quando criar uma página e verifique seus links no GitHub. O README
+principal deve continuar sendo uma entrada curta para esses caminhos.
 
-Atualize o guia afetado junto com o código que muda o comportamento. Exemplos de
-comando precisam usar opções realmente aceitas por `app.py --help`. Uma mudança
-de atalho, formato de saída ou requisito de instalação deve aparecer também no
-README principal.
-
-Ao registrar um teste, inclua o commit, o ambiente, o comando ou procedimento e
-o resultado observado. Preserve o contexto dos registros antigos para que uma
-verificação do protótipo inicial não seja confundida com a validação de uma versão
-posterior. Use links relativos para arquivos do repositório e links permanentes
-para evidências externas quando disponíveis.
+[Voltar ao projeto](../README.md) · [Mapa do projeto](MAPA_DO_PROJETO.md) ·
+[Licença](../LICENSE) · [Créditos](../THIRD_PARTY_NOTICES.md)
 

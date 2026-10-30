@@ -1,12 +1,41 @@
-# GestureLab
+# Guia completo do GestureLab
+
+[Início](../README.md) · [Documentação](README.md) · [Instalação](INSTALACAO.md)
 
 Guia para construir um projeto de visão computacional com webcam e apresentá-lo no portfólio
 
 Preparado para Luigi Scofano de Araujo. Referências técnicas consultadas em 30 de outubro de 2026.
 
+Este guia é um roteiro de aprendizado: explica conceitos, implementação e caminhos
+para evoluir o projeto. Para executar a versão que já está no repositório, siga a
+[instalação](INSTALACAO.md) e o [guia de uso](USO.md). Para localizar uma função,
+consulte o [mapa do código](MAPA_DO_PROJETO.md).
+
+## Sumário
+
+- [1. O projeto que você vai construir](#1-o-projeto-que-você-vai-construir)
+- [2. Como o sistema funciona](#2-como-o-sistema-funciona)
+- [3. Linguagens e ferramentas](#3-linguagens-e-ferramentas)
+- [4. Preparar o ambiente no Windows](#4-preparar-o-ambiente-no-windows)
+- [5. Construir entendendo cada etapa](#5-construir-entendendo-cada-etapa)
+- [6. Identificar e nomear gestos](#6-identificar-e-nomear-gestos)
+- [7. Usar geometria para criar regras próprias](#7-usar-geometria-para-criar-regras-próprias)
+- [8. Criar um dataset de gestos](#8-criar-um-dataset-de-gestos)
+- [9. Treinar um classificador próprio](#9-treinar-um-classificador-próprio)
+- [10. Avaliar o que realmente funciona](#10-avaliar-o-que-realmente-funciona)
+- [11. Escrita no ar e reconhecimento da escrita](#11-escrita-no-ar-e-reconhecimento-da-escrita)
+- [12. Próximos passos com utilidade real](#12-próximos-passos-com-utilidade-real)
+- [13. Evoluir para poses do corpo inteiro](#13-evoluir-para-poses-do-corpo-inteiro)
+- [14. Documentar desde o primeiro dia](#14-documentar-desde-o-primeiro-dia)
+- [15. Colocar o projeto no GitHub](#15-colocar-o-projeto-no-github)
+- [16. Transformar em uma peça de portfólio](#16-transformar-em-uma-peça-de-portfólio)
+- [17. Cronograma e primeira sessão](#17-cronograma-e-primeira-sessão)
+- [18. Problemas frequentes](#18-problemas-frequentes)
+- [19. Referências oficiais e materiais de estudo](#19-referências-oficiais-e-materiais-de-estudo)
+
 ## 1. O projeto que você vai construir
 
-Minha recomendação é criar o **GestureLab**, um laboratório de rastreamento e reconhecimento de mãos em tempo real. O nome é provisório. A primeira entrega reproduz o comportamento principal do post: abrir a webcam, identificar mãos e desenhar pontos e conexões sobre a imagem. Depois, a aplicação passa a mostrar o nome de gestos. Uma terceira versão aprende gestos definidos por você e executa uma ação útil.
+O **GestureLab** é um laboratório de rastreamento e reconhecimento de mãos em tempo real. Este roteiro começa pelo comportamento principal do post de referência: abrir a webcam, identificar mãos e desenhar pontos e conexões sobre a imagem. Depois, a aplicação passa a mostrar o nome de gestos. Uma evolução futura prevê aprender gestos definidos por você e executar uma ação útil.
 
 Como a referência mostra mãos, este guia começa por poses das mãos. A seção 13 explica a evolução para poses do corpo inteiro. As duas tarefas precisam de componentes e avaliações diferentes.
 
@@ -78,6 +107,9 @@ Instale apenas uma distribuição de OpenCV no ambiente. O kit usa `opencv-contr
 
 ## 4. Preparar o ambiente no Windows
 
+O procedimento de uso atual, incluindo clonagem, download em ZIP e atualização,
+está no [guia de instalação](INSTALACAO.md). Esta seção explica as escolhas de ambiente.
+
 ### 4.1 Instalar os programas
 
 1. Instale Python de 64 bits a partir de python.org. Para seguir exatamente a base do kit, use Python 3.12. Se usar outra versão suportada, registre-a e valide a instalação das dependências.
@@ -123,7 +155,7 @@ O script baixa os modelos oficiais para a pasta `models`, usando URLs versionada
 .\.venv\Scripts\python.exe app.py --mode hands
 ```
 
-Autorize o acesso à webcam quando o sistema solicitar. A janela deve mostrar a imagem e, quando houver mãos visíveis, os pontos e as conexões. Consulte `--help` para todos os argumentos e os controles indicados no README.
+Autorize o acesso à webcam quando o sistema solicitar. A janela deve mostrar a imagem e, quando houver mãos visíveis, os pontos e as conexões. Consulte `--help` para todos os argumentos e os [controles do guia de uso](USO.md).
 
 ```powershell
 .\.venv\Scripts\python.exe app.py --help
@@ -567,18 +599,18 @@ Documentação deve permitir que outra pessoa entenda, rode e avalie o projeto. 
 
 | Arquivo recomendado | Conteúdo |
 | --- | --- |
-| README.md | O que funciona, instalação, comandos, demonstração e limites |
-| requirements.txt | Dependências fixadas da aplicação |
-| requirements-dev.txt | Ferramentas de desenvolvimento |
-| .gitignore | Ambientes, caches, pesos e dados locais excluídos |
-| LICENSE | Condições de uso do código próprio |
-| THIRD_PARTY_NOTICES.md | Modelos, bibliotecas, referências e termos de terceiros |
-| docs/ESCRITA_NO_AR.md | Uso da caneta, exportação e reconhecimento futuro |
-| docs/ARQUITETURA.md | Componentes e caminho percorrido pelo frame |
-| docs/EXPERIMENTOS.md | Hipóteses, mudanças e observações |
-| docs/DATASET.md | Classes, coleta, participantes e divisões |
-| docs/AVALIACAO.md | Protocolo, métricas e limites |
-| docs/ROADMAP.md | Próximas entregas com critérios de conclusão |
+| [README.md](../README.md) | O que funciona, instalação, comandos, demonstração e limites |
+| [requirements.txt](../requirements.txt) | Dependências fixadas da aplicação |
+| [requirements-dev.txt](../requirements-dev.txt) | Ferramentas de desenvolvimento |
+| [.gitignore](../.gitignore) | Ambientes, caches, pesos e dados locais excluídos |
+| [LICENSE](../LICENSE) | Condições de uso do código próprio |
+| [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) | Modelos, bibliotecas, referências e termos de terceiros |
+| [docs/ESCRITA_NO_AR.md](ESCRITA_NO_AR.md) | Uso da caneta, exportação e reconhecimento futuro |
+| [docs/ARQUITETURA.md](ARQUITETURA.md) | Componentes e caminho percorrido pelo frame |
+| [docs/EXPERIMENTOS.md](EXPERIMENTOS.md) | Hipóteses, mudanças e observações |
+| [docs/DATASET.md](DATASET.md) | Classes, coleta, participantes e divisões |
+| [docs/AVALIACAO.md](AVALIACAO.md) | Protocolo, métricas e limites |
+| [docs/ROADMAP.md](ROADMAP.md) | Próximas entregas com critérios de conclusão |
 
 ### Registro de experimento
 
@@ -599,6 +631,11 @@ Explique sua autoria com precisão: o detector visual é fornecido pelo MediaPip
 Essas verificações cobrem funções determinísticas, coordenadas e argumentos da aplicação. Elas não substituem a webcam real nem a avaliação de reconhecimento. O projeto foi publicado em [luigiscofano/gesturelab](https://github.com/luigiscofano/gesturelab), e a [primeira execução do GitHub Actions](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460) foi aprovada em Windows e Linux em 30/10/2026. Consulte o badge do README para o estado atual.
 
 ## 15. Colocar o projeto no GitHub
+
+Os passos de criação abaixo servem para iniciar um repositório próprio do zero.
+Se você clonou o GestureLab, o remoto e o histórico já existem: siga o
+[fluxo de contribuição](../CONTRIBUTING.md#fluxo-de-uma-mudança) para trabalhar
+nessa cópia e o [guia de instalação](INSTALACAO.md) para mantê-la atualizada.
 
 ### Preparar o primeiro commit
 
@@ -686,6 +723,9 @@ Semanas adicionais podem receber a versão web ou um estudo de pose corporal. Ev
 
 ## 18. Problemas frequentes
 
+Para diagnóstico com comandos e passos por sintoma, consulte
+[solução de problemas](SOLUCAO_DE_PROBLEMAS.md). A tabela abaixo resume os casos mais comuns.
+
 | Sintoma | Verificação inicial |
 | --- | --- |
 | No module named mediapipe | Use o Python da .venv e reinstale requirements.txt |
@@ -735,3 +775,7 @@ As referências abaixo sustentam as APIs e os procedimentos descritos. O cronogr
 Para estudar, siga esta ordem: loop de webcam do OpenCV, Hand Landmarker, Gesture Recognizer, ambiente virtual e Git, geometria de landmarks, classificação no scikit-learn e validação por grupos. Depois, escolha a referência web ou a de pose corporal conforme a evolução selecionada.
 
 **Privacidade da implementação:** a inferência sobre as imagens acontece no dispositivo. A documentação atual do MediaPipe também informa envio de métricas de uso e desempenho. Portanto, não descreva a aplicação genericamente como “nenhuma comunicação externa” sem verificar a versão e a configuração concretas. O kit não grava vídeo por padrão. [20]
+
+---
+
+**Continue pelo seu objetivo:** [executar o projeto](INSTALACAO.md), [explorar o código](MAPA_DO_PROJETO.md) ou [escolher a próxima entrega](ROADMAP.md).

@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Instalar e executar o GestureLab
+    url: https://github.com/luigiscofano/gesturelab/blob/main/docs/INSTALACAO.md
+    about: Comece pelos programas necessários, ambiente, modelos e primeira execução.
+  - name: Resolver um problema de uso
+    url: https://github.com/luigiscofano/gesturelab/blob/main/docs/SOLUCAO_DE_PROBLEMAS.md
+    about: Encontre verificações para instalação, câmera, controles, desenhos e catálogo.
+  - name: Explorar a documentação
+    url: https://github.com/luigiscofano/gesturelab/tree/main/docs
+    about: Modos, comandos, arquitetura, testes, evolução e portfólio em um só índice.

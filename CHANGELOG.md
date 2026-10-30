@@ -1,6 +1,21 @@
 # Histórico de alterações
 
+[Início](README.md) · [Documentação](docs/README.md) · [Roadmap](docs/ROADMAP.md)
+
 ## 30 de outubro de 2026
+
+### Organização e apresentação no GitHub
+
+- README principal com capa vetorial original, visão dos quatro modos, primeira
+  execução e rotas para uso, estudo, diagnóstico e contribuição.
+- Central de documentação por objetivo; novos guias de instalação, uso,
+  solução de problemas e mapa dos módulos e testes.
+- Sumários e navegação consistente nos documentos existentes, com links diretos
+  para código, evidências, portfólio e próximas leituras.
+- Guia de automação renomeado de `.github/README.md` para `.github/AUTOMACAO.md`,
+  permitindo que a página inicial do GitHub exiba o README principal.
+- Fluxo de arquitetura com os quatro modos e atalhos de ajuda no seletor de issues.
+- Organização documental sem mudanças nos módulos Python, dependências ou modelos.
 
 ### Comentários em português
 

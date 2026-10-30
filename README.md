@@ -1,74 +1,48 @@
 # GestureLab
 
-[![Python checks](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml/badge.svg)](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml)
+![GestureLab — mãos, gestos, escrita no ar e poses corporais](docs/assets/gesturelab-banner.svg)
 
-Protótipo em Python para detectar **21 pontos por mão**, desenhar conexões sobre a
-webcam, dar nome a gestos conhecidos, **escrever no ar com o indicador** e
-**encontrar uma imagem com pose corporal parecida**. Usa modelos prontos do
-MediaPipe Tasks e uma comparação geométrica; o projeto não treina um detector do zero.
+[![Verificações em Windows e Ubuntu](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml/badge.svg)](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](docs/INSTALACAO.md)
+[![Licença MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-0D9488)](LICENSE)
 
-[Documentação](docs/README.md) · [Guia completo](docs/GUIA_COMPLETO.md) ·
-[Escrita no ar](docs/ESCRITA_NO_AR.md) · [Pose parecida](docs/posematch/README.md) ·
-[Roadmap](docs/ROADMAP.md) ·
-[Validação](docs/VALIDACAO.md) · [Contribuir](CONTRIBUTING.md)
+**Transforme sua webcam em um laboratório de visão computacional.** Detecte mãos,
+reconheça gestos, desenhe com o indicador e encontre imagens com uma pose corporal
+parecida. Quatro modos independentes, feitos em Python com OpenCV e MediaPipe Tasks.
 
-**Autor do projeto:** Luigi Scofano de Araujo. Este starter foi preparado com apoio
-de IA. Antes de apresentar como projeto concluído, execute, estude, adapte e registre
-os seus próprios resultados.
+**[Começar](docs/INSTALACAO.md)** · **[Como usar](docs/USO.md)** ·
+**[Documentação](docs/README.md)** · **[Mapa do código](docs/MAPA_DO_PROJETO.md)** ·
+**[Preciso de ajuda](docs/SOLUCAO_DE_PROBLEMAS.md)**
 
-## Por onde começar
+O aplicativo roda localmente e abre uma janela no seu computador. Esta página
+reúne o código, os guias e o histórico do projeto.
 
-| Quero... | Começo por... |
-| --- | --- |
-| Rodar a webcam pela primeira vez | [Instalação no Windows](#instalação-no-windows) ou [macOS/Linux](#macos-ou-linux) |
-| Desenhar com o dedo e salvar o resultado | [Escrever no ar](#escrever-no-ar) |
-| Encontrar uma imagem com pose parecida | [Buscar por pose corporal](#buscar-por-pose-corporal) |
-| Entender os módulos e as decisões | [Arquitetura](docs/ARQUITETURA.md) |
-| Estudar o projeto e preparar o portfólio | [Guia completo](docs/GUIA_COMPLETO.md) e [índice da documentação](docs/README.md) |
-| Executar ou ampliar os testes | [README de testes](tests/README.md) |
-| Propor uma melhoria em um pull request | [Guia de contribuição](CONTRIBUTING.md) |
+## O que você pode fazer
 
-O aplicativo roda no seu computador e abre uma janela do OpenCV. O GitHub hospeda
-o código e a documentação; não há um aplicativo de webcam publicado no navegador.
+| Modo | Experiência | Explore |
+| --- | --- | --- |
+| **Mãos** · `hands` | Veja 21 pontos e as conexões de cada mão, com até duas mãos por padrão. | [Usar o rastreamento](docs/USO.md#mãos--hands) |
+| **Gestos** · `gestures` | Faça um dos sete gestos conhecidos e veja seu nome em português. | [Conhecer os gestos](docs/USO.md#gestos--gestures) |
+| **Escrita no ar** · `airwrite` | Use o indicador como caneta, desfaça traços e salve o desenho em PNG + JSON. | [Aprender os controles](docs/USO.md#escrita-no-ar--airwrite) |
+| **Poses parecidas** · `posematch` | Compare sua pose com um catálogo local e veja a referência aceita mais próxima. | [Experimentar o PoseMatch](docs/USO.md#poses-parecidas--posematch) |
 
-## O que já está implementado
+### Uma prévia do PoseMatch
 
-- Webcam com até duas mãos por padrão; pontos vermelhos e conexões claras.
-- Modo `hands`, que reproduz o objetivo visual do post de referência.
-- Modo `gestures`, que mostra o nome em português dos gestos suportados pelo modelo.
-- Modo `airwrite`, que usa o indicador como caneta, preserva traços separados e suaviza a trajetória.
-- Modo `posematch`, que compara a pose do corpo com um catálogo e mostra a imagem mais próxima.
-- Na escrita: pausar, limpar, desfazer, alternar fundo e exportar PNG + JSON sem imagem da webcam.
-- `DESCONHECIDO` quando há mão, mas nenhum gesto aceito; `SEM MAO DETECTADA` quando não há mão.
-- Conversão BGR para RGB e timestamps crescentes para inferência sequencial.
-- Espelhamento apenas da visualização, preservando o referencial das mãos no modelo.
-- Foto de teste sem webcam, download de modelos com SHA-256, testes e CI de lógica pura.
+![Interface do PoseMatch com entrada sintética à esquerda e uma referência do catálogo à direita](docs/assets/posematch_preview.png)
 
-**Ainda não implementado:** treino de gestos próprios, estabilização temporal dos
-rótulos do modo gestures, identificação persistente das mãos, reconhecimento de letras,
-classificação treinada de poses corporais e demo no navegador. A busca por pose
-corporal compara referências locais; ela não atribui um diagnóstico ou um nome de movimento.
-O [guia completo](docs/GUIA_COMPLETO.md) explica essas evoluções.
+*Prévia ilustrativa gerada com pontos sintéticos e uma imagem original do catálogo.
+Mostra a interface; não é uma captura de webcam nem uma medição do modelo.*
 
-## Instalação no Windows
+O catálogo inicial tem **12 ilustrações de poses humanas**. Você pode acrescentar
+suas próprias fotografias seguindo o [guia do catálogo](pose_gallery/README.md).
 
-Use Python **3.12 de 64 bits**, VS Code e uma webcam. Os comandos abaixo são para
-o **PowerShell**, executados dentro da pasta `gesturelab`. Não precisam ativar o
-ambiente virtual nem alterar a política de execução do Windows.
+## Execute pela primeira vez
 
-Com Git instalado, obtenha o projeto:
+Tenha **Python 3.12 de 64 bits**, Git e uma webcam. No **PowerShell do Windows**:
 
 ```powershell
 git clone https://github.com/luigiscofano/gesturelab.git
 cd gesturelab
-```
-
-Você também pode baixar o ZIP pelo botão **Code → Download ZIP** no GitHub.
-Extraia o arquivo e abra no VS Code a pasta que contém diretamente `app.py` e
-`requirements.txt`, normalmente `gesturelab-main`. Execute os comandos no terminal
-dessa pasta, não de dentro do ZIP nem da pasta que o contém. Em seguida:
-
-```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
@@ -77,254 +51,99 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe app.py --mode hands
 ```
 
-Se `py -3.12` não encontrar o Python, instale essa versão ou substitua por um
-executável Python 3.12 disponível no seu computador. No VS Code, selecione
-`.venv\Scripts\python.exe` em **Python: Select Interpreter**.
+Uma janela deve mostrar sua câmera. Mostre as mãos para ver os pontos e as conexões.
+Clique na janela e pressione **Q** ou **Esc** para sair.
 
-O diagnóstico verifica versões, importação das bibliotecas e integridade dos
-modelos. Ele não abre a webcam; as opções estão no [README dos scripts](scripts/README.md).
+**[Instalação explicada passo a passo](docs/INSTALACAO.md)** inclui os programas
+necessários, a opção de baixar ZIP, os comandos de macOS/Linux e como atualizar.
+Se algo falhar, vá direto à [solução de problemas](docs/SOLUCAO_DE_PROBLEMAS.md).
 
-Para nomear gestos:
+Depois, escolha uma linha por vez:
 
 ```powershell
 .\.venv\Scripts\python.exe app.py --mode gestures
-```
-
-O modo é escolhido ao iniciar: feche a janela atual com **Q** ou **Esc** antes de
-executar outro comando. Os atalhos funcionam com a **janela do GestureLab em foco**;
-clique nela se as teclas não responderem. O programa não grava a webcam por padrão.
-No modo de gestos, `score` é a pontuação do modelo; não é uma probabilidade
-calibrada de acerto. O limiar inicial de 0,65 precisa ser avaliado no seu cenário.
-
-### Escrever no ar
-
-```powershell
 .\.venv\Scripts\python.exe app.py --mode airwrite
-```
-
-Use uma mão visível, com indicador estendido e médio, anelar e mínimo recolhidos.
-O polegar é ignorado. Mantenha a pose brevemente e mova o indicador para escrever.
-Abra a mão ou dobre o indicador para reposicionar sem riscar. O app interrompe
-o traço se a mão some ou se detectar duas mãos.
-
-| Tecla | Ação |
-| --- | --- |
-| Espaço | Pausar ou retomar |
-| C | Limpar |
-| Z | Desfazer último traço |
-| B | Alternar webcam e fundo branco |
-| S | Salvar PNG do desenho + JSON das trajetórias em outputs |
-| Q ou Esc | Sair |
-
-**Pressione S antes de sair para guardar o desenho.** Não há salvamento automático
-nem reabertura de uma sessão anterior. Cada salvamento cria um par de arquivos com
-nome próprio em `outputs/`, pasta criada no primeiro salvamento. Clique na janela
-do GestureLab antes de usar os atalhos.
-
-O modo `airwrite` precisa de uma sequência; não aceita `--image`. Os arquivos
-exportados não contêm a webcam. Ainda não há conversão automática de desenhos em
-letras. Veja o [guia de escrita no ar](docs/ESCRITA_NO_AR.md) para funcionamento,
-limitações e a evolução para reconhecimento de caracteres.
-
-### Buscar por pose corporal
-
-```powershell
-.\.venv\Scripts\python.exe scripts/download_models.py --only poses
 .\.venv\Scripts\python.exe app.py --mode posematch
 ```
 
-Fique sozinho no enquadramento, com ombros, quadris, braços e pernas visíveis.
-A janela mostra sua imagem de um lado e a referência do catálogo do outro.
-Mantenha a pose brevemente para confirmar o resultado. A distância geométrica
-exibida indica proximidade entre as poses: menor é melhor, sem representar uma
-probabilidade de acerto. Q ou Esc encerra esse modo.
+Na escrita, **S salva** o desenho antes de sair. Os arquivos vão para `outputs/`.
+Para trocar de modo, feche a janela atual e execute o próximo comando.
+O [guia de uso](docs/USO.md) reúne os atalhos, as opções e os exemplos com fotografias.
 
-O catálogo delimita a busca. O aplicativo não envia frames a um buscador nem
-pesquisa toda a internet a cada pose. Você pode indexar suas próprias fotografias
-e ampliar as referências seguindo o [README do catálogo](pose_gallery/README.md).
-Veja o [guia completo do posematch](docs/posematch/README.md) para uso, comparação,
-espelhamento, catálogo personalizado e limitações.
+## Encontre o que você precisa
 
-![Prévia do PoseMatch com dados sintéticos](docs/assets/posematch_preview.png)
-
-*Prévia da interface com pontos sintéticos e ilustração original; não é uma
-captura de webcam nem uma medição de qualidade do modelo.*
-
-### macOS ou Linux
-
-```bash
-python3.12 -m venv .venv
-.venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python scripts/download_models.py
-.venv/bin/python scripts/check_environment.py --imports --models all
-.venv/bin/python app.py --mode hands
-```
-
-Em distribuições Linux mínimas, o MediaPipe pode exigir bibliotecas gráficas do
-sistema mesmo em inferência por CPU. Se a mensagem mencionar `libGLESv2.so.2`, no
-Ubuntu a dependência é `libgles2`; se mencionar `libGL.so.1`, verifique `libgl1`.
-Use o gerenciador da sua distribuição. Isso não se aplica ao procedimento normal
-do Windows.
-
-## Comandos úteis
-
-| Objetivo | Argumentos depois de `python app.py` |
+| Seu objetivo | Caminho recomendado |
 | --- | --- |
-| Reproduzir landmarks do post | `--mode hands` |
-| Nomear gestos conhecidos | `--mode gestures` |
-| Escrever com o indicador | `--mode airwrite` |
-| Encontrar uma referência corporal | `--mode posematch` |
-| Usar outro catálogo | `--mode posematch --gallery data/minha_galeria/catalog.json` |
-| Exigir uma pose mais próxima | `--mode posematch --match-threshold 0.5` |
-| Iniciar escrita sobre branco | `--mode airwrite --canvas` |
-| Comparar sem suavização | `--mode airwrite --smooth-ms 0` |
-| Mudar espessura da caneta | `--mode airwrite --pen-width 7` |
-| Tentar outra webcam | `--camera 1` |
-| Exibir os índices dos pontos | `--show-indices` |
-| Ver imagem sem espelhamento | `--no-mirror` |
-| Ajustar rejeição de gestos | `--mode gestures --threshold 0.75` |
-| Processar foto sem abrir janela | `--image foto.jpg --output outputs/foto.png` |
-| Encerrar webcam depois de 300 frames | `--max-frames 300` |
-| Testar câmera sem janela | `--headless --max-frames 30` |
+| **Executar e explorar** | [Instalação](docs/INSTALACAO.md) → [Modos e comandos](docs/USO.md) |
+| **Entender o funcionamento** | [Mapa do projeto](docs/MAPA_DO_PROJETO.md) → [Arquitetura](docs/ARQUITETURA.md) |
+| **Estudar visão computacional** | [Guia completo, com sumário por assunto](docs/GUIA_COMPLETO.md) |
+| **Resolver um erro** | [Diagnóstico por sintoma](docs/SOLUCAO_DE_PROBLEMAS.md) → [Relatar um problema](https://github.com/luigiscofano/gesturelab/issues/new/choose) |
+| **Verificar qualidade e resultados** | [Testes](tests/README.md) → [Validação registrada](docs/VALIDACAO.md) |
+| **Evoluir ou contribuir** | [Roadmap](docs/ROADMAP.md) → [Como contribuir](CONTRIBUTING.md) |
+| **Apresentar no portfólio** | [Roteiro de apresentação](docs/GUIA_COMPLETO.md#16-transformar-em-uma-peça-de-portfólio) → [Registrar um experimento](docs/EXPERIMENTOS.md) |
 
-Nos modos de mãos, a foto imprime JSON com coordenadas originais, nome/score da
-mão e, quando aplicável, gesto. Em `posematch`, o JSON descreve a referência
-selecionada e a distância. `--output` é opcional e só pode ser usado com `--image`.
-Uma saída existente não é sobrescrita; escolha outro nome. A imagem original é
-preservada. Não há `--video`: este starter processa webcam ou uma foto.
+**[Abrir a central de documentação →](docs/README.md)**
 
-## Gestos incluídos no modelo pronto
+## Como funciona
 
-| Nome retornado pelo modelo | Rótulo na tela |
+O OpenCV lê a webcam ou uma foto. A imagem passa de BGR para RGB e segue para
+**um modelo MediaPipe por execução**. O modo escolhido transforma os pontos
+detectados em conexões, rótulos, traços ou uma comparação com o catálogo.
+
+| Tecnologia | Papel no projeto |
 | --- | --- |
-| `Closed_Fist` | Punho fechado |
-| `Open_Palm` | Mão aberta |
-| `Pointing_Up` | Indicador para cima |
-| `Thumb_Down` | Polegar para baixo |
-| `Thumb_Up` | Joia |
-| `Victory` | Vitória |
-| `ILoveYou` | I LOVE YOU |
-| `None`, categoria ausente ou score baixo | Desconhecido |
+| Python | Regras, estado da caneta, comparação de poses e comandos |
+| OpenCV | Câmera, leitura de imagens, desenho e janela |
+| MediaPipe Tasks | Modelos prontos para mãos, gestos e corpo |
+| NumPy | Representação e manipulação das imagens |
+| pytest e Ruff | Testes, análise de código e formatação |
 
-`ILoveYou` é o nome de uma classe do modelo, não uma implementação de tradução
-de Libras. A tela usa texto sem acentos por uma limitação das fontes do OpenCV.
+A inferência usa a imagem original; o espelhamento é aplicado à visualização.
+A escrita guarda traços separados. O PoseMatch normaliza a geometria do corpo
+antes de comparar referências. A [arquitetura](docs/ARQUITETURA.md) detalha essas
+decisões e o [mapa do projeto](docs/MAPA_DO_PROJETO.md) mostra onde encontrá-las no código.
 
-## Como o código está organizado
+## Estado do projeto
 
-| Caminho | Responsabilidade |
+Os quatro modos estão implementados. Há testes automatizados, inferência com
+imagens registrada e verificações em Windows/Ubuntu no GitHub Actions. A webcam
+e a interface precisam ser validadas no equipamento em que você vai demonstrar.
+
+| Disponível hoje | Próximas evoluções |
 | --- | --- |
-| `app.py` | Validar a CLI e iniciar o modo escolhido |
-| `hand_app.py` | Executar os modos de mãos e escrita, desenhar resultados e exportar saídas |
-| `vision_runtime.py` | Carregar dependências de visão e compartilhar leitura, conversão e recursos da câmera |
-| `core.py` | Geometria do desenho, nomes, rejeição por score e timestamps |
-| `airwriting.py` | Pose de escrita, separação de traços, suavização e estado da caneta |
-| `pose_matching.py` | Normalização, validação do catálogo e ranking geométrico, sem dependências de visão |
-| `pose_match_app.py` | Inferência corporal, confirmação temporal e interface de comparação |
-| `file_io.py` | Gravação exclusiva compartilhada pelos modos |
-| [`pose_gallery/README.md`](pose_gallery/README.md) | Referências iniciais, origem e preparação de imagens próprias |
-| `scripts/download_models.py` | Modelos oficiais versionados e integridade SHA-256 |
-| [`scripts/README.md`](scripts/README.md) | Uso dos utilitários de preparação e diagnóstico |
-| [`models/README.md`](models/README.md) | Procedência, download e integridade dos modelos |
-| [`tests/README.md`](tests/README.md) | Como executar a suíte e interpretar seus limites |
-| [`.github/README.md`](.github/README.md) | Workflows e organização das contribuições no GitHub |
-| `requirements.txt` | Versões fixas das dependências diretas |
-| [`docs/README.md`](docs/README.md) | Índice de guias, planos e registros de validação |
-| [`docs/assets/README.md`](docs/assets/README.md) | Diagramas, fontes vetoriais e manutenção das imagens |
+| Landmarks de mãos e gestos de um modelo pronto | Gestos personalizados e rótulos mais estáveis |
+| Escrita com suavização e exportação | Reconhecer os caracteres desenhados |
+| Comparação corporal com referências locais | Ampliar o catálogo e medir a qualidade da busca |
+| Aplicação de desktop e processamento de foto | Interface de seleção de modos e demo no navegador |
 
-Cada pasta documenta seu próprio conteúdo. O roteiro de estudo e portfólio está no
-[guia completo](docs/GUIA_COMPLETO.md); o comportamento da caneta e sua evolução
-para reconhecer caracteres estão no [guia de escrita no ar](docs/ESCRITA_NO_AR.md).
+A busca de poses usa **o catálogo local**; a escrita produz **desenhos**; os gestos
+reconhecidos são **classes predefinidas**. Pontuações e distâncias não representam
+acurácia medida. Consulte [validação](docs/VALIDACAO.md) e [roadmap](docs/ROADMAP.md)
+para acompanhar o que foi verificado e o que ainda será desenvolvido.
 
-O frame original é convertido de BGR para RGB e entregue ao modelo. O desenho
-espelhado usa `x_exibido = largura - 1 - x_original_em_pixels`. Assim o texto
-continua legível e a inferência usa a convenção de handedness da API Tasks atual.
-`Esquerda` e `Direita` se referem à pessoa. Verifique com a própria mão ao testar;
-webcams virtuais e drivers podem já entregar um frame espelhado.
+## Testar e contribuir
 
-O modo webcam usa `VIDEO` de forma síncrona: um resultado por frame processado.
-É uma escolha didática. `LIVE_STREAM` com callback pode ser uma evolução; requer
-tratar concorrência e frames descartados. O modo `gestures` executa somente o
-Gesture Recognizer, que já retorna landmarks: não roda dois modelos em paralelo.
-
-## Testes e execução reproduzível
+Com o ambiente criado, instale as dependências de desenvolvimento e execute:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\.venv\Scripts\python.exe -m ruff format --check .
-.\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check .
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Os testes verificam coordenadas espelhadas, limites da imagem, rejeição de gestos,
-distinção entre classes conhecidas e desconhecidas, timestamps e restrições da CLI.
-Não medem a qualidade do modelo. O workflow confere formatação, análise de código e testes
-em Windows e Linux. A [primeira execução no GitHub Actions](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460)
-foi aprovada nos dois sistemas; o badge acima acompanha o estado atual.
-O [README de testes](tests/README.md) explica os cenários cobertos e como distinguir
-verificação de lógica de validação da webcam e dos modelos.
+Os testes de lógica não precisam de webcam nem de pesos. O
+[README de testes](tests/README.md) explica a cobertura; o
+[guia de contribuição](CONTRIBUTING.md) explica branches, commits e pull requests.
+As mudanças já integradas estão no [changelog](CHANGELOG.md), e a configuração
+do GitHub está documentada em [Automação e colaboração](.github/AUTOMACAO.md).
 
-`requirements.txt` fixa dependências diretas. Para registrar também o ambiente
-completo depois de funcionar na sua máquina:
+## Autoria e licença
 
-```powershell
-.\.venv\Scripts\python.exe -m pip freeze | Out-File -Encoding utf8 requirements-lock-windows.txt
-```
+Projeto de **Luigi Scofano de Araujo**, desenvolvido com assistência de IA e
+modelos pré-treinados do MediaPipe. O código próprio é distribuído sob a
+[licença MIT](LICENSE). Bibliotecas, modelos e imagens mantêm suas próprias
+condições de uso; consulte [referências e créditos](THIRD_PARTY_NOTICES.md).
 
-Identifique sistema, arquitetura e versão do Python junto com esse arquivo.
-Um `pip freeze` de Linux não é automaticamente um lockfile universal para Windows.
-
-## Limitações e cuidados de engenharia
-
-- A webcam e a janela precisam ser verificadas no computador do usuário; esta
-  pasta não implica teste de hardware Windows ou calibração da sua câmera.
-- `FPS loop` é uma média suavizada do ciclo de captura, inferência e desenho;
-  não é uma medição de latência ponta a ponta nem uma garantia de FPS.
-- `z` normalizado representa profundidade estimada, não distância em centímetros.
-- Movimento rápido, mãos parcialmente fora da imagem, iluminação e oclusão afetam
-  o resultado. Índices de mãos na lista não são identificadores persistentes.
-- O limiar aceita/rejeita a classe, mas não estabiliza os rótulos entre frames.
-  Adicionar uma janela temporal exige associar a mesma mão ao longo do tempo.
-- A escrita usa uma regra geométrica de pose e uma única mão por vez. Ela confirma
-  a entrada na escrita e suaviza o cursor, mas não reconhece letras nem identifica
-  persistentemente a mesma pessoa. Perspectiva e oclusão ainda afetam a regra.
-- `posematch` compara geometria corporal em 2D com referências finitas. Ângulo da
-  câmera, perspectiva, oclusão e tamanho do catálogo afetam o resultado. Não é um
-  detector geral de poses de animais nem uma busca semântica de qualquer objeto.
-- A aplicação não envia fotos nem vídeos para um servidor próprio. O fornecedor
-  informa que o processamento de entrada ocorre no dispositivo e que APIs Tasks
-  podem enviar métricas de desempenho/uso. Não prometa ausência absoluta de rede.
-- Não publique imagens de outras pessoas ou datasets brutos sem autorização.
-  `data/`, `outputs/`, vídeos e pesos estão no `.gitignore` por padrão.
-
-## Soluções para erros comuns
-
-| Sintoma | O que verificar |
-| --- | --- |
-| `No module named ...` | Instale com o executável de `.venv` e selecione o mesmo no VS Code. |
-| `mediapipe` sem atributo `solutions` | Este projeto usa Tasks; não misture exemplos antigos de `mp.solutions.hands`. |
-| Modelo não encontrado | Execute `scripts/download_models.py` e confira a pasta `models`. |
-| Webcam indisponível | Permissão do sistema, outro app usando câmera, `--camera 0` ou `--camera 1`. |
-| Janela não abre | Execute localmente; não use `opencv-python-headless` para esta interface. |
-| Teclas não respondem | Clique na janela do GestureLab; atalhos não são comandos para digitar no terminal. |
-| Desenho não aparece em `outputs/` | Use S com a janela em foco antes de sair; a aplicação não salva automaticamente. |
-| Pacotes OpenCV conflitantes | Recrie `.venv` e instale apenas `requirements.txt`. |
-| Mãos esquerda/direita invertidas | Verifique se o driver já espelha a captura antes do aplicativo. |
-| Gesto troca de nome continuamente | Teste iluminação, distância e limiar; estabilização é uma etapa futura. |
-
-## Documentação oficial e licença
-
-Referências consultadas em 30/10/2026:
-
-- [MediaPipe Tasks para Python](https://ai.google.dev/edge/mediapipe/solutions/setup_python)
-- [Hand Landmarker para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker/python)
-- [Gesture Recognizer para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/python)
-- [Pose Landmarker para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python)
-- [Pacote MediaPipe 1.2.0 e aviso de privacidade](https://pypi.org/project/mediapipe/1.2.0/)
-- [Distribuições OpenCV para Python](https://pypi.org/project/opencv-contrib-python/)
-
-Código próprio sob [MIT](LICENSE). Dependências, modelos e quaisquer imagens de
-teste mantêm suas respectivas licenças. Ao publicar sua evolução, mantenha os
-créditos das referências e explique quais partes implementou, mediu e modificou.
-Consulte os [créditos e componentes de terceiros](THIRD_PARTY_NOTICES.md) para a
-procedência das bibliotecas e dos modelos.
+[Voltar ao início](#gesturelab) · [Explorar a documentação](docs/README.md) ·
+[Ver o histórico](https://github.com/luigiscofano/gesturelab/pulls?q=is%3Apr+is%3Amerged)

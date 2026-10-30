@@ -1,7 +1,6 @@
 # Scripts de preparação e diagnóstico
 
-[Visão geral](../README.md) · [Modelos](../models/README.md) ·
-[Documentação](../docs/README.md)
+[Início](../README.md) · [Documentação](../docs/README.md) · [Instalação](../docs/INSTALACAO.md)
 
 Execute os comandos abaixo na pasta que contém `app.py` e `requirements.txt`.
 O downloader e o diagnóstico básico usam a biblioteca padrão do Python. O
@@ -10,9 +9,16 @@ bibliotecas de visão para detectar as poses nas imagens fornecidas.
 
 | Script | Finalidade | Altera arquivos? |
 | --- | --- | --- |
-| `download_models.py` | Baixar os modelos oficiais e conferir SHA-256 | Sim, na pasta de modelos |
-| `check_environment.py` | Conferir Python, pacotes e verificações opcionais | Não altera o projeto |
-| `build_pose_catalog.py` | Indexar fotos locais para a busca por pose | Sim, na pasta de saída fornecida; preserva originais |
+| [download_models.py](download_models.py) | Baixar os modelos oficiais e conferir SHA-256 | Sim, na pasta de modelos |
+| [check_environment.py](check_environment.py) | Conferir Python, pacotes e verificações opcionais | Não altera o projeto |
+| [build_pose_catalog.py](build_pose_catalog.py) | Indexar fotos locais para a busca por pose | Sim, na pasta de saída fornecida; preserva originais |
+
+**Nesta página**
+
+- [1. Conferir a instalação](#1-conferir-a-instalação)
+- [2. Baixar modelos](#2-baixar-modelos)
+- [3. Verificar modelos e ambiente juntos](#3-verificar-modelos-e-ambiente-juntos)
+- [4. Criar um catálogo de fotos para posematch](#4-criar-um-catálogo-de-fotos-para-posematch)
 
 ## 1. Conferir a instalação
 
@@ -126,7 +132,7 @@ execução local e registro em [`docs/VALIDACAO.md`](../docs/VALIDACAO.md).
 | Mais de um OpenCV instalado | Recrie a `.venv` e instale as dependências do projeto. |
 | Modelo ausente | Execute o downloader para a tarefa desejada. |
 | SHA-256 diferente | Confira a origem, mova o arquivo divergente e baixe novamente. |
-| Importação de biblioteca nativa falhou | Leia o erro e as orientações de instalação no README geral. |
+| Importação de biblioteca nativa falhou | Leia o erro e siga o [guia de solução de problemas](../docs/SOLUCAO_DE_PROBLEMAS.md). |
 
 Use `python scripts/check_environment.py --help` e
 `python scripts/download_models.py --help` para consultar as opções com o Python
@@ -150,3 +156,7 @@ recusadas com um motivo. `data/` já é excluído do Git por padrão.
 
 Veja o [README do catálogo](../pose_gallery/README.md) para opções, procedência e
 limitações, e o [guia do modo](../docs/posematch/README.md) para execução e ranking.
+
+---
+
+**Próxima leitura:** [usar os quatro modos](../docs/USO.md), [resolver problemas](../docs/SOLUCAO_DE_PROBLEMAS.md) e [origem dos modelos](../models/README.md).

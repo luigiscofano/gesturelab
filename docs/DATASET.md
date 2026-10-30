@@ -1,5 +1,7 @@
 # Planejamento do dataset
 
+[Início](../README.md) · [Documentação](README.md) · [Próximas entregas](ROADMAP.md)
+
 **Estado:** a coleta e o classificador próprio ainda não estão implementados.
 Este documento orienta a próxima etapa; não descreve um dataset existente.
 
@@ -66,3 +68,7 @@ Muitas linhas no CSV não garantem diversidade de pessoas ou situações.
 ## Referência
 
 https://scikit-learn.org/stable/modules/cross_validation.html
+
+---
+
+**Próxima leitura:** [planejar a avaliação](AVALIACAO.md) e [documentar experimentos](EXPERIMENTOS.md).

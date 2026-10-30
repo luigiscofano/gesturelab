@@ -1,5 +1,7 @@
 # Registro de experimentos
 
+[Início](../README.md) · [Documentação](README.md) · [Plano de avaliação](AVALIACAO.md)
+
 Este é um modelo de registro. Não contém resultados medidos pelo usuário.
 Duplique a seção abaixo a cada experimento e mantenha as tentativas que falharam.
 
@@ -30,3 +32,7 @@ Duplique a seção abaixo a cada experimento e mantenha as tentativas que falhar
 
 Os valores de duração e limiar são parâmetros experimentais. Defina-os antes da
 medição e evite escolher o melhor resultado olhando repetidamente o teste final.
+
+---
+
+**Próxima leitura:** [plano de avaliação](AVALIACAO.md) e [resultados já verificados](VALIDACAO.md).

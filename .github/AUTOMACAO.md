@@ -1,7 +1,6 @@
 # Automação e colaboração
 
-[Voltar ao projeto](../README.md) · [Como contribuir](../CONTRIBUTING.md) ·
-[Testes](../tests/README.md)
+[Início](../README.md) · [Documentação](../docs/README.md) · [Como contribuir](../CONTRIBUTING.md)
 
 Esta pasta contém o workflow do GitHub Actions e os modelos usados para abrir
 issues e pull requests. Ela não é necessária para executar a webcam localmente.
@@ -14,6 +13,7 @@ issues e pull requests. Ela não é necessária para executar a webcam localment
 | [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md) | Registrar problema, mudança, evidências e limitações |
 | [ISSUE_TEMPLATE/bug_report.yml](ISSUE_TEMPLATE/bug_report.yml) | Informar um erro reproduzível, o ambiente e o resultado esperado |
 | [ISSUE_TEMPLATE/feature_request.yml](ISSUE_TEMPLATE/feature_request.yml) | Propor uma melhoria com objetivo e critério de conclusão |
+| [ISSUE_TEMPLATE/config.yml](ISSUE_TEMPLATE/config.yml) | Mostrar atalhos para instalação e solução de problemas ao abrir uma issue |
 
 ## O que o CI executa
 
@@ -55,8 +55,10 @@ o [guia de contribuição](../CONTRIBUTING.md).
 
 ## Templates
 
-Ao criar uma issue, escolha **Relatar um erro** ou **Propor uma melhoria** e
-preencha os campos relevantes. Logs e comandos reproduzíveis ajudam mais que
+Ao criar uma issue, o seletor oferece **Relatar um erro**, **Propor uma melhoria**
+e atalhos para os guias de instalação e solução de problemas. Também permite abrir
+uma issue em branco quando os modelos disponíveis não se aplicarem. Escolha o
+caminho adequado e preencha os campos relevantes. Logs e comandos reproduzíveis ajudam mais que
 uma descrição genérica. Não inclua credenciais ou imagens de terceiros.
 
 O template de pull request solicita o motivo da alteração, seu efeito e os
@@ -69,3 +71,7 @@ encerramento automático ocorre ao integrar na branch padrão.
 - [Sintaxe de workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
 - [Templates de issues e pull requests](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests)
 - [Vincular uma issue a um pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)
+
+---
+
+**Próxima leitura:** [fluxo de contribuição](../CONTRIBUTING.md), [testes](../tests/README.md) e [histórico de alterações](../CHANGELOG.md).
