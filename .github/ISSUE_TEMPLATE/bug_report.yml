@@ -1,0 +1,47 @@
+name: Relatar um erro
+description: Descreva um problema reproduzível no GestureLab.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Informe comandos e mensagens de erro. Evite credenciais e imagens de terceiros.
+  - type: input
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Sistema, arquitetura, versão do Python e commit ou branch.
+      placeholder: Windows 11, x64, Python 3.12, main no commit...
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Parte afetada
+      options:
+        - Instalação ou diagnóstico
+        - Download dos modelos
+        - hands
+        - gestures
+        - airwrite
+        - Documentação ou testes
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+      description: Inclua o comando utilizado e os passos até o erro.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Resultado esperado e resultado observado
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Mensagens do terminal
+      description: Remova dados pessoais antes de colar o trecho relevante.
+      render: text
