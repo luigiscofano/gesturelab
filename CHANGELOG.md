@@ -2,6 +2,26 @@
 
 ## 30 de outubro de 2026
 
+### Busca de imagens por pose corporal
+
+- Quarto modo independente, `posematch`, com Pose Landmarker corporal e imagem
+  de referência exibida ao lado da captura.
+- Descritor de 12 articulações, proporção de imagem, normalização por tronco,
+  visibilidade, comparação espelhada e distância geométrica explícita.
+- Confirmação temporal e limpeza da referência ao perder uma pose utilizável.
+- Catálogo inicial de 12 ilustrações originais, fontes SVG/PNG e gerador.
+- Indexação de fotografias próprias com modelo real, saída portátil e tratamento
+  de imagens recusadas, incluindo proporções extremas e erros do OpenCV.
+- Terceiro modelo versionado e conferido por SHA-256; nenhuma dependência direta nova.
+- Gravação exclusiva extraída para um módulo comum, preservando os modos anteriores.
+- READMEs próprios do modo e do catálogo, comandos de foto e prévia sintética da interface.
+- Suíte local ampliada para 124 testes; integração com imagem e sequência VIDEO
+  verificada sem webcam física, conforme o registro de validação.
+
+Entregas rastreadas nas issues [#9](https://github.com/luigiscofano/gesturelab/issues/9),
+[#10](https://github.com/luigiscofano/gesturelab/issues/10) e
+[#11](https://github.com/luigiscofano/gesturelab/issues/11), com branches e PRs próprios.
+
 ### Robustez, diagnóstico e colaboração
 
 - Exportação de fotos com criação exclusiva, preservando destinos criados por

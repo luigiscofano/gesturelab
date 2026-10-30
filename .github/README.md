@@ -26,7 +26,7 @@ executa estas etapas:
 
 1. Ruff identifica erros estáticos da configuração em `pyproject.toml`.
 2. `compileall` verifica se os módulos, scripts e testes podem ser compilados.
-3. `--help` do aplicativo, downloader e diagnóstico confirma que suas entradas
+3. `--help` do aplicativo, downloader, diagnóstico e indexador de poses confirma que suas entradas
    funcionam sem importar as dependências de visão.
 4. pytest verifica a lógica determinística, incluindo os casos de regressão.
 

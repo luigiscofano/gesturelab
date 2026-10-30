@@ -3,7 +3,7 @@
 [README principal](README.md) · [Testes](tests/README.md) ·
 [Automação do GitHub](.github/README.md) · [Roadmap](docs/ROADMAP.md)
 
-O objetivo é manter os modos `hands`, `gestures` e `airwrite` utilizáveis enquanto
+O objetivo é manter os modos `hands`, `gestures`, `airwrite` e `posematch` utilizáveis enquanto
 o projeto evolui. Uma boa contribuição tem um problema concreto, uma mudança
 compreensível e evidências proporcionais ao que alterou.
 

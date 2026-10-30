@@ -169,3 +169,54 @@ Os resultados remotos da etapa ficam associados aos commits e pull requests em
 O workflow revisto mantém a matriz Windows/Ubuntu e acrescenta compilação e
 ajuda das CLIs. Ele continua sem instalar dependências de visão ou testar
 hardware; consulte o [README da automação](../.github/README.md).
+
+## Modo posematch e catálogo de referências
+
+Em 30/10/2026 foi acrescentada busca local de imagens por semelhança de pose
+corporal. A implementação, a revisão independente entre agentes e as ilustrações
+foram preparadas com assistência de IA. Os três modos anteriores foram preservados.
+
+| Verificação | Resultado observado |
+| --- | --- |
+| Suíte completa local | **124 testes passaram** |
+| Ruff e diff-check | Aprovados |
+| Núcleo geométrico | 25 testes novos de normalização, proporção, espelhamento, cobertura, ranking e catálogo |
+| Runtime corporal | 21 testes de confirmação, ausência/ambiguidade, orientação, tarefa, captura e saída |
+| Catálogo/indexador | 12 testes, incluindo proporções extremas e continuação após erro OpenCV |
+| CLI | Novos casos para modo separado, opções específicas e distâncias inválidas |
+| Modelo corporal | Pose Landmarker Lite versão de artefato 1, SHA-256 conferido pelo downloader |
+| Catálogo inicial | 12 referências ilustradas, arquivos existentes e autorrecuperação geométrica coerente |
+| Indexador real | Uma pessoa aceita na imagem oficial de teste, landmarks reais e PNG portátil gerados |
+| Busca com a imagem oficial | Referência ilustrada de avanço com braços abertos selecionada; composição inspecionada |
+| Busca em catálogo de foto indexada | Referência recuperada com distância próxima de zero após redimensionamento |
+| Interface | Proporção preservada e créditos legíveis; texto removido das ilustrações para não inverter ao espelhar |
+
+A foto usada internamente veio de
+[pose.jpg, exemplo oficial do MediaPipe](https://storage.googleapis.com/mediapipe-assets/pose.jpg).
+Ela e as composições correspondentes permaneceram em arquivos temporários e
+**não acompanham o repositório**. As referências distribuídas são ilustrações
+originais com geometria conhecida. A prévia publicada nos READMEs também utiliza
+pontos sintéticos e está identificada explicitamente.
+
+Na execução IMAGE com a foto original, a referência `wide-lunge` foi selecionada
+com distância aproximada **0,1085**, usando 12 articulações. Ao pesquisar em um
+catálogo gerado da mesma foto, a distância foi aproximadamente **0,0196**: o
+indexador havia redimensionado a entrada antes de detectar os pontos. Esses
+valores verificam um caso de integração e não constituem acurácia nem avaliação
+de generalização. Não houve seleção de limiar com um conjunto de teste amplo.
+
+Uma sequência VIDEO repetiu a foto positiva nos timestamps 0, 90, 180 e 270 ms.
+A referência ficou em confirmação até 90 ms e apareceu a partir de 180 ms. Um
+frame vazio em 360 ms retornou zero pessoas e limpou a referência. Esse teste
+verificou a tarefa temporal e a transição de estado, usando imagens repetidas;
+não foi uma captura de webcam nem uma medição de movimento real.
+
+O ambiente usou as mesmas versões e a biblioteca nativa temporária descritas
+acima. O TFLite emitiu mensagens sobre delegate CPU, feedback e projeção de ROI,
+sem impedir as execuções. Webcam física, desempenho contínuo, generalização
+para pessoas novas e qualidade em diferentes ângulos continuam pendentes de
+avaliação local.
+
+As verificações do CI continuam limitadas à lógica e às CLIs, sem instalação
+das bibliotecas de visão. O teste real de modelo e imagens descrito nesta seção
+foi executado localmente no ambiente de preparação.

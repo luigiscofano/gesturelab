@@ -3,11 +3,13 @@
 [![Python checks](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml/badge.svg)](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml)
 
 Protótipo em Python para detectar **21 pontos por mão**, desenhar conexões sobre a
-webcam, dar nome a gestos conhecidos e **escrever no ar com o indicador**. Usa modelos prontos do
-MediaPipe Tasks; o projeto não treina um detector do zero.
+webcam, dar nome a gestos conhecidos, **escrever no ar com o indicador** e
+**encontrar uma imagem com pose corporal parecida**. Usa modelos prontos do
+MediaPipe Tasks e uma comparação geométrica; o projeto não treina um detector do zero.
 
 [Documentação](docs/README.md) · [Guia completo](docs/GUIA_COMPLETO.md) ·
-[Escrita no ar](docs/ESCRITA_NO_AR.md) · [Roadmap](docs/ROADMAP.md) ·
+[Escrita no ar](docs/ESCRITA_NO_AR.md) · [Pose parecida](docs/posematch/README.md) ·
+[Roadmap](docs/ROADMAP.md) ·
 [Validação](docs/VALIDACAO.md) · [Contribuir](CONTRIBUTING.md)
 
 **Autor do projeto:** Luigi Scofano de Araujo. Este starter foi preparado com apoio
@@ -20,6 +22,7 @@ os seus próprios resultados.
 | --- | --- |
 | Rodar a webcam pela primeira vez | [Instalação no Windows](#instalação-no-windows) ou [macOS/Linux](#macos-ou-linux) |
 | Desenhar com o dedo e salvar o resultado | [Escrever no ar](#escrever-no-ar) |
+| Encontrar uma imagem com pose parecida | [Buscar por pose corporal](#buscar-por-pose-corporal) |
 | Entender os módulos e as decisões | [Arquitetura](docs/ARQUITETURA.md) |
 | Estudar o projeto e preparar o portfólio | [Guia completo](docs/GUIA_COMPLETO.md) e [índice da documentação](docs/README.md) |
 | Executar ou ampliar os testes | [README de testes](tests/README.md) |
@@ -34,6 +37,7 @@ o código e a documentação; não há um aplicativo de webcam publicado no nave
 - Modo `hands`, que reproduz o objetivo visual do post de referência.
 - Modo `gestures`, que mostra o nome em português dos gestos suportados pelo modelo.
 - Modo `airwrite`, que usa o indicador como caneta, preserva traços separados e suaviza a trajetória.
+- Modo `posematch`, que compara a pose do corpo com um catálogo e mostra a imagem mais próxima.
 - Na escrita: pausar, limpar, desfazer, alternar fundo e exportar PNG + JSON sem imagem da webcam.
 - `DESCONHECIDO` quando há mão, mas nenhum gesto aceito; `SEM MAO DETECTADA` quando não há mão.
 - Conversão BGR para RGB e timestamps crescentes para inferência sequencial.
@@ -42,7 +46,8 @@ o código e a documentação; não há um aplicativo de webcam publicado no nave
 
 **Ainda não implementado:** treino de gestos próprios, estabilização temporal dos
 rótulos do modo gestures, identificação persistente das mãos, reconhecimento de letras,
-poses do corpo e demo no navegador.
+classificação treinada de poses corporais e demo no navegador. A busca por pose
+corporal compara referências locais; ela não atribui um diagnóstico ou um nome de movimento.
 O [guia completo](docs/GUIA_COMPLETO.md) explica essas evoluções.
 
 ## Instalação no Windows
@@ -121,6 +126,30 @@ exportados não contêm a webcam. Ainda não há conversão automática de desen
 letras. Veja o [guia de escrita no ar](docs/ESCRITA_NO_AR.md) para funcionamento,
 limitações e a evolução para reconhecimento de caracteres.
 
+### Buscar por pose corporal
+
+```powershell
+.\.venv\Scripts\python.exe scripts/download_models.py --only poses
+.\.venv\Scripts\python.exe app.py --mode posematch
+```
+
+Fique sozinho no enquadramento, com ombros, quadris, braços e pernas visíveis.
+A janela mostra sua imagem de um lado e a referência do catálogo do outro.
+Mantenha a pose brevemente para confirmar o resultado. A distância geométrica
+exibida indica proximidade entre as poses: menor é melhor, sem representar uma
+probabilidade de acerto. Q ou Esc encerra esse modo.
+
+O catálogo delimita a busca. O aplicativo não envia frames a um buscador nem
+pesquisa toda a internet a cada pose. Você pode indexar suas próprias fotografias
+e ampliar as referências seguindo o [README do catálogo](pose_gallery/README.md).
+Veja o [guia completo do posematch](docs/posematch/README.md) para uso, comparação,
+espelhamento, catálogo personalizado e limitações.
+
+![Prévia do PoseMatch com dados sintéticos](docs/assets/posematch_preview.png)
+
+*Prévia da interface com pontos sintéticos e ilustração original; não é uma
+captura de webcam nem uma medição de qualidade do modelo.*
+
 ### macOS ou Linux
 
 ```bash
@@ -145,6 +174,9 @@ do Windows.
 | Reproduzir landmarks do post | `--mode hands` |
 | Nomear gestos conhecidos | `--mode gestures` |
 | Escrever com o indicador | `--mode airwrite` |
+| Encontrar uma referência corporal | `--mode posematch` |
+| Usar outro catálogo | `--mode posematch --gallery data/minha_galeria/catalog.json` |
+| Exigir uma pose mais próxima | `--mode posematch --match-threshold 0.5` |
 | Iniciar escrita sobre branco | `--mode airwrite --canvas` |
 | Comparar sem suavização | `--mode airwrite --smooth-ms 0` |
 | Mudar espessura da caneta | `--mode airwrite --pen-width 7` |
@@ -156,8 +188,9 @@ do Windows.
 | Encerrar webcam depois de 300 frames | `--max-frames 300` |
 | Testar câmera sem janela | `--headless --max-frames 30` |
 
-O modo de foto imprime JSON com coordenadas originais, nome/score da mão e,
-quando aplicável, gesto. `--output` é opcional e só pode ser usado com `--image`.
+Nos modos de mãos, a foto imprime JSON com coordenadas originais, nome/score da
+mão e, quando aplicável, gesto. Em `posematch`, o JSON descreve a referência
+selecionada e a distância. `--output` é opcional e só pode ser usado com `--image`.
 Uma saída existente não é sobrescrita; escolha outro nome. A imagem original é
 preservada. Não há `--video`: este starter processa webcam ou uma foto.
 
@@ -184,6 +217,10 @@ de Libras. A tela usa texto sem acentos por uma limitação das fontes do OpenCV
 | `app.py` | CLI, câmera, MediaPipe, desenho e processamento de foto |
 | `core.py` | Geometria do desenho, nomes, rejeição por score e timestamps |
 | `airwriting.py` | Pose de escrita, separação de traços, suavização e estado da caneta |
+| `pose_matching.py` | Normalização, validação do catálogo e ranking geométrico, sem dependências de visão |
+| `pose_match_app.py` | Inferência corporal, confirmação temporal e interface de comparação |
+| `file_io.py` | Gravação exclusiva compartilhada pelos modos |
+| [`pose_gallery/README.md`](pose_gallery/README.md) | Referências iniciais, origem e preparação de imagens próprias |
 | `scripts/download_models.py` | Modelos oficiais versionados e integridade SHA-256 |
 | [`scripts/README.md`](scripts/README.md) | Uso dos utilitários de preparação e diagnóstico |
 | [`models/README.md`](models/README.md) | Procedência, download e integridade dos modelos |
@@ -248,6 +285,9 @@ Um `pip freeze` de Linux não é automaticamente um lockfile universal para Wind
 - A escrita usa uma regra geométrica de pose e uma única mão por vez. Ela confirma
   a entrada na escrita e suaviza o cursor, mas não reconhece letras nem identifica
   persistentemente a mesma pessoa. Perspectiva e oclusão ainda afetam a regra.
+- `posematch` compara geometria corporal em 2D com referências finitas. Ângulo da
+  câmera, perspectiva, oclusão e tamanho do catálogo afetam o resultado. Não é um
+  detector geral de poses de animais nem uma busca semântica de qualquer objeto.
 - A aplicação não envia fotos nem vídeos para um servidor próprio. O fornecedor
   informa que o processamento de entrada ocorre no dispositivo e que APIs Tasks
   podem enviar métricas de desempenho/uso. Não prometa ausência absoluta de rede.
@@ -276,6 +316,7 @@ Referências consultadas em 30/10/2026:
 - [MediaPipe Tasks para Python](https://ai.google.dev/edge/mediapipe/solutions/setup_python)
 - [Hand Landmarker para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker/python)
 - [Gesture Recognizer para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/python)
+- [Pose Landmarker para Python](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python)
 - [Pacote MediaPipe 1.2.0 e aviso de privacidade](https://pypi.org/project/mediapipe/1.2.0/)
 - [Distribuições OpenCV para Python](https://pypi.org/project/opencv-contrib-python/)
 
