@@ -6,11 +6,27 @@ import math
 
 # Índices oficiais dos 21 landmarks. Cada par descreve uma aresta da mão.
 HAND_CONNECTIONS = (
-    (0, 1), (1, 2), (2, 3), (3, 4),
-    (0, 5), (5, 6), (6, 7), (7, 8),
-    (5, 9), (9, 10), (10, 11), (11, 12),
-    (9, 13), (13, 14), (14, 15), (15, 16),
-    (13, 17), (0, 17), (17, 18), (18, 19), (19, 20),
+    (0, 1),
+    (1, 2),
+    (2, 3),
+    (3, 4),
+    (0, 5),
+    (5, 6),
+    (6, 7),
+    (7, 8),
+    (5, 9),
+    (9, 10),
+    (10, 11),
+    (11, 12),
+    (9, 13),
+    (13, 14),
+    (14, 15),
+    (15, 16),
+    (13, 17),
+    (0, 17),
+    (17, 18),
+    (18, 19),
+    (19, 20),
 )
 
 # O cv2.putText usa fontes sem suporte completo a acentos.
@@ -23,21 +39,22 @@ GESTURE_NAMES = {
     "Victory": "VITORIA",
     "ILoveYou": "I LOVE YOU",
 }
+HANDEDNESS_NAMES = {"Left": "Esquerda", "Right": "Direita"}
 
 
 def pixel_point(x: float, y: float, width: int, height: int, mirror: bool) -> tuple[int, int]:
     """Converte coordenadas normalizadas ao canvas e espelha só a visualização.
 
-    Clamp protege o desenho quando a estimativa sai ligeiramente da imagem.
+    Limitar os pixels protege o desenho quando a estimativa sai da imagem.
     O x espelhado é exatamente width - 1 - x_pixel, como no cv2.flip.
     """
     if width < 1 or height < 1:
         raise ValueError("A imagem deve ter largura e altura positivas.")
     if not math.isfinite(x) or not math.isfinite(y):
         raise ValueError("Coordenadas devem ser finitas.")
-    px = min(width - 1, max(0, round(x * (width - 1))))
-    py = min(height - 1, max(0, round(y * (height - 1))))
-    return (width - 1 - px if mirror else px), py
+    pixel_x = min(width - 1, max(0, round(x * (width - 1))))
+    pixel_y = min(height - 1, max(0, round(y * (height - 1))))
+    return (width - 1 - pixel_x if mirror else pixel_x), pixel_y
 
 
 def gesture_label(category: str | None, score: float, threshold: float) -> str:
@@ -54,8 +71,8 @@ def gesture_label(category: str | None, score: float, threshold: float) -> str:
 
 
 def handedness_label(category: str | None) -> str:
-    """Nome da mão da pessoa; só é válido se a inferência recebe input original."""
-    return {"Left": "Esquerda", "Right": "Direita"}.get(category or "", "Mao")
+    """Nomeia a mão da pessoa quando a inferência recebe a imagem original."""
+    return HANDEDNESS_NAMES.get(category or "", "Mao")
 
 
 class FrameClock:
@@ -65,6 +82,6 @@ class FrameClock:
         self.last_ms = -1
 
     def tick(self, elapsed_seconds: float) -> int:
-        value = max(self.last_ms + 1, int(elapsed_seconds * 1000))
-        self.last_ms = value
-        return value
+        timestamp_ms = max(self.last_ms + 1, int(elapsed_seconds * 1000))
+        self.last_ms = timestamp_ms
+        return timestamp_ms

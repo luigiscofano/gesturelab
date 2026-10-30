@@ -1,10 +1,11 @@
 from types import SimpleNamespace
-import sys
 
 import pytest
 
 import app
+import hand_app
 from app import parse_args
+from vision_runtime import VisionDependencies
 
 
 def test_default_mode_matches_first_milestone():
@@ -62,15 +63,26 @@ def test_invalid_smoothing_is_rejected(value):
 
 
 def test_posematch_accepts_its_own_gallery_and_a_photo():
-    args = parse_args(["--mode", "posematch", "--gallery", "catalog.json",
-                       "--match-threshold", "0.6", "--image", "pose.jpg"])
+    args = parse_args(
+        [
+            "--mode",
+            "posematch",
+            "--gallery",
+            "catalog.json",
+            "--match-threshold",
+            "0.6",
+            "--image",
+            "pose.jpg",
+        ]
+    )
     assert args.gallery.name == "catalog.json"
     assert args.match_threshold == 0.6
     assert args.image.name == "pose.jpg"
 
 
-@pytest.mark.parametrize("option,value", [("--gallery", "catalog.json"),
-                                          ("--match-threshold", "0.5")])
+@pytest.mark.parametrize(
+    "option,value", [("--gallery", "catalog.json"), ("--match-threshold", "0.5")]
+)
 def test_posematch_options_are_rejected_in_hand_modes(option, value):
     with pytest.raises(SystemExit):
         parse_args(["--mode", "hands", option, value])
@@ -84,12 +96,10 @@ def test_posematch_rejects_invalid_distances(value):
 
 def test_posematch_dispatch_does_not_create_a_hand_task(monkeypatch):
     calls = []
-    dependencies = (None,) * 5
+    dependencies = object()
     monkeypatch.setattr(app, "load_dependencies", lambda: dependencies)
-    monkeypatch.setattr(app, "create_task", lambda *args: pytest.fail("tarefa de mão indevida"))
-    monkeypatch.setitem(sys.modules, "pose_match_app", SimpleNamespace(
-        run_posematch=lambda args, deps: calls.append((args.mode, deps))
-    ))
+    monkeypatch.setattr(app, "run_hand_mode", lambda *args: pytest.fail("tarefa de mão indevida"))
+    monkeypatch.setattr(app, "run_posematch", lambda args, deps: calls.append((args.mode, deps)))
     assert app.main(["--mode", "posematch", "--image", "pose.jpg"]) == 0
     assert calls == [("posematch", dependencies)]
 
@@ -111,10 +121,13 @@ def test_photo_export_does_not_overwrite_a_file_created_during_encoding(tmp_path
 
     cv2 = SimpleNamespace(imdecode=lambda *args: frame, IMREAD_COLOR=1, imencode=encode)
     np = SimpleNamespace(fromfile=lambda *args, **kwargs: b"input", uint8=object())
-    monkeypatch.setattr(app, "process_frame", lambda *args: None)
-    monkeypatch.setattr(app, "draw_result", lambda *args: (frame, {}))
+    monkeypatch.setattr(hand_app, "process_frame", lambda *args: None)
+    monkeypatch.setattr(hand_app, "draw_result", lambda *args: (frame, {}))
 
     with pytest.raises(FileExistsError):
-        app.run_image(None, args, (cv2, None, np, None, None))
+        dependencies = VisionDependencies(
+            cv2=cv2, mediapipe=None, numpy=np, tasks=None, vision=None
+        )
+        hand_app.run_image(None, args, dependencies)
 
     assert output.read_bytes() == b"another process owns this file"
