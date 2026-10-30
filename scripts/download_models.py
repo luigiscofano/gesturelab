@@ -1,4 +1,4 @@
-"""Baixa dois modelos oficiais versionados e verifica SHA-256.
+"""Baixa modelos oficiais versionados e verifica SHA-256.
 
 Somente este script acessa a rede explicitamente. O aplicativo não grava vídeo.
 """
@@ -23,6 +23,11 @@ MODELS = {
         "gesture_recognizer.task",
         "https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task",
         "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482",
+    ),
+    "poses": (
+        "pose_landmarker_lite.task",
+        "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+        "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
     ),
 }
 

@@ -10,7 +10,8 @@ Ao publicar sua evolução, documente o que estudou, alterou, implementou e aval
 - Distribuição usada: https://pypi.org/project/mediapipe/1.2.0/
 - API: MediaPipe Tasks para Python.
 - Código do MediaPipe: licença Apache 2.0 conforme o projeto oficial.
-- Modelos: Hand Landmarker e Gesture Recognizer oficiais, versão de artefato 1.
+- Modelos: Hand Landmarker, Gesture Recognizer e Pose Landmarker Lite oficiais,
+  versão de artefato 1.
 - Procedência, URLs e hashes: `models/README.md` e `scripts/download_models.py`.
 
 Os pesos não acompanham o ZIP. O script baixa os artefatos oficiais. Consulte os
@@ -29,9 +30,14 @@ licenças permanecem sob responsabilidade dos respectivos fornecedores.
 
 - https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/python
 - https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer/python
+- https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python
 - https://docs.opencv.org/4.x/dd/d43/tutorial_py_video_display.html
 
 O comportamento inicial foi inspirado no post mostrado pelo usuário: captura
 de webcam, desenho dos pontos das mãos e evolução para reconhecimento de gestos.
 O código não foi transcrito do screenshot. Imagens de teste de terceiros não são
-incluídas nos entregáveis.
+incluídas nos entregáveis. As imagens de referência em `pose_gallery` são
+ilustrações originais do projeto, conforme seu [README](pose_gallery/README.md).
+Elas usam pontos definidos na construção do desenho, sem serem apresentadas
+como fotografias detectadas pelo modelo. Fotografias adicionadas pelo usuário
+mantêm sua origem e condições de uso; o indexador não transfere direitos sobre elas.

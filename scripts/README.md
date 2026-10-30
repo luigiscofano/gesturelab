@@ -4,13 +4,15 @@
 [Documentação](../docs/README.md)
 
 Execute os comandos abaixo na pasta que contém `app.py` e `requirements.txt`.
-Os dois scripts usam somente a biblioteca padrão do Python; o diagnóstico só
-importa as bibliotecas de visão quando recebe `--imports`.
+O downloader e o diagnóstico básico usam a biblioteca padrão do Python. O
+diagnóstico só importa visão com `--imports`; o indexador de fotos utiliza as
+bibliotecas de visão para detectar as poses nas imagens fornecidas.
 
 | Script | Finalidade | Altera arquivos? |
 | --- | --- | --- |
 | `download_models.py` | Baixar os modelos oficiais e conferir SHA-256 | Sim, na pasta de modelos |
 | `check_environment.py` | Conferir Python, pacotes e verificações opcionais | Não altera o projeto |
+| `build_pose_catalog.py` | Indexar fotos locais para a busca por pose | Sim, na pasta de saída fornecida; preserva originais |
 
 ## 1. Conferir a instalação
 
@@ -53,7 +55,7 @@ mensagens e criar caches durante a inicialização.
 
 ## 2. Baixar modelos
 
-Para preparar os três modos do aplicativo, baixe os dois modelos:
+Para preparar os quatro modos do aplicativo, baixe os três modelos:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/download_models.py
@@ -67,9 +69,10 @@ No macOS / Linux, substitua o executável pelo da sua `.venv`:
 
 | Opção | Resultado |
 | --- | --- |
-| Sem `--only` | Baixa Hand Landmarker e Gesture Recognizer |
+| Sem `--only` | Baixa Hand Landmarker, Gesture Recognizer e Pose Landmarker Lite |
 | `--only hands` | Prepara `hands` e `airwrite` |
 | `--only gestures` | Prepara `gestures` |
+| `--only poses` | Prepara `posematch` e o indexador de fotos |
 | `--directory caminho` | Usa uma pasta diferente de `models` |
 
 O download exige conexão à internet. URLs versionados, nomes e hashes estão em
@@ -96,8 +99,8 @@ baixados permanecem locais e estão excluídos do Git.
 .venv/bin/python scripts/check_environment.py --imports --models all
 ```
 
-`--models hands` verifica apenas Hand Landmarker; `--models gestures` verifica
-apenas Gesture Recognizer. Sem `--models`, os arquivos `.task` não são
+`--models hands` verifica Hand Landmarker; `--models gestures`, Gesture Recognizer;
+`--models poses`, Pose Landmarker Lite. Sem `--models`, os arquivos `.task` não são
 verificados. O diagnóstico lê os arquivos e compara SHA-256 com as mesmas
 referências do downloader; não baixa, apaga nem substitui modelos.
 
@@ -128,3 +131,22 @@ execução local e registro em [`docs/VALIDACAO.md`](../docs/VALIDACAO.md).
 Use `python scripts/check_environment.py --help` e
 `python scripts/download_models.py --help` para consultar as opções com o Python
 do ambiente escolhido.
+
+## 4. Criar um catálogo de fotos para posematch
+
+Coloque fotografias autorizadas, preferencialmente de uma pessoa com o corpo
+visível, em `data/minhas_fotos`. Depois de instalar as dependências e baixar o
+modelo `poses`, execute:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/build_pose_catalog.py --input data/minhas_fotos --output data/minha_galeria
+.\.venv\Scripts\python.exe app.py --mode posematch --gallery data/minha_galeria/catalog.json
+```
+
+No macOS/Linux, use `.venv/bin/python`. A saída deve ser uma pasta nova. O
+indexador prepara imagens e landmarks no mesmo catálogo, sem depender dos
+caminhos dos originais e sem sobrescrevê-los. Fotos sem uma pose utilizável são
+recusadas com um motivo. `data/` já é excluído do Git por padrão.
+
+Veja o [README do catálogo](../pose_gallery/README.md) para opções, procedência e
+limitações, e o [guia do modo](../docs/posematch/README.md) para execução e ranking.
