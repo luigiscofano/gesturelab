@@ -1,7 +1,9 @@
 # Plano de avaliação
 
+[Início](../README.md) · [Documentação](README.md) · [Validação realizada](VALIDACAO.md)
+
 **Estado:** os campos abaixo são um protocolo a preencher. Não são resultados
-medidos. A validação técnica do starter está em `VALIDACAO.md`.
+medidos. A validação técnica do projeto está em [Validação](VALIDACAO.md).
 
 ## Ambiente
 
@@ -49,3 +51,7 @@ teste, reserve novos dados para uma avaliação final independente.
 
 - https://scikit-learn.org/stable/common_pitfalls.html
 - https://scikit-learn.org/stable/modules/cross_validation.html
+
+---
+
+**Próxima leitura:** [registrar um experimento](EXPERIMENTOS.md) e [planejar os dados](DATASET.md).

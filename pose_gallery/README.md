@@ -1,7 +1,6 @@
 # Catálogo de imagens para poses parecidas
 
-[Projeto](../README.md) · [Modo posematch](../docs/posematch/README.md) ·
-[Scripts](../scripts/README.md)
+[Início](../README.md) · [Documentação](../docs/README.md) · [Modo posematch](../docs/posematch/README.md)
 
 O catálogo inicial contém **12 ilustrações originais de personagens articulados**,
 com os braços e as pernas em posições diferentes. O modo `posematch` compara a
@@ -13,6 +12,14 @@ foram desenhadas por código para que as posições das articulações sejam con
 e para permitir uma primeira execução sem baixar um banco de imagens externo.
 A busca fica limitada ao conteúdo deste catálogo. Quanto mais variadas e adequadas
 forem as referências, maior a possibilidade de encontrar uma pose próxima.
+
+**Nesta página**
+
+- [Conteúdo](#conteúdo)
+- [Origem e licença](#origem-e-licença)
+- [Criar um catálogo com suas próprias fotos](#criar-um-catálogo-com-suas-próprias-fotos)
+- [Regenerar as ilustrações incluídas](#regenerar-as-ilustrações-incluídas)
+- [Esquema do catálogo](#esquema-do-catálogo)
 
 ## Conteúdo
 
@@ -109,3 +116,7 @@ O carregador rejeita identificadores repetidos, imagens ausentes e poses sem
 articulações suficientes. As distâncias retornadas são geométricas, em unidades
 normalizadas pelo tronco; não são probabilidades nem uma avaliação de qualidade
 anatômica. A comparação não reconhece a identidade das pessoas.
+
+---
+
+**Próxima leitura:** [executar o PoseMatch](../docs/posematch/README.md), [indexador de fotos](../scripts/build_pose_catalog.py) e [avaliação](../docs/AVALIACAO.md).

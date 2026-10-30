@@ -1,15 +1,23 @@
 # Como contribuir com o GestureLab
 
-[README principal](README.md) · [Testes](tests/README.md) ·
-[Automação do GitHub](.github/README.md) · [Roadmap](docs/ROADMAP.md)
+[Início](README.md) · [Documentação](docs/README.md) · [Próximas entregas](docs/ROADMAP.md)
 
 O objetivo é manter os modos `hands`, `gestures`, `airwrite` e `posematch` utilizáveis enquanto
 o projeto evolui. Uma boa contribuição tem um problema concreto, uma mudança
 compreensível e evidências proporcionais ao que alterou.
 
+**Nesta página**
+
+- [Preparar o ambiente](#preparar-o-ambiente)
+- [Estilo de código](#estilo-de-código)
+- [Fluxo de uma mudança](#fluxo-de-uma-mudança)
+- [Branches, commits e revisão](#branches-commits-e-revisão)
+- [Validação por tipo de alteração](#validação-por-tipo-de-alteração)
+- [Documentação e créditos](#documentação-e-créditos)
+
 ## Preparar o ambiente
 
-Siga a instalação no [README](README.md). Execute os comandos na pasta que contém
+Siga o [guia de instalação](docs/INSTALACAO.md). Execute os comandos na pasta que contém
 `app.py` e use o mesmo Python do ambiente virtual.
 
 Para desenvolver no Windows, depois de criar `.venv`:
@@ -55,13 +63,13 @@ Ruff define a formatação do projeto. Para aplicar o padrão antes de enviar um
 ```
 
 O CI confere a formatação e as regras de imports, sintaxe, simplificação e erros
-comuns configuradas em `pyproject.toml`. Esses checks ajudam a manter consistência;
+comuns configuradas em [pyproject.toml](pyproject.toml). Esses checks ajudam a manter consistência;
 a revisão também deve conferir comportamento, responsabilidades e clareza do diff.
 
 ## Fluxo de uma mudança
 
 1. Consulte as [issues](https://github.com/luigiscofano/gesturelab/issues) e o
-   roadmap. Para uma mudança maior, registre o problema e o critério de conclusão.
+   [roadmap](docs/ROADMAP.md). Para uma mudança maior, registre o problema e o critério de conclusão.
 2. Atualize a `main` local e crie uma branch com um nome que descreva o trabalho.
 3. Implemente a mudança, atualize a documentação afetada e teste o comportamento.
 4. Faça commits que agrupem mudanças coerentes. Explique a intenção na mensagem.
@@ -140,9 +148,11 @@ desempenho em webcam real. Preserve essa distinção ao descrever resultados.
 
 ## Documentação e créditos
 
-Atualize o README geral se a forma de instalar ou usar mudar. Mantenha instruções
-específicas nos READMEs de [scripts](scripts/README.md), [modelos](models/README.md),
-[testes](tests/README.md) e [automação](.github/README.md). Evite replicar o mesmo
+Mantenha a visão geral no [README](README.md), os passos de instalação no
+[guia de instalação](docs/INSTALACAO.md) e os comandos no [guia de uso](docs/USO.md).
+Atualize também o [índice da documentação](docs/README.md) ao criar um guia. Preserve instruções
+específicas nos documentos de [scripts](scripts/README.md), [modelos](models/README.md),
+[testes](tests/README.md) e [automação](.github/AUTOMACAO.md). Evite replicar o mesmo
 texto em todos os arquivos.
 
 O projeto utiliza modelos prontos e teve sua implementação inicial preparada
@@ -154,3 +164,7 @@ externas. Código, bibliotecas e pesos podem ter licenças diferentes.
 Modelos baixados, `outputs/`, datasets e vídeos ficam fora do versionamento por
 padrão. Revise `git diff --cached` antes de enviar um commit. Para uma demo de
 portfólio, prefira a própria gravação e documente as condições do teste.
+
+---
+
+**Próxima leitura:** [mapa do código](docs/MAPA_DO_PROJETO.md), [testes](tests/README.md) e [automação do GitHub](.github/AUTOMACAO.md).

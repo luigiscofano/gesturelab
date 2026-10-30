@@ -1,9 +1,22 @@
 # Escrita no ar no GestureLab
 
+[Início](../README.md) · [Documentação](README.md) · [Como usar](USO.md)
+
 O modo `airwrite` transforma o movimento da ponta do indicador em traços persistentes.
 Ele reutiliza o Hand Landmarker já usado no modo `hands`. A escrita e o reconhecimento
 de letras são etapas diferentes: esta versão desenha e exporta os traços; ainda não
 converte a escrita em texto.
+
+**Nesta página**
+
+- [Executar](#executar)
+- [Como usar a caneta](#como-usar-a-caneta)
+- [O que foi acrescentado ao pipeline](#o-que-foi-acrescentado-ao-pipeline)
+- [Por que manter traços separados](#por-que-manter-traços-separados)
+- [Suavização e limites da regra](#suavização-e-limites-da-regra)
+- [Arquivos exportados](#arquivos-exportados)
+- [Evolução para reconhecer letras e números](#evolução-para-reconhecer-letras-e-números)
+- [Critérios de aceite e portfólio](#critérios-de-aceite-e-portfólio)
 
 ## Executar
 
@@ -193,3 +206,7 @@ reconhecimento de caracteres não estiver implementado e avaliado.
 - Conceito de Digital Ink: https://developers.google.com/ml-kit/vision/digital-ink-recognition
 - EMNIST: https://www.nist.gov/itl/products-and-services/emnist-dataset
 - Classificação de dígitos com SVM: https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html
+
+---
+
+**Próxima leitura:** [comandos e opções](USO.md), [solução de problemas](SOLUCAO_DE_PROBLEMAS.md) e [testes da escrita](../tests/test_airwriting.py).

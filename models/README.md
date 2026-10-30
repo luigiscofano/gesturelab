@@ -1,7 +1,6 @@
 # Modelos de visão computacional
 
-[Visão geral](../README.md) · [Scripts](../scripts/README.md) ·
-[Créditos e dependências](../THIRD_PARTY_NOTICES.md)
+[Início](../README.md) · [Documentação](../docs/README.md) · [Scripts](../scripts/README.md)
 
 Esta pasta recebe os modelos **pré-treinados do MediaPipe** usados na inferência.
 O GestureLab não treinou esses modelos. O código da aplicação controla captura,
@@ -93,3 +92,7 @@ GestureLab. Consulte as referências oficiais antes de redistribuir os pesos:
 - [Documentação e modelos do Gesture Recognizer](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer).
 - [Documentação e modelos do Pose Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker).
 - [Avisos de terceiros do projeto](../THIRD_PARTY_NOTICES.md).
+
+---
+
+**Próxima leitura:** [diagnóstico do ambiente](../scripts/README.md), [como usar os modelos](../docs/USO.md) e [créditos](../THIRD_PARTY_NOTICES.md).

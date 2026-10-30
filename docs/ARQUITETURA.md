@@ -1,26 +1,48 @@
 # Arquitetura do GestureLab
 
+[Início](../README.md) · [Documentação](README.md) · [Mapa do projeto](MAPA_DO_PROJETO.md)
+
+**Nesta página**
+
+- [Estado implementado](#estado-implementado)
+- [Modo de escrita no ar](#modo-de-escrita-no-ar)
+- [Busca de imagens por pose corporal](#busca-de-imagens-por-pose-corporal)
+- [Dependências e manutenção](#dependências-e-manutenção)
+- [Evolução planejada](#evolução-planejada)
+
 ## Estado implementado
 
-`app.py` valida os argumentos e inicia o modo escolhido. `hand_app.py` executa
-os modos de mãos e escrita; `pose_match_app.py` executa a busca corporal.
-`vision_runtime.py` reúne as dependências de visão e as operações compartilhadas
+[app.py](../app.py) valida os argumentos e inicia o modo escolhido. [hand_app.py](../hand_app.py) executa
+os modos de mãos e escrita; [pose_match_app.py](../pose_match_app.py) executa a busca corporal.
+[vision_runtime.py](../vision_runtime.py) reúne as dependências de visão e as operações compartilhadas
 de imagem e câmera. Os módulos de geometria e estado continuam independentes
 dessas bibliotecas.
 
 O programa usa exatamente uma tarefa por execução: Hand Landmarker em `hands`
 e `airwrite`, Gesture Recognizer em `gestures` ou Pose Landmarker em `posematch`.
 
-![Fluxo do projeto](assets/pipeline.png)
+```mermaid
+flowchart TD
+    input["Webcam ou foto"] --> rgb["OpenCV: BGR para RGB"]
+    rgb --> hand["Hand Landmarker"]
+    rgb --> gesture["Gesture Recognizer"]
+    rgb --> pose["Pose Landmarker"]
+    hand --> points["hands: pontos e conexões"]
+    hand --> pen["airwrite: traços e exportação"]
+    gesture --> labels["gestures: nomes e pontos"]
+    pose --> matching["posematch: normalização e comparação"]
+    catalog["Catálogo local"] --> matching
+    matching --> reference["Referência aceita na tela"]
+```
 
-O diagrama acima representa os três modos iniciais. O fluxo corporal acrescentado
-está descrito na seção posematch e no seu README próprio.
+O diagrama reúne as alternativas; somente o caminho do modo escolhido é executado.
+`airwrite` usa uma sequência da webcam. Os demais modos também aceitam uma foto.
 
 | Etapa | Entrada | Saída |
 | --- | --- | --- |
 | Captura ou leitura | Webcam ou caminho de uma foto | Frame BGR |
 | Conversão | Frame BGR | Imagem RGB contígua |
-| Inferência | Imagem e, em VIDEO, timestamp crescente | Landmarks, lateralidade e, em gestures, categorias |
+| Inferência | Imagem e, em VIDEO, timestamp crescente | Pontos das mãos ou corpo; lateralidade nas mãos e categorias em gestures |
 | Decisão de rótulo | Nome e score | Nome conhecido ou DESCONHECIDO |
 | Visualização | Frame original e resultados | Imagem com pontos, conexões e textos |
 
@@ -38,9 +60,9 @@ histórico por mão, implemente associação temporal ou limite a experiência a
 
 ## Modo de escrita no ar
 
-`airwriting.py` recebe posições e condições de escrita, mantém traços separados,
+[airwriting.py](../airwriting.py) recebe posições e condições de escrita, mantém traços separados,
 aplica suavização e encerra a continuidade ao perder a pose, a mão ou a condição
-de rastreamento. A interface em `hand_app.py` exibe os traços sobre vídeo ou branco,
+de rastreamento. A interface em [hand_app.py](../hand_app.py) exibe os traços sobre vídeo ou branco,
 processa atalhos e exporta PNG + JSON quando solicitado.
 
 O PNG contém só a tinta. O JSON preserva os traços, pontos, tempos e convenção de
@@ -52,9 +74,9 @@ os rótulos do modo `gestures` temporalmente estáveis por si só.
 
 ## Busca de imagens por pose corporal
 
-`app.py` valida a CLI e encaminha `posematch` para `pose_match_app.py`. Esse módulo
+[app.py](../app.py) valida a CLI e encaminha `posematch` para [pose_match_app.py](../pose_match_app.py). Esse módulo
 cuida de captura, inferência corporal, confirmação temporal e composição da tela.
-O ranking está em `pose_matching.py`, com dataclasses e funções puras: não importa
+O ranking está em [pose_matching.py](../pose_matching.py), com dataclasses e funções puras: não importa
 OpenCV/MediaPipe e pode ser testado sem câmera ou pesos.
 
 O catálogo contém imagens e landmarks no referencial de cada imagem. A pose
@@ -63,7 +85,7 @@ menor distância aceita no catálogo, incluindo a hipótese espelhada. A distân
 é geométrica, não é uma probabilidade calibrada. O sistema limpa a referência
 quando não há uma pose utilizável, em vez de atribuir a imagem anterior à cena atual.
 
-`file_io.py` reúne a criação exclusiva de arquivos utilizada pela foto anotada,
+[file_io.py](../file_io.py) reúne a criação exclusiva de arquivos utilizada pela foto anotada,
 pelo desenho e pela comparação de poses. Essa pequena extração evita dependência
 circular entre os modos e mantém uma única implementação da proteção de saídas.
 
@@ -101,3 +123,7 @@ interação funcionando.
 - https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/python
 - https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer/python
 - https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python
+
+---
+
+**Próxima leitura:** [mapa dos arquivos](MAPA_DO_PROJETO.md), [testes](../tests/README.md) e [como contribuir](../CONTRIBUTING.md).

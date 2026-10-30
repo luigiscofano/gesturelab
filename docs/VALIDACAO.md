@@ -1,8 +1,21 @@
 # Registro de validação do starter
 
+[Início](../README.md) · [Documentação](README.md) · [Testes](../tests/README.md)
+
 Data: **30 de outubro de 2026**. Este registro documenta verificações realmente
 executadas durante a preparação do projeto. Não é uma avaliação de acurácia e
 não substitui o teste da webcam no computador de Luigi.
+
+**Nesta página**
+
+- [Ambiente usado](#ambiente-usado)
+- [O que foi verificado](#o-que-foi-verificado)
+- [O que ainda deve ser testado localmente](#o-que-ainda-deve-ser-testado-localmente)
+- [Publicação e GitHub Actions](#publicação-e-github-actions)
+- [Atualização com escrita no ar](#atualização-com-escrita-no-ar)
+- [Revisão de robustez, diagnóstico e documentação](#revisão-de-robustez-diagnóstico-e-documentação)
+- [Modo posematch e catálogo de referências](#modo-posematch-e-catálogo-de-referências)
+- [Refatoração e consistência do código](#refatoração-e-consistência-do-código)
 
 ## Ambiente usado
 
@@ -168,7 +181,7 @@ Os resultados remotos da etapa ficam associados aos commits e pull requests em
 [Pull requests](https://github.com/luigiscofano/gesturelab/pulls?q=is%3Apr).
 O workflow revisto mantém a matriz Windows/Ubuntu e acrescenta compilação e
 ajuda das CLIs. Ele continua sem instalar dependências de visão ou testar
-hardware; consulte o [README da automação](../.github/README.md).
+hardware; consulte o [README da automação](../.github/AUTOMACAO.md).
 
 ## Modo posematch e catálogo de referências
 
@@ -231,7 +244,7 @@ Os comandos, os formatos de saída, os modelos e os limiares permaneceram os mes
 `app.py` passou a cuidar da CLI e do encaminhamento. `hand_app.py` reúne os modos
 de mãos e escrita; `vision_runtime.py` concentra dependências nomeadas e operações
 com o mesmo contrato. A revisão também abrangeu o núcleo puro, os scripts, o
-gerador do catálogo e os testes. As convenções foram registradas em `CONTRIBUTING.md`.
+gerador do catálogo e os testes. As convenções foram registradas em [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 | Verificação | Resultado observado |
 | --- | --- |
@@ -258,3 +271,7 @@ Essas comparações verificam preservação de comportamento nos casos executado
 Não são uma nova avaliação de acurácia, desempenho ou webcam física. A revisão
 e as alterações tiveram assistência de IA, incluindo leituras independentes entre
 agentes; não representam aprovação humana independente.
+
+---
+
+**Próxima leitura:** [executar os testes](../tests/README.md), [avaliar no próprio equipamento](AVALIACAO.md) e [histórico de alterações](../CHANGELOG.md).

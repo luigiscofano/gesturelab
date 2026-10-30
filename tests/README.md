@@ -1,13 +1,20 @@
 # Testes do GestureLab
 
-[Projeto](../README.md) · [Índice da documentação](../docs/README.md) ·
-[Registro de validação](../docs/VALIDACAO.md)
+[Início](../README.md) · [Documentação](../docs/README.md) · [Validação realizada](../docs/VALIDACAO.md)
 
 Esta pasta verifica contratos da aplicação: conversão de coordenadas, rejeição de
 gestos, estados da caneta, argumentos da linha de comando e proteção das saídas.
 Também verifica o descritor corporal, o ranking e o modo de busca por pose.
 Os testes determinísticos usam dados sintéticos e arquivos temporários. Eles não
 abrem a webcam, não baixam modelos e não precisam importar OpenCV ou MediaPipe.
+
+**Nesta página**
+
+- [Executar a partir da raiz](#executar-a-partir-da-raiz)
+- [O que cada arquivo verifica](#o-que-cada-arquivo-verifica)
+- [Por que existem testes de falha de exportação](#por-que-existem-testes-de-falha-de-exportação)
+- [O que uma aprovação não demonstra](#o-que-uma-aprovação-não-demonstra)
+- [Ao corrigir um problema](#ao-corrigir-um-problema)
 
 ## Executar a partir da raiz
 
@@ -105,6 +112,10 @@ execute o grupo afetado e a suíte completa antes de abrir o pull request. Use
 da sua câmera ou de arquivos pessoais para um teste automático.
 
 O [workflow do repositório](../.github/workflows/ci.yml) executa as verificações
-configuradas no GitHub Actions. Consulte o [README de automação](../.github/README.md)
+configuradas no GitHub Actions. Consulte o [guia de automação](../.github/AUTOMACAO.md)
 para entender o que roda em cada job. A contagem de testes pode aumentar com
 regressões novas; quantidade não substitui um comportamento bem verificado.
+
+---
+
+**Próxima leitura:** [automação do GitHub](../.github/AUTOMACAO.md), [como contribuir](../CONTRIBUTING.md) e [plano de avaliação](../docs/AVALIACAO.md).

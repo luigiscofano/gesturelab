@@ -1,5 +1,7 @@
 # Próximas entregas
 
+[Início](../README.md) · [Documentação](README.md) · [Como contribuir](../CONTRIBUTING.md)
+
 Este roteiro distingue o código inicial das evoluções propostas. Marque uma
 entrega como concluída somente depois de executá-la e reunir a evidência indicada.
 
@@ -27,3 +29,7 @@ O primeiro uso concreto agora inclui escrita no ar. Depois de validar a caneta,
 escolha entre reconhecer números e letras ou construir uma tela experimental de
 seleção por pinça para o Intuição. Na integração com jogos, mantenha uma alternativa
 por mouse e meça tempo e erros de interação.
+
+---
+
+**Próxima leitura:** [o que já foi validado](VALIDACAO.md), [como avaliar](AVALIACAO.md) e [fluxo de contribuição](../CONTRIBUTING.md).

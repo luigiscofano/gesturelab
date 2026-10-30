@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title description">
+  <title id="title">GestureLab — visão computacional, na prática</title>
+  <desc id="description">Capa do projeto com ilustrações esquemáticas de pontos de uma mão, um traço no ar e uma pose corporal. Quatro modos: hands, gestures, airwrite e posematch.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102833"/>
+      <stop offset="1" stop-color="#111c32"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#a5b4fc"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#aac4d6" opacity="0.13"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="360" rx="24" fill="url(#background)"/>
+  <rect x="700" y="24" width="556" height="312" rx="18" fill="url(#grid)"/>
+  <path d="M 690 40 V 320" stroke="#284050"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <rect x="48" y="42" width="8" height="8" rx="4" fill="#5eead4"/>
+    <text x="68" y="52" font-size="15" font-weight="600" letter-spacing="2.1" fill="#9dc8cc">UM LABORATÓRIO COM SUA WEBCAM</text>
+    <text x="44" y="139" font-size="72" font-weight="700" letter-spacing="-3" fill="#f4fafc">Gesture<tspan fill="#5eead4">Lab</tspan></text>
+    <text x="48" y="190" font-size="27" fill="#d4e3ed">Visão computacional, na prática.</text>
+    <text x="48" y="227" font-size="20" fill="#a4b9cb">Mãos, gestos, escrita no ar e poses corporais.</text>
+    <g font-size="16" font-weight="600" text-anchor="middle">
+      <rect x="48" y="270" width="102" height="38" rx="19" fill="#193d43" stroke="#2d6267"/>
+      <text x="99" y="295" fill="#9cf3df">hands</text>
+      <rect x="162" y="270" width="120" height="38" rx="19" fill="#193d43" stroke="#2d6267"/>
+      <text x="222" y="295" fill="#9cf3df">gestures</text>
+      <rect x="294" y="270" width="118" height="38" rx="19" fill="#243448" stroke="#465777"/>
+      <text x="353" y="295" fill="#cad4ff">airwrite</text>
+      <rect x="424" y="270" width="142" height="38" rx="19" fill="#243448" stroke="#465777"/>
+      <text x="495" y="295" fill="#cad4ff">posematch</text>
+    </g>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="734" y="56" width="228" height="236" rx="20" fill="#132f3a" stroke="#2b4b58"/>
+    <path d="M 758 82 H 776 M 758 82 V 100 M 938 82 H 920 M 938 82 V 100 M 758 266 H 776 M 758 266 V 248 M 938 266 H 920 M 938 266 V 248" stroke="#456573" stroke-width="2"/>
+    <path d="M 840 254 L 802 220 L 782 198 L 773 180 L 779 166 M 840 254 L 816 185 L 804 151 L 799 123 L 798 102 M 840 254 L 842 177 L 838 138 L 836 107 L 835 84 M 840 254 L 866 184 L 871 148 L 875 122 L 880 102 M 840 254 L 889 201 L 902 175 L 913 155 L 923 141 M 816 185 L 842 177 L 866 184 L 889 201" stroke="#69d8c6" stroke-width="3"/>
+    <g fill="#9ff2e0" stroke="#183b43" stroke-width="2">
+      <circle cx="840" cy="254" r="5"/><circle cx="802" cy="220" r="4"/><circle cx="782" cy="198" r="4"/><circle cx="773" cy="180" r="4"/><circle cx="779" cy="166" r="5"/>
+      <circle cx="816" cy="185" r="4"/><circle cx="804" cy="151" r="4"/><circle cx="799" cy="123" r="4"/><circle cx="798" cy="102" r="5"/>
+      <circle cx="842" cy="177" r="4"/><circle cx="838" cy="138" r="4"/><circle cx="836" cy="107" r="4"/><circle cx="835" cy="84" r="5"/>
+      <circle cx="866" cy="184" r="4"/><circle cx="871" cy="148" r="4"/><circle cx="875" cy="122" r="4"/><circle cx="880" cy="102" r="5"/>
+      <circle cx="889" cy="201" r="4"/><circle cx="902" cy="175" r="4"/><circle cx="913" cy="155" r="4"/><circle cx="923" cy="141" r="5"/>
+    </g>
+    <rect x="984" y="56" width="244" height="110" rx="18" fill="#1b2c43" stroke="#35445f"/>
+    <path d="M 1007 140 C 1020 89 1025 87 1037 123 C 1047 157 1061 95 1073 102 C 1084 110 1069 143 1091 138 C 1112 131 1123 84 1132 94 C 1153 115 1120 153 1152 137 L 1197 105" stroke="url(#ink)" stroke-width="5"/>
+    <circle cx="1197" cy="105" r="7" fill="#d7ddff" stroke="#647a99" stroke-width="5"/>
+    <rect x="984" y="182" width="244" height="110" rx="18" fill="#1b2c43" stroke="#35445f"/>
+    <g stroke="#a5b4fc" stroke-width="3">
+      <circle cx="1060" cy="205" r="8"/>
+      <path d="M 1039 222 L 1081 222 M 1039 222 L 1027 207 L 1016 194 M 1081 222 L 1093 207 L 1104 194 M 1047 223 L 1050 249 L 1043 271 M 1073 223 L 1070 249 L 1077 271 M 1050 249 L 1070 249"/>
+    </g>
+    <path d="M 1121 235 H 1142 M 1136 229 L 1142 235 L 1136 241" stroke="#607589" stroke-width="2"/>
+    <rect x="1155" y="200" width="54" height="74" rx="7" stroke="#526682"/>
+    <g stroke="#79d9ca" stroke-width="2">
+      <circle cx="1182" cy="215" r="5"/>
+      <path d="M 1173 227 L 1191 227 M 1173 227 L 1165 215 M 1191 227 L 1199 215 M 1177 228 L 1178 245 L 1174 260 M 1187 228 L 1186 245 L 1190 260 M 1178 245 L 1186 245"/>
+    </g>
+  </g>
+  <text x="984" y="320" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" letter-spacing="1.2" fill="#819cb2">PYTHON · OPENCV · MEDIAPIPE</text>
+</svg>
