@@ -122,3 +122,50 @@ saídas de teste não acompanham o pacote.
 
 Webcam física, interface no Windows e robustez entre pessoas continuam pendentes
 de teste local. Reconhecimento de caracteres ainda não está implementado.
+
+## Revisão de robustez, diagnóstico e documentação
+
+Em 30/10/2026, uma nova etapa revisou a versão publicada, preservando os três
+modos. As mudanças estão descritas no [changelog](../CHANGELOG.md) e nas issues
+[#1](https://github.com/luigiscofano/gesturelab/issues/1) a
+[#4](https://github.com/luigiscofano/gesturelab/issues/4). A implementação e a
+revisão de código desta etapa foram realizadas com assistência de IA; isso não
+representa uma aprovação humana independente.
+
+| Verificação da revisão | Resultado observado |
+| --- | --- |
+| Suíte completa local | **59 testes passaram**, usando o mesmo Python 3.12.14 |
+| Ruff e compilação | Nenhum erro reportado |
+| Regressões contra o código anterior | Três casos reproduziram sobrescrita ou exportação incompleta |
+| Exportação após a correção | Preserva arquivos existentes e tenta remover apenas as saídas criadas pela tentativa que falhou |
+| Diagnóstico padrão | Confere Python, arquitetura, versões fixas e distribuições OpenCV |
+| Diagnóstico com `--imports --models all` | Imports reais e hashes dos dois modelos aprovados |
+| CLI sem bibliotecas de visão | Ajuda acessível; diagnóstico informa pacotes ausentes com código 1 |
+| Links dos READMEs e contribuição | 110 links relativos verificados, sem destinos ausentes |
+| Workflow e formulários de issue | YAML analisado sem erro de sintaxe |
+
+Na verificação adicional de exportação, OpenCV e NumPy reais produziram um PNG
+válido de **120 × 80 pixels** e um JSON com **dois traços de dois pontos**. O
+espaço entre os traços permaneceu branco. Os caminhos de teste continham acento.
+A leitura e a escrita de foto também preservaram a entrada byte a byte e
+produziram uma saída PNG legível. Nesse teste de foto, a inferência e a anotação
+foram substituídas para isolar o comportamento de arquivos; não houve avaliação
+nova da detecção de mãos. As imagens eram sintéticas e os arquivos temporários.
+
+Os testes automatizados de falha usam codificadores substitutos e arquivos
+temporários para reproduzir colisões e erros de escrita. Isso é distinto da
+verificação adicional com o codificador real. O rollback trata exceções comuns;
+não garante uma exportação completa após queda de energia ou falha da própria
+remoção dos arquivos.
+
+O diagnóstico real utilizou a biblioteca nativa temporária descrita no ambiente
+acima. O MediaPipe/Matplotlib emitiu um aviso de cache temporário no ambiente
+restrito, sem impedir a verificação. Imports, hashes e versões aprovados não
+comprovam que a câmera ou a janela funcionam no computador do usuário.
+
+Os resultados remotos da etapa ficam associados aos commits e pull requests em
+[GitHub Actions](https://github.com/luigiscofano/gesturelab/actions) e
+[Pull requests](https://github.com/luigiscofano/gesturelab/pulls?q=is%3Apr).
+O workflow revisto mantém a matriz Windows/Ubuntu e acrescenta compilação e
+ajuda das CLIs. Ele continua sem instalar dependências de visão ou testar
+hardware; consulte o [README da automação](../.github/README.md).
