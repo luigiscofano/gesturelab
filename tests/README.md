@@ -5,6 +5,7 @@
 
 Esta pasta verifica contratos da aplicação: conversão de coordenadas, rejeição de
 gestos, estados da caneta, argumentos da linha de comando e proteção das saídas.
+Também verifica o descritor corporal, o ranking e o modo de busca por pose.
 Os testes determinísticos usam dados sintéticos e arquivos temporários. Eles não
 abrem a webcam, não baixam modelos e não precisam importar OpenCV ou MediaPipe.
 
@@ -44,6 +45,9 @@ virtual. Não é necessário ativar esse ambiente nem alterar a política do Pow
 | [test_cli.py](test_cli.py) | Opções e combinações aceitas, encerramento obrigatório em webcam sem janela, restrições do modo foto e proteção contra sobrescrita durante a exportação. |
 | [test_airwriting.py](test_airwriting.py) | Pose geométrica, confirmação, separação de traços, perda de mão, salto, duas mãos, pausa, limpar, desfazer, suavização, metadados e falhas de exportação. |
 | [test_environment.py](test_environment.py) | Contratos do diagnóstico de instalação, com dependências e arquivos controlados pelo teste. Consulte também o [README dos scripts](../scripts/README.md). |
+| [test_pose_matching.py](test_pose_matching.py) | Normalização, proporção da imagem, espelhamento, ranking, visibilidade e validação do catálogo. |
+| [test_pose_match_app.py](test_pose_match_app.py) | Confirmação temporal, limpeza da referência, fluxo da câmera/foto e composição com dependências substitutas. |
+| [test_pose_catalog.py](test_pose_catalog.py) | Preparação de catálogos e tratamento de imagens não utilizáveis, sem modelo na suíte de lógica. |
 
 Você pode executar um subconjunto durante uma alteração:
 
@@ -82,10 +86,12 @@ FPS, latência ou funcionamento da câmera e da janela no seu computador. També
 não prova robustez da regra de pose para todas as pessoas, distâncias e posições.
 
 Os testes de visão e as verificações já executadas estão em
-[VALIDACAO.md](../docs/VALIDACAO.md). Para uma validação manual, confira os três
+[VALIDACAO.md](../docs/VALIDACAO.md). Para uma validação manual, confira os quatro
 modos, feche a janela corretamente, escreva dois traços separados, salve com `S`
 e abra os arquivos exportados. Registre ambiente, resultado e limitações em
 [EXPERIMENTOS.md](../docs/EXPERIMENTOS.md), sem publicar imagens de terceiros.
+Em `posematch`, verifique a escolha da imagem, o espelhamento e a limpeza da
+referência ao sair do enquadramento ou aparecer uma segunda pessoa.
 
 ## Ao corrigir um problema
 

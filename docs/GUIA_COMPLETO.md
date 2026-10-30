@@ -21,7 +21,7 @@ Você vai construir a aplicação desde a preparação do ambiente. Na primeira 
 | v0.5 | Gestos próprios e avaliação documentada | Dataset, aprendizado supervisionado e experimentos |
 | v1.0 | Uma interação útil e demonstrável | Produto, engenharia e apresentação profissional |
 
-Os números de versão são uma proposta de organização. O kit inicial entregue junto com este guia já traz os modos de rastreamento, gestos prontos e escrita no ar para execução local. A escrita possui confirmação de entrada, suavização e exportação. Coleta rotulada, treinamento próprio, estabilização dos nomes no modo gestures, reconhecimento da escrita e poses corporais são próximos desenvolvimentos.
+Os números de versão são uma proposta de organização. O kit inicial trouxe os modos de rastreamento, gestos prontos e escrita no ar para execução local. A escrita possui confirmação de entrada, suavização e exportação. Uma atualização acrescentou `posematch`, que encontra imagens de referência por semelhança de pose corporal; seu uso está em [posematch/README.md](posematch/README.md). Coleta rotulada, treinamento próprio, estabilização dos nomes no modo gestures e reconhecimento da escrita continuam sendo próximos desenvolvimentos.
 
 ## 2. Como o sistema funciona
 
@@ -548,6 +548,10 @@ GitHub Pages hospeda arquivos estáticos. Ele pode exibir sua página e uma apli
 Na migração, trate versões dos modelos, carregamento, desempenho e autorização de câmera. A documentação web alerta que a inferência síncrona pode bloquear a interface; Web Workers são uma evolução útil. [13]
 
 ## 13. Evoluir para poses do corpo inteiro
+
+A busca geométrica de imagens por pose corporal já foi implementada em `posematch`,
+como modo separado. Consulte o [README específico](posematch/README.md). As ideias
+de classificação e contagem abaixo continuam sendo propostas futuras.
 
 Se por poses você quer dizer posturas corporais, use **Pose Landmarker**. Ele estima 33 pontos do corpo. Os nomes das poses precisam vir de regras ou de um classificador criado para seu objetivo; o detector de pontos não entrega automaticamente rótulos como agachamento, guarda ou postura de luta. [16]
 

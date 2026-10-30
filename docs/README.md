@@ -12,11 +12,13 @@ comece pelo [README principal](../README.md).
 | [Guia completo](GUIA_COMPLETO.md) | Estudar e evoluir o projeto | Conceitos de visão computacional, ferramentas, desenvolvimento, GitHub e portfólio |
 | [Arquitetura](ARQUITETURA.md) | Entender ou alterar o código | Responsabilidade dos módulos, inferência, espelhamento e estado da escrita |
 | [Escrita no ar](ESCRITA_NO_AR.md) | Usar ou modificar a caneta | Pose, confirmação, suavização, traços separados, exportação e limitações |
+| [Busca por pose corporal](posematch/README.md) | Encontrar uma imagem de pose parecida | Comparação, interface, catálogo e limites do modo posematch |
 | [Recursos visuais](assets/README.md) | Editar os diagramas dos guias | Arquivos SVG e PNG, finalidade e cuidados de atualização |
 
-Os modos `hands`, `gestures` e `airwrite` estão implementados. A escrita produz
+Os modos `hands`, `gestures`, `airwrite` e `posematch` estão implementados. A escrita produz
 desenhos e trajetórias; ela ainda não reconhece letras. O reconhecimento de gestos
-usa classes de um modelo pronto. Essas distinções devem aparecer também em
+usa classes de um modelo pronto. A busca corporal usa distâncias geométricas
+entre referências locais, sem classificar universalmente movimentos. Essas distinções devem aparecer também em
 demonstrações e descrições do portfólio.
 
 ## Evidências e próximas entregas
@@ -43,7 +45,7 @@ inferência com imagem e observação em webcam real.
    `app.py` e `requirements.txt`.
 2. Use o [README dos scripts](../scripts/README.md) para preparar os modelos e
    conferir os utilitários disponíveis.
-3. Abra `hands`, encerre com Q ou Esc e experimente `gestures` e `airwrite`.
+3. Abra `hands`, encerre com Q ou Esc e experimente `gestures`, `airwrite` e `posematch`.
 4. No modo de escrita, mantenha a janela em foco e pressione S antes de sair.
    Não há salvamento automático.
 
@@ -72,6 +74,8 @@ inferência com imagem e observação em webcam real.
 - [Testes](../tests/README.md): execução, cobertura de cenários e limites.
 - [GitHub](../.github/README.md): automação e organização do trabalho.
 - [Recursos visuais](assets/README.md): diagramas usados nos documentos.
+- [Busca por pose](posematch/README.md): uso e arquitetura do quarto modo.
+- [Catálogo de poses](../pose_gallery/README.md): imagens de referência e indexação.
 
 ## Como manter estes documentos
 

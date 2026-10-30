@@ -23,6 +23,8 @@ body:
         - hands
         - gestures
         - airwrite
+        - posematch
+        - Catálogo de imagens de poses
         - Documentação ou testes
     validations:
       required: true

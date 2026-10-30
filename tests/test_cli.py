@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+import sys
 
 import pytest
 
@@ -58,6 +59,39 @@ def test_canvas_is_only_available_for_airwrite():
 def test_invalid_smoothing_is_rejected(value):
     with pytest.raises(SystemExit):
         parse_args(["--mode", "airwrite", "--smooth-ms", value])
+
+
+def test_posematch_accepts_its_own_gallery_and_a_photo():
+    args = parse_args(["--mode", "posematch", "--gallery", "catalog.json",
+                       "--match-threshold", "0.6", "--image", "pose.jpg"])
+    assert args.gallery.name == "catalog.json"
+    assert args.match_threshold == 0.6
+    assert args.image.name == "pose.jpg"
+
+
+@pytest.mark.parametrize("option,value", [("--gallery", "catalog.json"),
+                                          ("--match-threshold", "0.5")])
+def test_posematch_options_are_rejected_in_hand_modes(option, value):
+    with pytest.raises(SystemExit):
+        parse_args(["--mode", "hands", option, value])
+
+
+@pytest.mark.parametrize("value", ["-1", "nan", "inf"])
+def test_posematch_rejects_invalid_distances(value):
+    with pytest.raises(SystemExit):
+        parse_args(["--mode", "posematch", "--match-threshold", value])
+
+
+def test_posematch_dispatch_does_not_create_a_hand_task(monkeypatch):
+    calls = []
+    dependencies = (None,) * 5
+    monkeypatch.setattr(app, "load_dependencies", lambda: dependencies)
+    monkeypatch.setattr(app, "create_task", lambda *args: pytest.fail("tarefa de mão indevida"))
+    monkeypatch.setitem(sys.modules, "pose_match_app", SimpleNamespace(
+        run_posematch=lambda args, deps: calls.append((args.mode, deps))
+    ))
+    assert app.main(["--mode", "posematch", "--image", "pose.jpg"]) == 0
+    assert calls == [("posematch", dependencies)]
 
 
 def test_photo_export_does_not_overwrite_a_file_created_during_encoding(tmp_path, monkeypatch):

@@ -10,10 +10,15 @@ de desempenho. O aplicativo não carrega esses arquivos para funcionar.
 | --- | --- | --- | --- |
 | Índices dos 21 landmarks da mão | [hand_landmarks.svg](hand_landmarks.svg) | [hand_landmarks.png](hand_landmarks.png) | [Guia completo](../GUIA_COMPLETO.md) |
 | Captura, inferência e três modos | [pipeline.svg](pipeline.svg) | [pipeline.png](pipeline.png) | [Arquitetura](../ARQUITETURA.md) e [guia completo](../GUIA_COMPLETO.md) |
+| Interface do PoseMatch | Renderização do aplicativo com pontos sintéticos | [posematch_preview.png](posematch_preview.png) | [Guia do quarto modo](../posematch/README.md) e README geral |
 
 Os SVGs preservam elementos vetoriais e textos para edição. Os PNGs são as versões
 usadas pelos links de imagem dos documentos. Mantenha os dois formatos coerentes
 ao corrigir um rótulo, índice, conexão ou etapa.
+
+A prévia do PoseMatch não tem um SVG correspondente: é uma composição produzida
+pela interface com geometria sintética do catálogo ilustrado. Ela mostra o layout
+e está identificada como sintética; não comprova detecção de uma webcam real.
 
 ## Atualizar um diagrama
 
