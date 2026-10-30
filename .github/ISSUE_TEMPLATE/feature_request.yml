@@ -1,0 +1,30 @@
+name: Propor uma melhoria
+description: Explique o objetivo e como verificar o resultado.
+title: "[Melhoria]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema ou necessidade
+      description: Que dificuldade esta melhoria resolve? Para quem?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Comportamento proposto
+      description: Descreva uma entrega pequena e verificável.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critério de conclusão
+      description: Como demonstrar que a melhoria funciona?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas, limitações e referências
+      description: Opcional. Inclua fontes quando depender de modelos ou bibliotecas externos.
