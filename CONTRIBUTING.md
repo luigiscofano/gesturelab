@@ -16,6 +16,7 @@ Para desenvolver no Windows, depois de criar `.venv`:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m ruff format --check .
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check .
 ```
@@ -23,6 +24,39 @@ Para desenvolver no Windows, depois de criar `.venv`:
 No macOS/Linux, substitua o executável por `.venv/bin/python`. Para trabalhar
 somente na lógica e na documentação sem instalar as bibliotecas de visão, siga
 a instalação mínima no [README dos testes](tests/README.md).
+
+## Estilo de código
+
+Use nomes em inglês para o código e português para mensagens e documentação.
+Os nomes devem expressar o domínio: prefira `timestamp_ms`, `reference_image` e
+`created_paths` a abreviações que exigem consultar outra função. Convenções
+conhecidas das bibliotecas, como `cv2` e `np`, continuam adequadas.
+
+- Mantenha cada função com uma responsabilidade reconhecível. Separe geometria,
+  estado, interface e acesso a arquivos quando essas partes mudam por motivos diferentes.
+- Extraia código repetido quando o contrato for o mesmo. Fluxos parecidos com
+  requisitos diferentes podem permanecer separados.
+- Prefira condições de saída claras a vários níveis de `if`. Crie uma classe
+  quando houver estado e invariantes a preservar, não apenas para agrupar funções.
+- Dê nomes a limites e índices que tenham significado no algoritmo. Mantenha
+  unidades nos nomes quando elas evitarem confusão.
+- Use anotações de tipos para esclarecer entradas, saídas e estruturas de dados.
+  Preserve os imports tardios das bibliotecas de visão.
+- Comente decisões e restrições que não ficam claras pelo código. Evite narrar
+  cada linha ou repetir o nome da função na docstring.
+- Nos testes, descreva o comportamento esperado, prepare apenas o cenário
+  necessário e mantenha as asserções próximas do resultado observado.
+
+Ruff define a formatação do projeto. Para aplicar o padrão antes de enviar uma mudança:
+
+```powershell
+.\.venv\Scripts\python.exe -m ruff format .
+.\.venv\Scripts\python.exe -m ruff check .
+```
+
+O CI confere a formatação e as regras de imports, sintaxe, simplificação e erros
+comuns configuradas em `pyproject.toml`. Esses checks ajudam a manter consistência;
+a revisão também deve conferir comportamento, responsabilidades e clareza do diff.
 
 ## Fluxo de uma mudança
 

@@ -7,9 +7,9 @@ from types import SimpleNamespace
 
 import pytest
 
-import app
+import hand_app
 from airwriting import AirWriter, writing_pose
-from app import update_airwriter
+from hand_app import update_airwriter
 
 
 def hand_points():
@@ -18,7 +18,7 @@ def hand_points():
     points[1:5] = [(90, 250), (60, 230), (40, 200), (20, 180)]
     points[5:9] = [(80, 220), (80, 160), (80, 115), (80, 70)]
     for start, x in ((9, 120), (13, 155), (17, 190)):
-        points[start:start + 4] = [(x, 220), (x, 175), (x - 10, 205), (x, 225)]
+        points[start : start + 4] = [(x, 220), (x, 175), (x - 10, 205), (x, 225)]
     return points
 
 
@@ -38,9 +38,13 @@ def test_index_pose_ignores_thumb():
 @pytest.mark.parametrize("angle,scale", [(90, 0.4), (180, 2.0), (-35, 1.2)])
 def test_pose_is_invariant_to_in_plane_rotation_translation_and_scale(angle, scale):
     radians = math.radians(angle)
-    points = [(scale * (x * math.cos(radians) - y * math.sin(radians)) + 900,
-               scale * (x * math.sin(radians) + y * math.cos(radians)) - 300)
-              for x, y in hand_points()]
+    points = [
+        (
+            scale * (x * math.cos(radians) - y * math.sin(radians)) + 900,
+            scale * (x * math.sin(radians) + y * math.cos(radians)) - 300,
+        )
+        for x, y in hand_points()
+    ]
     assert writing_pose(points)
 
 
@@ -214,9 +218,11 @@ def test_landmark_adapter_applies_display_mirroring_to_tip_and_export():
 @pytest.fixture
 def export_environment(tmp_path, monkeypatch):
     """Codificador substituído: valida arquivos e falhas, sem instalar OpenCV."""
-    monkeypatch.setattr(app, "ROOT", tmp_path)
-    monkeypatch.setattr(app, "datetime", SimpleNamespace(now=lambda: datetime(2026, 1, 2, 3, 4, 5)))
-    monkeypatch.setattr(app.uuid, "uuid4", lambda: SimpleNamespace(hex="0123456789abcdef"))
+    monkeypatch.setattr(hand_app, "ROOT", tmp_path)
+    monkeypatch.setattr(
+        hand_app, "datetime", SimpleNamespace(now=lambda: datetime(2026, 1, 2, 3, 4, 5))
+    )
+    monkeypatch.setattr(hand_app.uuid, "uuid4", lambda: SimpleNamespace(hex="0123456789abcdef"))
     writer = AirWriter(640, 480)
     args = SimpleNamespace(pen_width=5)
     cv2 = SimpleNamespace(imencode=lambda *args: (True, SimpleNamespace(tobytes=lambda: b"png")))
@@ -225,7 +231,7 @@ def export_environment(tmp_path, monkeypatch):
 
 
 def test_airwrite_export_preserves_json_metadata(export_environment):
-    png_path, json_path = app.save_airwriting(*export_environment)
+    png_path, json_path = hand_app.save_airwriting(*export_environment)
     assert png_path.read_bytes() == b"png"
     data = json.loads(json_path.read_text(encoding="utf-8"))
     assert data["frame_size"] == {"width": 640, "height": 480}
@@ -235,7 +241,8 @@ def test_airwrite_export_preserves_json_metadata(export_environment):
 
 
 def test_json_collision_preserves_existing_file_and_removes_new_png(
-    export_environment, tmp_path,
+    export_environment,
+    tmp_path,
 ):
     folder = tmp_path / "outputs"
     folder.mkdir()
@@ -243,14 +250,16 @@ def test_json_collision_preserves_existing_file_and_removes_new_png(
     existing.write_bytes(b"existing trajectories")
 
     with pytest.raises(FileExistsError):
-        app.save_airwriting(*export_environment)
+        hand_app.save_airwriting(*export_environment)
 
     assert list(folder.iterdir()) == [existing]
     assert existing.read_bytes() == b"existing trajectories"
 
 
 def test_failed_json_write_removes_both_partial_export_files(
-    export_environment, tmp_path, monkeypatch,
+    export_environment,
+    tmp_path,
+    monkeypatch,
 ):
     original_open = Path.open
 
@@ -258,15 +267,17 @@ def test_failed_json_write_removes_both_partial_export_files(
     def fail_json_write(path, mode="r", *args, **kwargs):
         with original_open(path, mode, *args, **kwargs) as output:
             if path.suffix == ".json" and mode.startswith("x"):
+
                 def write(data):
                     output.write(data[:5])
                     raise OSError("simulated disk full")
+
                 yield SimpleNamespace(write=write)
             else:
                 yield output
 
     monkeypatch.setattr(Path, "open", fail_json_write)
     with pytest.raises(OSError, match="simulated disk full"):
-        app.save_airwriting(*export_environment)
+        hand_app.save_airwriting(*export_environment)
 
     assert list((tmp_path / "outputs").iterdir()) == []

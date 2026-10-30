@@ -10,7 +10,7 @@ issues e pull requests. Ela não é necessária para executar a webcam localment
 
 | Arquivo | Finalidade |
 | --- | --- |
-| [workflows/ci.yml](workflows/ci.yml) | Análise de código, compilação, ajuda das CLIs e testes em Windows/Ubuntu |
+| [workflows/ci.yml](workflows/ci.yml) | Formatação, análise de código, compilação, ajuda das CLIs e testes em Windows/Ubuntu |
 | [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md) | Registrar problema, mudança, evidências e limitações |
 | [ISSUE_TEMPLATE/bug_report.yml](ISSUE_TEMPLATE/bug_report.yml) | Informar um erro reproduzível, o ambiente e o resultado esperado |
 | [ISSUE_TEMPLATE/feature_request.yml](ISSUE_TEMPLATE/feature_request.yml) | Propor uma melhoria com objetivo e critério de conclusão |
@@ -24,11 +24,12 @@ Cada execução usa Python 3.12 em dois runners: `ubuntu-latest` e `windows-late
 O job instala somente as versões fixas de pytest e Ruff especificadas no YAML e
 executa estas etapas:
 
-1. Ruff identifica erros estáticos da configuração em `pyproject.toml`.
-2. `compileall` verifica se os módulos, scripts e testes podem ser compilados.
-3. `--help` do aplicativo, downloader, diagnóstico e indexador de poses confirma que suas entradas
+1. `ruff format --check` confere a formatação de todos os arquivos Python.
+2. `ruff check` verifica imports, sintaxe, simplificações e erros comuns definidos em `pyproject.toml`.
+3. `compileall` verifica se os módulos, scripts e testes podem ser compilados.
+4. `--help` do aplicativo, downloader, diagnóstico e indexador de poses confirma que suas entradas
    funcionam sem importar as dependências de visão.
-4. pytest verifica a lógica determinística, incluindo os casos de regressão.
+5. pytest verifica a lógica determinística, incluindo os casos de regressão.
 
 O workflow tem limite de dez minutos por job. Uma nova execução da mesma
 referência cancela a anterior ainda em andamento; branches diferentes e os

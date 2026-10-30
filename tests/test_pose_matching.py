@@ -21,9 +21,18 @@ from pose_matching import (
 def landmarks(*, raised_left=False, raised_right=False):
     points = [{"x": 0.5, "y": 0.3, "visibility": 1.0, "presence": 1.0} for _ in range(33)]
     positions = {
-        11: (0.4, 0.3), 12: (0.6, 0.3), 13: (0.35, 0.45), 14: (0.65, 0.45),
-        15: (0.3, 0.6), 16: (0.7, 0.6), 23: (0.43, 0.55), 24: (0.57, 0.55),
-        25: (0.42, 0.72), 26: (0.58, 0.72), 27: (0.4, 0.9), 28: (0.6, 0.9),
+        11: (0.4, 0.3),
+        12: (0.6, 0.3),
+        13: (0.35, 0.45),
+        14: (0.65, 0.45),
+        15: (0.3, 0.6),
+        16: (0.7, 0.6),
+        23: (0.43, 0.55),
+        24: (0.57, 0.55),
+        25: (0.42, 0.72),
+        26: (0.58, 0.72),
+        27: (0.4, 0.9),
+        28: (0.6, 0.9),
     }
     if raised_left:
         positions.update({13: (0.35, 0.2), 15: (0.3, 0.05)})
@@ -35,13 +44,16 @@ def landmarks(*, raised_left=False, raised_right=False):
 
 
 def reference(identifier, points):
-    return PoseReference(identifier, identifier, Path(f"{identifier}.png"), extract_pose(points, 640, 480))
+    return PoseReference(
+        identifier, identifier, Path(f"{identifier}.png"), extract_pose(points, 640, 480)
+    )
 
 
 def test_scale_and_translation_do_not_change_nearest_pose():
     original = landmarks(raised_left=True)
-    transformed = [{**point, "x": point["x"] * 0.6 + 0.1, "y": point["y"] * 0.6 + 0.2}
-                   for point in original]
+    transformed = [
+        {**point, "x": point["x"] * 0.6 + 0.1, "y": point["y"] * 0.6 + 0.2} for point in original
+    ]
     query = extract_pose(transformed, 640, 480)
     matches = rank_matches(query, [reference("rest", landmarks()), reference("raised", original)])
     assert matches[0].reference.id == "raised"
@@ -77,14 +89,22 @@ def test_identical_symmetric_pose_prefers_unmirrored_display():
 def test_poor_matches_are_rejected_and_results_have_deterministic_top_k():
     query = extract_pose(landmarks(raised_left=True, raised_right=True), 640, 480)
     assert rank_matches(query, [reference("rest", landmarks())], max_distance=0.05) == []
-    refs = [reference(name, landmarks(raised_left=True, raised_right=True)) for name in ("b", "a", "c")]
+    refs = [
+        reference(name, landmarks(raised_left=True, raised_right=True)) for name in ("b", "a", "c")
+    ]
     assert [match.reference.id for match in rank_matches(query, refs, top_k=2)] == ["a", "b"]
     assert rank_matches(None, refs) == []
 
 
-@pytest.mark.parametrize("index,field,value", [
-    (11, "visibility", 0.1), (24, "presence", 0.1), (23, "x", math.nan), (12, "x", 1.1),
-])
+@pytest.mark.parametrize(
+    "index,field,value",
+    [
+        (11, "visibility", 0.1),
+        (24, "presence", 0.1),
+        (23, "x", math.nan),
+        (12, "x", 1.1),
+    ],
+)
 def test_missing_or_unreliable_torso_rejects_the_pose(index, field, value):
     points = landmarks()
     points[index][field] = value
@@ -122,11 +142,22 @@ def test_invalid_rank_options_are_reported(kwargs):
 
 def catalog_data(tmp_path):
     (tmp_path / "reference.png").write_bytes(b"image validation belongs to the renderer")
-    return {"schema_version": 1, "references": [{
-        "id": "rest", "title": "Em pé", "image": "reference.png", "width": 640, "height": 480,
-        "landmarks": landmarks(), "source": "Ilustração do projeto", "license": "MIT",
-        "credit": "GestureLab",
-    }]}
+    return {
+        "schema_version": 1,
+        "references": [
+            {
+                "id": "rest",
+                "title": "Em pé",
+                "image": "reference.png",
+                "width": 640,
+                "height": 480,
+                "landmarks": landmarks(),
+                "source": "Ilustração do projeto",
+                "license": "MIT",
+                "credit": "GestureLab",
+            }
+        ],
+    }
 
 
 def write_catalog(tmp_path, data):
@@ -144,7 +175,9 @@ def test_catalog_loads_portable_paths_and_preserves_attribution(tmp_path):
     assert refs[0].pose.joint_count == 12
 
 
-@pytest.mark.parametrize("image", ["../outside.png", "/tmp/outside.png", "C:/outside.png", "..\\outside.png"])
+@pytest.mark.parametrize(
+    "image", ["../outside.png", "/tmp/outside.png", "C:/outside.png", "..\\outside.png"]
+)
 def test_catalog_cannot_escape_its_directory(tmp_path, image):
     data = catalog_data(tmp_path)
     data["references"][0]["image"] = image

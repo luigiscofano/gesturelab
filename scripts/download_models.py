@@ -13,6 +13,8 @@ import urllib.request
 from pathlib import Path
 
 DEFAULT_DIRECTORY = Path(__file__).resolve().parents[1] / "models"
+CHUNK_SIZE_BYTES = 1024 * 1024
+DOWNLOAD_TIMEOUT_SECONDS = 60
 MODELS = {
     "hands": (
         "hand_landmarker.task",
@@ -35,30 +37,35 @@ MODELS = {
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+        for chunk in iter(lambda: stream.read(CHUNK_SIZE_BYTES), b""):
             digest.update(chunk)
     return digest.hexdigest()
 
 
 def download(name: str, directory: Path) -> None:
-    filename, url, expected = MODELS[name]
+    filename, url, expected_hash = MODELS[name]
     target = directory / filename
     if target.exists():
-        if sha256(target) != expected:
-            raise ValueError(f"Hash inesperado em {target}; mova esse arquivo antes de tentar novamente.")
+        if sha256(target) != expected_hash:
+            raise ValueError(
+                f"Hash inesperado em {target}; mova esse arquivo antes de tentar novamente."
+            )
         print(f"OK (já existe): {filename}")
         return
     temporary = directory / (filename + ".part")
     try:
         request = urllib.request.Request(url, headers={"User-Agent": "GestureLab/0.1"})
-        with urllib.request.urlopen(request, timeout=60) as response, temporary.open("wb") as output:
-            while chunk := response.read(1024 * 1024):
+        with (
+            urllib.request.urlopen(request, timeout=DOWNLOAD_TIMEOUT_SECONDS) as response,
+            temporary.open("wb") as output,
+        ):
+            while chunk := response.read(CHUNK_SIZE_BYTES):
                 output.write(chunk)
-        actual = sha256(temporary)
-        if actual != expected:
-            raise ValueError(f"SHA-256 não confere para {filename}: {actual}")
+        actual_hash = sha256(temporary)
+        if actual_hash != expected_hash:
+            raise ValueError(f"SHA-256 não confere para {filename}: {actual_hash}")
         temporary.replace(target)
-        print(f"OK: {filename} ({target.stat().st_size} bytes)\nSHA-256: {actual}")
+        print(f"OK: {filename} ({target.stat().st_size} bytes)\nSHA-256: {actual_hash}")
     finally:
         temporary.unlink(missing_ok=True)
 
@@ -70,7 +77,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     args.directory.mkdir(parents=True, exist_ok=True)
     try:
-        for name in ([args.only] if args.only else MODELS):
+        selected_models = [args.only] if args.only else MODELS
+        for name in selected_models:
             download(name, args.directory)
     except (OSError, ValueError, urllib.error.URLError) as exc:
         print(f"Falha no download: {exc}", file=sys.stderr)

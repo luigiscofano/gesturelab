@@ -5,20 +5,27 @@ from types import SimpleNamespace
 import pytest
 
 import pose_match_app as runtime
+from vision_runtime import VisionDependencies
 
 
 def match(identifier="pose-a", *, distance=0.15, mirrored=False):
     reference = SimpleNamespace(
-        id=identifier, title="Pose de exemplo", image_path="example.png",
-        source="catálogo de teste", license="teste",
+        id=identifier,
+        title="Pose de exemplo",
+        image_path="example.png",
+        source="catálogo de teste",
+        license="teste",
     )
-    return SimpleNamespace(reference=reference, distance=distance, mirrored=mirrored, joint_count=12)
+    return SimpleNamespace(
+        reference=reference, distance=distance, mirrored=mirrored, joint_count=12
+    )
 
 
 @pytest.mark.parametrize("count", [0, 2])
 def test_absent_or_multiple_people_do_not_reuse_a_match(count, monkeypatch):
     def unexpected(*args, **kwargs):
         raise AssertionError("Não deve escolher uma pessoa pela posição na lista.")
+
     monkeypatch.setattr(runtime, "extract_pose", unexpected)
     result = SimpleNamespace(pose_landmarks=[object()] * count)
     search = runtime.search_result(result, 640, 480, [], 0.8)
@@ -29,7 +36,9 @@ def test_absent_or_multiple_people_do_not_reuse_a_match(count, monkeypatch):
 
 def test_low_visibility_does_not_run_retrieval(monkeypatch):
     monkeypatch.setattr(runtime, "extract_pose", lambda *args: None)
-    monkeypatch.setattr(runtime, "rank_matches", lambda *args, **kwargs: pytest.fail("busca indevida"))
+    monkeypatch.setattr(
+        runtime, "rank_matches", lambda *args, **kwargs: pytest.fail("busca indevida")
+    )
     search = runtime.search_result(SimpleNamespace(pose_landmarks=[[1]]), 640, 480, [], 0.8)
     assert search.pose_count == 1
     assert "MOSTRE O CORPO" in search.status
@@ -40,8 +49,11 @@ def test_search_passes_original_aspect_and_exact_zero_threshold(monkeypatch):
     calls = []
     query, landmarks, references = object(), [object()], [object()]
     candidate = match()
-    monkeypatch.setattr(runtime, "extract_pose",
-                        lambda points, width, height: calls.append((points, width, height)) or query)
+    monkeypatch.setattr(
+        runtime,
+        "extract_pose",
+        lambda points, width, height: calls.append((points, width, height)) or query,
+    )
 
     def rank(actual_query, actual_refs, **kwargs):
         assert actual_query is query
@@ -50,8 +62,9 @@ def test_search_passes_original_aspect_and_exact_zero_threshold(monkeypatch):
         return [candidate]
 
     monkeypatch.setattr(runtime, "rank_matches", rank)
-    search = runtime.search_result(SimpleNamespace(pose_landmarks=[landmarks]),
-                                   1280, 720, references, 0)
+    search = runtime.search_result(
+        SimpleNamespace(pose_landmarks=[landmarks]), 1280, 720, references, 0
+    )
     assert calls == [(landmarks, 1280, 720)]
     assert search.candidates == (candidate,)
 
@@ -93,11 +106,19 @@ def test_tracking_gap_requires_new_confirmation():
         confirmation.update(match(), 1000)
 
 
-@pytest.mark.parametrize("camera_mirror,match_mirror,display_flip", [
-    (False, False, False), (False, True, True), (True, False, True), (True, True, False),
-])
+@pytest.mark.parametrize(
+    "camera_mirror,match_mirror,display_flip",
+    [
+        (False, False, False),
+        (False, True, True),
+        (True, False, True),
+        (True, True, False),
+    ],
+)
 def test_reference_orientation_tracks_display_and_match_mirroring(
-    camera_mirror, match_mirror, display_flip,
+    camera_mirror,
+    match_mirror,
+    display_flip,
 ):
     candidate = match(mirrored=match_mirror)
     search = runtime.PoseSearch(1, "IMAGEM ENCONTRADA", (candidate,))
@@ -120,7 +141,9 @@ def test_body_task_detects_two_people_and_uses_correct_mode(tmp_path, image, mod
         PoseLandmarkerOptions=lambda **kwargs: options.append(kwargs) or kwargs,
         PoseLandmarker=SimpleNamespace(create_from_options=lambda value: task),
     )
-    assert runtime.create_pose_task(SimpleNamespace(model=model, image=image), python, vision) is task
+    assert (
+        runtime.create_pose_task(SimpleNamespace(model=model, image=image), python, vision) is task
+    )
     assert options[0]["running_mode"] == mode
     assert options[0]["num_poses"] == 2
     assert options[0]["output_segmentation_masks"] is False
@@ -135,12 +158,18 @@ def test_video_inference_receives_original_frame_and_timestamp():
         assert conversion == "BGR2RGB"
         return rgb
 
-    deps = (
-        SimpleNamespace(cvtColor=convert, COLOR_BGR2RGB="BGR2RGB"),
-        SimpleNamespace(ImageFormat=SimpleNamespace(SRGB="RGB"), Image=lambda **kwargs: kwargs),
-        SimpleNamespace(ascontiguousarray=lambda data: data), None, None,
+    deps = VisionDependencies(
+        cv2=SimpleNamespace(cvtColor=convert, COLOR_BGR2RGB="BGR2RGB"),
+        mediapipe=SimpleNamespace(
+            ImageFormat=SimpleNamespace(SRGB="RGB"), Image=lambda **kwargs: kwargs
+        ),
+        numpy=SimpleNamespace(ascontiguousarray=lambda data: data),
+        tasks=None,
+        vision=None,
     )
-    task = SimpleNamespace(detect_for_video=lambda image, timestamp: seen.append((image, timestamp)))
+    task = SimpleNamespace(
+        detect_for_video=lambda image, timestamp: seen.append((image, timestamp))
+    )
     runtime.process_pose_frame(task, frame, 42, deps)
     assert seen == [({"image_format": "RGB", "data": rgb}, 42)]
 
@@ -166,10 +195,14 @@ class FakeCapture:
 
 
 def camera_deps(capture):
-    return (
-        SimpleNamespace(VideoCapture=lambda index: capture,
-                        CAP_PROP_FRAME_WIDTH=1, CAP_PROP_FRAME_HEIGHT=2),
-        None, None, None, None,
+    return VisionDependencies(
+        cv2=SimpleNamespace(
+            VideoCapture=lambda index: capture, CAP_PROP_FRAME_WIDTH=1, CAP_PROP_FRAME_HEIGHT=2
+        ),
+        mediapipe=None,
+        numpy=None,
+        tasks=None,
+        vision=None,
     )
 
 
@@ -206,19 +239,21 @@ def test_photo_cannot_overwrite_the_input_even_before_processing(tmp_path):
     path = tmp_path / "photo.png"
     args = SimpleNamespace(image=path, output=path)
     with pytest.raises(ValueError, match="imagem original"):
-        runtime.run_pose_image(None, args, (None,) * 5, [])
+        runtime.run_pose_image(None, args, VisionDependencies(None, None, None, None, None), [])
 
 
 def test_pose_comparison_export_preserves_existing_output(tmp_path, monkeypatch):
     output = tmp_path / "comparison.png"
     output.write_bytes(b"existing output")
-    args = SimpleNamespace(image=tmp_path / "photo.png", output=output,
-                           mirror=True, match_threshold=0.8)
+    args = SimpleNamespace(
+        image=tmp_path / "photo.png", output=output, mirror=True, match_threshold=0.8
+    )
     monkeypatch.setattr(runtime, "read_image", lambda *args: SimpleNamespace(shape=(2, 2, 3)))
-    monkeypatch.setattr(runtime, "process_pose_frame",
-                        lambda *args: SimpleNamespace(pose_landmarks=[]))
+    monkeypatch.setattr(
+        runtime, "process_pose_frame", lambda *args: SimpleNamespace(pose_landmarks=[])
+    )
     monkeypatch.setattr(runtime, "draw_pose_match", lambda *args: (object(), {}))
     cv2 = SimpleNamespace(imencode=lambda *args: (True, SimpleNamespace(tobytes=lambda: b"new")))
     with pytest.raises(FileExistsError):
-        runtime.run_pose_image(None, args, (cv2, None, None, None, None), [])
+        runtime.run_pose_image(None, args, VisionDependencies(cv2, None, None, None, None), [])
     assert output.read_bytes() == b"existing output"

@@ -37,7 +37,7 @@ figuras. Editá-las não exige alterar as dependências da aplicação.
 
 O mapa da mão ajuda a localizar a ponta do indicador, índice 8, e os demais pontos.
 As conexões desenhadas pela aplicação estão definidas em [core.py](../../core.py).
-O fluxo dos modos é implementado em [app.py](../../app.py) e o estado da caneta em
+A entrada dos modos está em [app.py](../../app.py); a execução das mãos e da escrita fica em [hand_app.py](../../hand_app.py), e o estado da caneta em
 [airwriting.py](../../airwriting.py).
 
 O diagrama de fluxo resume a arquitetura. As restrições de cada modo, como a

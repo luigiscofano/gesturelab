@@ -13,6 +13,7 @@ def installed_versions(monkeypatch, versions):
         if name not in versions:
             raise metadata.PackageNotFoundError(name)
         return versions[name]
+
     monkeypatch.setattr(environment.metadata, "version", version)
 
 
@@ -22,15 +23,17 @@ def test_missing_mismatched_and_matching_packages_are_distinguished(monkeypatch)
         {"numpy": "2.1", "mediapipe": "1.2", "opencv-contrib-python": "5.0"}
     )
     assert [(check.name, check.passed) for check in checks] == [
-        ("numpy", False), ("mediapipe", True), ("opencv-contrib-python", False)
+        ("numpy", False),
+        ("mediapipe", True),
+        ("opencv-contrib-python", False),
     ]
     assert "ausente" in checks[-1].message
 
 
 def test_opencv_conflict_is_rejected_even_when_requested_version_matches(monkeypatch):
-    installed_versions(monkeypatch, {
-        "opencv-contrib-python": "5.0", "opencv-python-headless": "5.0"
-    })
+    installed_versions(
+        monkeypatch, {"opencv-contrib-python": "5.0", "opencv-python-headless": "5.0"}
+    )
     checks = environment.check_dependencies({"opencv-contrib-python": "5.0"})
     assert checks[0].passed
     assert not checks[1].passed
@@ -55,10 +58,14 @@ def test_pinned_requirements_allow_comments_but_reject_silent_skips(tmp_path):
 def test_missing_and_corrupt_models_fail_without_modifying_files(monkeypatch, tmp_path):
     content = b"modelo de teste"
     expected = hashlib.sha256(content).hexdigest()
-    monkeypatch.setattr(environment, "MODELS", {
-        "hands": ("hands.task", "unused", expected),
-        "gestures": ("gestures.task", "unused", expected),
-    })
+    monkeypatch.setattr(
+        environment,
+        "MODELS",
+        {
+            "hands": ("hands.task", "unused", expected),
+            "gestures": ("gestures.task", "unused", expected),
+        },
+    )
     corrupt = tmp_path / "hands.task"
     corrupt.write_bytes(b"corrompido")
     checks = environment.check_models("all", tmp_path)
@@ -71,10 +78,14 @@ def test_missing_and_corrupt_models_fail_without_modifying_files(monkeypatch, tm
 
 def test_model_selection_checks_only_requested_file(monkeypatch, tmp_path):
     content = b"modelo de teste"
-    monkeypatch.setattr(environment, "MODELS", {
-        "hands": ("hands.task", "unused", hashlib.sha256(content).hexdigest()),
-        "gestures": ("missing.task", "unused", "unimportant"),
-    })
+    monkeypatch.setattr(
+        environment,
+        "MODELS",
+        {
+            "hands": ("hands.task", "unused", hashlib.sha256(content).hexdigest()),
+            "gestures": ("missing.task", "unused", "unimportant"),
+        },
+    )
     (tmp_path / "hands.task").write_bytes(content)
     checks = environment.check_models("hands", tmp_path)
     assert len(checks) == 1
@@ -119,7 +130,10 @@ def test_cli_routes_requested_import_and_model_checks(monkeypatch, tmp_path):
     installed_versions(monkeypatch, {})
     calls = []
     monkeypatch.setattr(environment, "check_imports", lambda: calls.append("imports") or [])
-    monkeypatch.setattr(environment, "check_models",
-                        lambda selection, directory: calls.append((selection, directory)) or [])
+    monkeypatch.setattr(
+        environment,
+        "check_models",
+        lambda selection, directory: calls.append((selection, directory)) or [],
+    )
     assert environment.main(["--imports", "--models", "all", "--directory", str(tmp_path)]) == 0
     assert calls == ["imports", ("all", tmp_path)]
