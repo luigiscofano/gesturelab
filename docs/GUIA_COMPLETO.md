@@ -592,7 +592,7 @@ Explique sua autoria com precisão: o detector visual é fornecido pelo MediaPip
 .\.venv\Scripts\python.exe -m ruff check .
 ```
 
-Essas verificações cobrem funções determinísticas, coordenadas e argumentos da aplicação. Elas não substituem a webcam real nem a avaliação de reconhecimento. O workflow de GitHub Actions só executará no seu repositório após a publicação; uma configuração presente não equivale a uma execução aprovada.
+Essas verificações cobrem funções determinísticas, coordenadas e argumentos da aplicação. Elas não substituem a webcam real nem a avaliação de reconhecimento. O projeto foi publicado em [luigiscofano/gesturelab](https://github.com/luigiscofano/gesturelab), e a [primeira execução do GitHub Actions](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460) foi aprovada em Windows e Linux em 30/10/2026. Consulte o badge do README para o estado atual.
 
 ## 15. Colocar o projeto no GitHub
 

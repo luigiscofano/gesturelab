@@ -73,12 +73,25 @@ Use a própria gravação de Luigi para a demonstração pública do portfólio.
    espelhamento no driver antes de entregar o frame.
 4. Duas mãos simultâneas, movimento, oclusão, iluminação e gestos semelhantes.
 5. FPS e latência no equipamento de destino, documentando resolução e hardware.
-6. Execução do workflow no repositório GitHub. O YAML foi fornecido; nenhuma
-   execução de GitHub Actions foi observada durante esta preparação.
 
 Os testes locais de visão não fizeram benchmark de tempo real nem avaliariam
 generalização com uma única foto. Registre esses resultados separadamente à
 medida que o projeto evoluir.
+
+## Publicação e GitHub Actions
+
+O projeto foi publicado em [luigiscofano/gesturelab](https://github.com/luigiscofano/gesturelab)
+em 30/10/2026. A [primeira execução do workflow](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460),
+referente ao commit `2157bc78d0e449e192fa418d90cb43ecf38c50cb`, terminou com sucesso.
+
+| Ambiente do CI | Análise de código | Testes determinísticos |
+| --- | --- | --- |
+| Ubuntu, Python 3.12 | Aprovada | Aprovados |
+| Windows, Python 3.12 | Aprovada | Aprovados |
+
+O CI instala pytest e Ruff e verifica a lógica sem webcam. Ele não instala o
+conjunto completo de bibliotecas de visão nem valida a janela ou a câmera física.
+O badge do README acompanha as execuções seguintes.
 
 ## Atualização com escrita no ar
 

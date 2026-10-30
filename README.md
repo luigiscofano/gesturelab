@@ -1,5 +1,7 @@
 # GestureLab
 
+[![Python checks](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml/badge.svg)](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml)
+
 Protótipo em Python para detectar **21 pontos por mão**, desenhar conexões sobre a
 webcam, dar nome a gestos conhecidos e **escrever no ar com o indicador**. Usa modelos prontos do
 MediaPipe Tasks; o projeto não treina um detector do zero.
@@ -182,8 +184,9 @@ Gesture Recognizer, que já retorna landmarks: não roda dois modelos em paralel
 
 Os testes verificam coordenadas espelhadas, limites da imagem, rejeição de gestos,
 distinção entre classes conhecidas e desconhecidas, timestamps e restrições da CLI.
-Não medem a qualidade do modelo. O workflow de CI está configurado, mas seu badge
-só deve ser adicionado ao README depois de executar no seu GitHub.
+Não medem a qualidade do modelo. O workflow executa a análise de código e os testes
+em Windows e Linux. A [primeira execução no GitHub Actions](https://github.com/luigiscofano/gesturelab/actions/runs/41074869460)
+foi aprovada nos dois sistemas; o badge acima acompanha o estado atual.
 
 `requirements.txt` fixa dependências diretas. Para registrar também o ambiente
 completo depois de funcionar na sua máquina:
