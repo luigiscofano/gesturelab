@@ -1,5 +1,13 @@
 # Catálogo de imagens para poses parecidas
 
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** referências locais e geometria das poses; esta área não é uma busca de imagens na internet.
+
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** referências locais e geometria das poses; esta área não é uma busca de imagens na internet.
+
 [Início](../README.md) · [Documentação](../docs/README.md) · [Modo posematch](../docs/posematch/README.md)
 
 O catálogo inicial contém **12 ilustrações originais de personagens articulados**,
@@ -120,3 +128,11 @@ anatômica. A comparação não reconhece a identidade das pessoas.
 ---
 
 **Próxima leitura:** [executar o PoseMatch](../docs/posematch/README.md), [indexador de fotos](../scripts/build_pose_catalog.py) e [avaliação](../docs/AVALIACAO.md).
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `pose_gallery/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `pose_gallery/`.

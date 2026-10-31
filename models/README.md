@@ -1,5 +1,13 @@
 # Modelos de visão computacional
 
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** arquivos de modelo e instruções de obtenção; modelos externos mantêm suas licenças e requisitos.
+
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** arquivos de modelo e instruções de obtenção; modelos externos mantêm suas licenças e requisitos.
+
 [Início](../README.md) · [Documentação](../docs/README.md) · [Scripts](../scripts/README.md)
 
 Esta pasta recebe os modelos **pré-treinados do MediaPipe** usados na inferência.
@@ -96,3 +104,11 @@ GestureLab. Consulte as referências oficiais antes de redistribuir os pesos:
 ---
 
 **Próxima leitura:** [diagnóstico do ambiente](../scripts/README.md), [como usar os modelos](../docs/USO.md) e [créditos](../THIRD_PARTY_NOTICES.md).
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `models/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `models/`.

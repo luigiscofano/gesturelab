@@ -1,5 +1,13 @@
 # Testes do GestureLab
 
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** testes e seus critérios de aprovação; um resultado deve ser interpretado dentro da cobertura documentada.
+
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** testes e seus critérios de aprovação; um resultado deve ser interpretado dentro da cobertura documentada.
+
 [Início](../README.md) · [Documentação](../docs/README.md) · [Validação realizada](../docs/VALIDACAO.md)
 
 Esta pasta verifica contratos da aplicação: conversão de coordenadas, rejeição de
@@ -119,3 +127,11 @@ regressões novas; quantidade não substitui um comportamento bem verificado.
 ---
 
 **Próxima leitura:** [automação do GitHub](../.github/AUTOMACAO.md), [como contribuir](../CONTRIBUTING.md) e [plano de avaliação](../docs/AVALIACAO.md).
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `tests/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `tests/`.

@@ -1,5 +1,13 @@
 # Recursos visuais do GestureLab
 
+[Início](../../README.md) · [Como executar](../../README.md#como-executar) · [Aprendizagem](../../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../../README.md#estado-atual)
+
+> **Nesta área:** figuras e evidências visuais; imagens ilustrativas e resultados de execução devem ser distinguidos conforme a legenda.
+
+[Início](../../README.md) · [Como executar](../../README.md#como-executar) · [Aprendizagem](../../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../../README.md#estado-atual)
+
+> **Nesta área:** figuras e evidências visuais; imagens ilustrativas e resultados de execução devem ser distinguidos conforme a legenda.
+
 [Início](../../README.md) · [Documentação](../README.md) · [Arquitetura](../ARQUITETURA.md)
 
 Esta pasta reúne a capa e as ilustrações explicativas usadas nos guias do GestureLab.
@@ -59,3 +67,10 @@ exigência de uma sequência de frames no modo `airwrite`, estão descritas na
 
 Voltar ao [índice da documentação](../README.md) ou ao [README do projeto](../../README.md).
 
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `docs/assets/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `docs/assets/`.

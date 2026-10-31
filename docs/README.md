@@ -1,5 +1,13 @@
 # Central de documentação
 
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** guias de arquitetura, reprodução, decisões e evidências; os exemplos executáveis e o estado consolidado estão na raiz.
+
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** guias de arquitetura, reprodução, decisões e evidências; os exemplos executáveis e o estado consolidado estão na raiz.
+
 [Início do projeto](../README.md) · [Instalação](INSTALACAO.md) ·
 [Como usar](USO.md) · [Solução de problemas](SOLUCAO_DE_PROBLEMAS.md)
 
@@ -93,3 +101,10 @@ principal deve continuar sendo uma entrada curta para esses caminhos.
 [Voltar ao projeto](../README.md) · [Mapa do projeto](MAPA_DO_PROJETO.md) ·
 [Licença](../LICENSE) · [Créditos](../THIRD_PARTY_NOTICES.md)
 
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `docs/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `docs/`.

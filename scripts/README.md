@@ -1,5 +1,13 @@
 # Scripts de preparação e diagnóstico
 
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** ferramentas de reprodução e verificação, executadas a partir da raiz conforme as dependências do projeto.
+
+[Início](../README.md) · [Como executar](../README.md#como-executar) · [Aprendizagem](../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../README.md#estado-atual)
+
+> **Nesta área:** ferramentas de reprodução e verificação, executadas a partir da raiz conforme as dependências do projeto.
+
 [Início](../README.md) · [Documentação](../docs/README.md) · [Instalação](../docs/INSTALACAO.md)
 
 Execute os comandos abaixo na pasta que contém `app.py` e `requirements.txt`.
@@ -160,3 +168,11 @@ limitações, e o [guia do modo](../docs/posematch/README.md) para execução e 
 ---
 
 **Próxima leitura:** [usar os quatro modos](../docs/USO.md), [resolver problemas](../docs/SOLUCAO_DE_PROBLEMAS.md) e [origem dos modelos](../models/README.md).
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `scripts/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `scripts/`.

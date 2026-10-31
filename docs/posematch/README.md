@@ -1,5 +1,13 @@
 # PoseMatch — encontrar uma imagem com pose parecida
 
+[Início](../../README.md) · [Como executar](../../README.md#como-executar) · [Aprendizagem](../../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../../README.md#estado-atual)
+
+> **Nesta área:** conteúdo da área “PoseMatch — encontrar uma imagem com pose parecida” dentro de GestureLab · Mãos, gestos, escrita no ar e poses; use o guia inicial para localizar a execução e as relações entre módulos.
+
+[Início](../../README.md) · [Como executar](../../README.md#como-executar) · [Aprendizagem](../../README.md#o-que-desenvolvi-e-aprendi) · [Estado atual](../../README.md#estado-atual)
+
+> **Nesta área:** conteúdo da área “PoseMatch — encontrar uma imagem com pose parecida” dentro de GestureLab · Mãos, gestos, escrita no ar e poses; use o guia inicial para localizar a execução e as relações entre módulos.
+
 [Início](../../README.md) · [Documentação](../README.md) · [Catálogo de poses](../../pose_gallery/README.md)
 
 O modo `posematch` estima a pose corporal de uma pessoa, compara sua geometria
@@ -183,3 +191,11 @@ mantendo uma avaliação final separada.
 ---
 
 **Próxima leitura:** [montar um catálogo](../../pose_gallery/README.md), [resolver problemas](../SOLUCAO_DE_PROBLEMAS.md) e [entender os módulos](../MAPA_DO_PROJETO.md).
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `docs/posematch/`.
+
+---
+
+**Projeto:** [GestureLab · Mãos, gestos, escrita no ar e poses](../../README.md). Consulte a raiz para os requisitos e o primeiro comando; este guia aprofunda a área `docs/posematch/`.
