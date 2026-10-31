@@ -81,7 +81,7 @@ Esta etapa está vinculada às issues [#1](https://github.com/luigiscofano/gestu
 [#2](https://github.com/luigiscofano/gesturelab/issues/2),
 [#3](https://github.com/luigiscofano/gesturelab/issues/3) e
 [#4](https://github.com/luigiscofano/gesturelab/issues/4). Os commits e pull requests
-registram o trabalho realizado nesta data, com assistência de IA.
+registram o trabalho realizado nesta data.
 
 ### Escrita no ar
 

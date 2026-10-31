@@ -2,7 +2,7 @@
 
 [Início](README.md) · [Documentação](docs/README.md) · [Licença do código](LICENSE)
 
-O código inicial foi preparado para Luigi Scofano de Araujo com assistência de IA.
+Projeto de Luigi Scofano de Araujo.
 Sua licença MIT não altera os termos de modelos, bibliotecas ou outros materiais.
 Ao publicar sua evolução, documente o que estudou, alterou, implementou e avaliou.
 

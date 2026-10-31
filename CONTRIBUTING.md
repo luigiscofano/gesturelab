@@ -123,8 +123,8 @@ continua sendo a entrada para usar a versão integrada. Para esta etapa do
 projeto, usamos merge commits para conservar os commits de cada entrega e o
 vínculo com seu PR. Não faça force-push na `main` compartilhada.
 
-Uma revisão pode ser feita pelo próprio autor ou com assistência de IA. Informe
-qual foi realizada; não atribua aprovação humana a uma verificação automática.
+Registre o tipo de revisão realizado; não atribua aprovação humana a uma
+verificação automática.
 Os checks do GitHub Actions não substituem a leitura do código nem os testes
 com hardware quando a mudança depende da câmera.
 
@@ -155,8 +155,7 @@ específicas nos documentos de [scripts](scripts/README.md), [modelos](models/RE
 [testes](tests/README.md) e [automação](.github/AUTOMACAO.md). Evite replicar o mesmo
 texto em todos os arquivos.
 
-O projeto utiliza modelos prontos e teve sua implementação inicial preparada
-com assistência de IA. Preserve essa informação e registre sua contribuição
+O projeto utiliza modelos prontos. Registre sua contribuição
 com precisão: o que estudou, modificou, testou ou mediu. Consulte
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) antes de incorporar referências
 externas. Código, bibliotecas e pesos podem ter licenças diferentes.

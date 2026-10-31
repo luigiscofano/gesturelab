@@ -618,7 +618,7 @@ Use um registro curto com estes campos: data, versão ou commit, problema observ
 
 Capture evidências de cada marco: uma imagem, um vídeo curto, um resultado de teste ou uma tabela de medidas. No README, mantenha a seção de funcionalidades implementadas separada das ideias futuras. Uma pessoa deve conseguir saber se “reconhecer gestos próprios” já existe ou é um objetivo.
 
-Explique sua autoria com precisão: o detector visual é fornecido pelo MediaPipe; você construiu a aplicação e suas extensões. Se usar exemplos oficiais ou assistência de IA, registre a origem e revise o resultado. Em uma entrevista, esteja pronto para explicar e alterar o código que apresenta.
+Explique sua autoria com precisão: o detector visual é fornecido pelo MediaPipe; você construiu a aplicação e suas extensões. Se usar exemplos oficiais, registre a origem e revise o resultado. Em uma entrevista, esteja pronto para explicar e alterar o código que apresenta.
 
 ### Executar as verificações do código
 

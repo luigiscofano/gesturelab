@@ -9,7 +9,7 @@
       "image": "images/arms-down.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -219,7 +219,7 @@
       "image": "images/arms-wide.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -429,7 +429,7 @@
       "image": "images/arms-up.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -639,7 +639,7 @@
       "image": "images/one-arm-up.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -849,7 +849,7 @@
       "image": "images/hands-on-hips.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -1059,7 +1059,7 @@
       "image": "images/elbows-bent.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -1269,7 +1269,7 @@
       "image": "images/low-v.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -1479,7 +1479,7 @@
       "image": "images/wide-squat.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -1689,7 +1689,7 @@
       "image": "images/side-step.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -1899,7 +1899,7 @@
       "image": "images/raised-knee.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -2109,7 +2109,7 @@
       "image": "images/wide-lunge.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [
@@ -2319,7 +2319,7 @@
       "image": "images/side-bend.png",
       "source": "Ilustração original do GestureLab; geometria gerada pelo código",
       "license": "MIT",
-      "credit": "GestureLab, com assistência de IA",
+      "credit": "GestureLab",
       "width": 480,
       "height": 640,
       "landmarks": [

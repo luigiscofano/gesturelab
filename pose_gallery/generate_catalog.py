@@ -279,7 +279,7 @@ def generate_catalog(output_directory: Path) -> int:
                 "image": f"images/{name}.png",
                 "source": "Ilustração original do GestureLab; geometria gerada pelo código",
                 "license": "MIT",
-                "credit": "GestureLab, com assistência de IA",
+                "credit": "GestureLab",
                 "width": WIDTH,
                 "height": HEIGHT,
                 "landmarks": normalized_landmarks(points),

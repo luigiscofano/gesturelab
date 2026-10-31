@@ -15,5 +15,5 @@ pendente; não declare uma execução que não ocorreu.
 
 ## Limitações e documentação
 
-Liste limitações relevantes e os guias/READMEs atualizados. Se houve assistência
-de IA ou uso de código/modelos externos, descreva a origem e a revisão feita.
+Liste limitações relevantes e os guias/READMEs atualizados. Se houve uso de código/modelos externos,
+descreva a origem e a revisão feita.

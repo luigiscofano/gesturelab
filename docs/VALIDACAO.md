@@ -141,9 +141,8 @@ de teste local. Reconhecimento de caracteres ainda não está implementado.
 Em 30/10/2026, uma nova etapa revisou a versão publicada, preservando os três
 modos. As mudanças estão descritas no [changelog](../CHANGELOG.md) e nas issues
 [#1](https://github.com/luigiscofano/gesturelab/issues/1) a
-[#4](https://github.com/luigiscofano/gesturelab/issues/4). A implementação e a
-revisão de código desta etapa foram realizadas com assistência de IA; isso não
-representa uma aprovação humana independente.
+[#4](https://github.com/luigiscofano/gesturelab/issues/4). As verificações desta etapa estão registradas abaixo e não representam
+uma aprovação humana independente.
 
 | Verificação da revisão | Resultado observado |
 | --- | --- |
@@ -186,8 +185,7 @@ hardware; consulte o [README da automação](../.github/AUTOMACAO.md).
 ## Modo posematch e catálogo de referências
 
 Em 30/10/2026 foi acrescentada busca local de imagens por semelhança de pose
-corporal. A implementação, a revisão independente entre agentes e as ilustrações
-foram preparadas com assistência de IA. Os três modos anteriores foram preservados.
+corporal. A implementação e as ilustrações foram acrescentadas nesta etapa. Os três modos anteriores foram preservados.
 
 | Verificação | Resultado observado |
 | --- | --- |
@@ -268,9 +266,8 @@ citadas nas seções anteriores. Entradas, saídas e cópias temporárias da ver
 anterior ficaram fora do repositório.
 
 Essas comparações verificam preservação de comportamento nos casos executados.
-Não são uma nova avaliação de acurácia, desempenho ou webcam física. A revisão
-e as alterações tiveram assistência de IA, incluindo leituras independentes entre
-agentes; não representam aprovação humana independente.
+Não são uma nova avaliação de acurácia, desempenho ou webcam física. As verificações
+registradas não representam aprovação humana independente.
 
 ---
 

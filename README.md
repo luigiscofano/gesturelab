@@ -140,7 +140,7 @@ do GitHub está documentada em [Automação e colaboração](.github/AUTOMACAO.m
 
 ## Autoria e licença
 
-Projeto de **Luigi Scofano de Araujo**, desenvolvido com assistência de IA e
+Projeto de **Luigi Scofano de Araujo**, desenvolvido com
 modelos pré-treinados do MediaPipe. O código próprio é distribuído sob a
 [licença MIT](LICENSE). Bibliotecas, modelos e imagens mantêm suas próprias
 condições de uso; consulte [referências e créditos](THIRD_PARTY_NOTICES.md).

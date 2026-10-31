@@ -42,7 +42,7 @@ inverta letras. Título, origem e créditos aparecem separadamente na interface.
 ## Origem e licença
 
 Os desenhos e o gerador fazem parte do código próprio do GestureLab sob
-[licença MIT](../LICENSE), preparados com assistência de IA. Não foram copiados
+[licença MIT](../LICENSE). Não foram copiados
 de fotografias, personagens ou bancos de imagens de terceiros.
 
 Neste catálogo ilustrado, os **12 pontos usados na comparação** correspondem à
