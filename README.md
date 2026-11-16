@@ -1,12 +1,14 @@
 # GestureLab · Mãos, gestos, escrita no ar e poses
 
+[![Marca oficial do GestureLab](docs/marca/gesturelab-fundo-claro.png)](docs/marca/README.md)
+
 > Laboratório de visão computacional em Python: quatro modos independentes para explorar mãos, gestos, desenho no ar e busca de imagens por semelhança de pose corporal.
 
 ![Visão geral de GestureLab · Mãos, gestos, escrita no ar e poses](docs/assets/gesturelab-banner.svg)
 
 [![Verificação](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/luigiscofano/gesturelab/actions/workflows/ci.yml)
 
-[O que faz](#o-que-este-projeto-faz) · [Módulos](#funcionalidades-e-módulos) · [Executar](#como-executar) · [Aprendizagem](#o-que-desenvolvi-e-aprendi) · [Estado atual](#estado-atual) · [Documentação](#documentação-e-navegação)
+[O que faz](#o-que-este-projeto-faz) · [Módulos](#funcionalidades-e-módulos) · [Executar](#como-executar) · [Aprendizagem](#o-que-desenvolvi-e-aprendi) · [Estado atual](#estado-atual) · [Documentação](#documentação-e-navegação) · [Marca oficial](docs/marca/README.md)
 
 ## O que este projeto faz
 
