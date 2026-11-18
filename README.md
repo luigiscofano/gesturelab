@@ -12,13 +12,28 @@
 
 ## O que este projeto faz
 
+<details>
+<summary>Expandir o que este projeto faz</summary>
+
 Transforma a webcam em uma interface visual: localiza pontos das mãos ou do corpo e usa essas coordenadas para desenhar conexões, mostrar gestos, produzir traços e comparar poses. É uma aplicação **local de desktop**, iniciada pelo terminal. Usa modelos pré-treinados do MediaPipe e quatro modos selecionáveis; um modo é executado por vez.
+
+
+</details>
 
 ## Qual problema resolve
 
+<details>
+<summary>Expandir qual problema resolve</summary>
+
 O projeto aproxima a saída de um detector visual de uma aplicação que o usuário consegue experimentar. Coordenadas isoladas passam a controlar uma caneta ou uma comparação geométrica, com estados, limites de aceitação, tratamento de arquivos e testes. Também permite estudar onde termina a detecção fornecida por um modelo e onde começa a lógica da aplicação.
 
+
+</details>
+
 ## Funcionalidades e módulos
+
+<details>
+<summary>Expandir funcionalidades e módulos</summary>
 
 | Quero fazer | Modo | Entrada | Resultado |
 | --- | --- | --- | --- |
@@ -75,7 +90,13 @@ O modo não pesquisa imagens na internet e não depende dos modos de mãos ou es
 
 A prévia usa entrada sintética e uma referência do catálogo; não é uma captura de webcam ou uma medição de desempenho.
 
+
+</details>
+
 ## Como executar
+
+<details>
+<summary>Expandir como executar</summary>
 
 **Requisitos:** Python 3.12 de 64 bits, Git, webcam e ambiente gráfico. É necessária conexão para instalar dependências e baixar os modelos; a inferência é local depois da preparação. Feche outros aplicativos que estejam usando a câmera.
 
@@ -135,13 +156,25 @@ python -m pytest -q
 
 Os testes de lógica não precisam de webcam nem dos pesos dos modelos. A validação com imagens, a sessão de câmera e a interface são verificações diferentes. Para câmera, permissões, modelos ausentes ou instalação, consulte [a solução de problemas](docs/SOLUCAO_DE_PROBLEMAS.md).
 
+
+</details>
+
 ## O que desenvolvi e aprendi
+
+<details>
+<summary>Expandir o que desenvolvi e aprendi</summary>
 
 O trabalho da aplicação inclui organização por responsabilidades, CLI, captura e visualização, estado da caneta, suavização, exportação, descritor geométrico, ranking, catálogo reproduzível e testes. Os detectores visuais são fornecidos pelo **MediaPipe**; a integração não é apresentada como treinamento de modelos próprios.
 
 As competências exercitadas são processamento de imagens, coordenadas, estado temporal, separação entre domínio e dependências, validação de entradas e limites de métricas. Uma atividade de estudo é alterar o limiar do PoseMatch e registrar tanto rejeições quanto falsos candidatos, sem chamar a distância de acurácia.
 
+
+</details>
+
 ## Estado atual
+
+<details>
+<summary>Expandir estado atual</summary>
 
 | Disponível | Em desenvolvimento / evolução proposta |
 | --- | --- |
@@ -150,11 +183,23 @@ As competências exercitadas são processamento de imagens, coordenadas, estado 
 | Comparação com catálogo local e rejeição por limiar | Catálogo maior e benchmark independente |
 | Testes, lint e CI em Windows/Ubuntu | Avaliação sistemática de uso em equipamentos e ambientes diversos |
 
+
+</details>
+
 ## Validação e limites
+
+<details>
+<summary>Expandir validação e limites</summary>
 
 Há testes de geometria, estados, entradas, arquivos e regressões, além de inferência com imagens registrada em [VALIDACAO.md](docs/VALIDACAO.md). Nenhum score do modelo ou descritor é convertido em promessa de acerto. O espelhamento afeta a visualização; o modelo recebe a imagem original. Iluminação, oclusão, enquadramento e câmera afetam a experiência.
 
+
+</details>
+
 ## Documentação e navegação
+
+<details>
+<summary>Expandir documentação e navegação</summary>
 
 | Preciso de… | Onde encontrar |
 | --- | --- |
@@ -168,12 +213,27 @@ Há testes de geometria, estados, entradas, arquivos e regressões, além de inf
 | Índice geral | [docs/](docs/README.md) |
 
 
+
+</details>
+
 ## Autoria, referências e licença
+
+<details>
+<summary>Expandir autoria, referências e licença</summary>
 
 **Luigi Scofano de Araujo · Engenharia de Computação, Poli-USP · USP 13680334.** Fontes recuperados, componentes de terceiros e trabalhos em grupo mantêm os créditos indicados nos arquivos e na documentação.
 
 [Dependências e créditos](THIRD_PARTY_NOTICES.md) · [Licença](LICENSE) · [Como contribuir](CONTRIBUTING.md) · [Mudanças](CHANGELOG.md)
 
+
+</details>
+
 ## Tópicos do repositório
 
+<details>
+<summary>Expandir tópicos do repositório</summary>
+
 `python` · `computer-vision` · `opencv` · `mediapipe` · `hand-tracking` · `gesture-recognition` · `air-writing` · `pose-estimation` · `pose-matching` · `educational`
+
+</details>
+
