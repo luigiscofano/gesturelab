@@ -146,6 +146,12 @@ webcam com `--headless`.
 
 ### A janela não abre
 
+Se o **menu inicial** acusar falta de Tcl/Tk, confira esse componente com
+`python -m tkinter` usando o Python da `.venv`. No Windows, o instalador oficial
+do Python oferece Tcl/Tk; no Linux, o ambiente pode precisar do pacote
+`python3-tk` compatível com o Python usado. Os comandos `app.py --mode ...`
+continuam disponíveis sem Tk.
+
 Use uma sessão local com interface gráfica. A janela OpenCV não aparece na
 página do GitHub, em um notebook hospedado ou em um terminal remoto sem suporte
 gráfico. Confira também se não passou `--headless`.

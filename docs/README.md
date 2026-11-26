@@ -20,7 +20,7 @@ e as próximas entregas.
 | Quero... | Abra esta página |
 | --- | --- |
 | **Rodar pela primeira vez** | [Instalação do zero](INSTALACAO.md): programas, Git ou ZIP, ambiente e primeira janela |
-| **Experimentar os quatro modos** | [Como usar](USO.md): comandos, controles, fotos e saídas |
+| **Experimentar os quatro modos** | [Como usar](USO.md): menu inicial, comandos, controles, fotos e saídas |
 | **Resolver algo que deu errado** | [Solução de problemas](SOLUCAO_DE_PROBLEMAS.md): sintomas e verificações |
 | **Encontrar uma parte do código** | [Mapa do projeto](MAPA_DO_PROJETO.md): pastas, módulos e onde alterar cada comportamento |
 | **Entender as decisões técnicas** | [Arquitetura](ARQUITETURA.md): captura, inferência, estado e separação dos módulos |
@@ -42,7 +42,7 @@ reúne todos os argumentos de `app.py`, com padrões e restrições.
 
 | Área | O que você encontra | Onde começar |
 | --- | --- | --- |
-| Aplicação | CLI, inferência, regras e interface | [Mapa dos módulos](MAPA_DO_PROJETO.md) |
+| Aplicação | Menu, CLI, inferência, regras e interface | [Mapa dos módulos](MAPA_DO_PROJETO.md) |
 | `scripts/` | Download, diagnóstico e indexação de fotos | [Guia dos utilitários](../scripts/README.md) |
 | `models/` | Origem, nomes e integridade dos modelos | [Guia dos modelos](../models/README.md) |
 | `pose_gallery/` | Catálogo inicial e geração das ilustrações | [Guia do catálogo](../pose_gallery/README.md) |

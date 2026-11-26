@@ -14,6 +14,7 @@ O GestureLab roda no seu computador; a página do GitHub reúne código e docume
 | Você precisa de | Para quê |
 | --- | --- |
 | [Python **3.12 de 64 bits**](https://www.python.org/downloads/) | Executar o aplicativo no ambiente de referência do projeto |
+| Tcl/Tk (para o menu) | Componente do Python normalmente incluído no instalador oficial do Windows; a CLI não precisa dele |
 | Webcam e sessão com interface gráfica | Usar os quatro modos ao vivo |
 | Internet durante a preparação | Instalar os pacotes e baixar os modelos |
 | [Git](https://git-scm.com/downloads), se escolher clonar | Obter o repositório e receber atualizações com `git pull` |
@@ -101,11 +102,14 @@ arquivos. Ao terminar sem falhas, ele exibe
 Se aparecer `[FALHA]`, consulte a mensagem correspondente em
 [Solução de problemas](SOLUCAO_DE_PROBLEMAS.md) antes de abrir o aplicativo.
 
-### Abrir o primeiro modo
+### Abrir o menu
 
 ```powershell
-.\.venv\Scripts\python.exe app.py --mode hands
+.\.venv\Scripts\python.exe launcher.py
 ```
+
+Com os modelos já instalados, você também pode abrir **`Iniciar-GestureLab.cmd`**
+com dois cliques no Explorador.
 
 Continue em [Confirmar o primeiro resultado](#4-confirmar-o-primeiro-resultado).
 
@@ -120,7 +124,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python scripts/download_models.py
 .venv/bin/python scripts/check_environment.py --imports --models all
-.venv/bin/python app.py --mode hands
+.venv/bin/python launcher.py
 ```
 
 No VS Code, selecione `.venv/bin/python` como interpretador. Os exemplos dos
@@ -133,12 +137,13 @@ terminal ou editor utilizado. Se uma biblioteca nativa estiver ausente, veja
 
 ## 4. Confirmar o primeiro resultado
 
-1. Aguarde a janela **GestureLab** abrir e permita o acesso à câmera, caso o
-   sistema solicite.
+1. Na tela inicial **GestureLab**, clique em **Mãos** ou pressione **1**.
+   Permita o acesso à câmera caso o sistema solicite.
 2. Mostre uma mão inteira, com boa iluminação. Os pontos e suas conexões devem
    acompanhar a mão quando ela for detectada.
-3. Clique na janela e pressione **Q** ou **Esc** para encerrar.
-4. Com a execução anterior encerrada, experimente outro modo:
+3. Na janela de captura, pressione **Q** ou **Esc** para voltar ao menu.
+4. Experimente os outros modos no mesmo menu. Para executar direto pelo terminal,
+   passe um dos argumentos abaixo ao Python da sua `.venv`:
 
 | Quero experimentar | Argumentos depois do executável Python |
 | --- | --- |

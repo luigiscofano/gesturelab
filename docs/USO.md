@@ -2,7 +2,8 @@
 
 [Início](../README.md) · [Documentação](README.md) · [Instalação](INSTALACAO.md)
 
-Escolha um modo, execute o comando e interaja com a janela que ele abre.
+No menu inicial, escolha um modo e interaja com a janela que ele abre. Os comandos
+abaixo também permitem iniciar diretamente no modo desejado.
 Este guia reúne os controles e as opções disponíveis. Se ainda não preparou o
 ambiente e os modelos, comece pela [instalação](INSTALACAO.md).
 
@@ -25,10 +26,12 @@ Os exemplos são para **PowerShell no Windows**, na pasta que contém `app.py`.
 No macOS/Linux, substitua `.\.venv\Scripts\python.exe` por `.venv/bin/python`.
 Coloque caminhos com espaços entre aspas, como `--image "minhas fotos/pose.jpg"`.
 
-O modo é escolhido ao iniciar. Para trocar, pressione **Q** ou **Esc**, espere
-o terminal ficar disponível e execute o próximo comando. Clique na janela do
-GestureLab para que ela receba os atalhos. O aplicativo roda no seu computador;
-a página do GitHub apresenta o código e os guias.
+Abra `launcher.py` com o Python da `.venv` ou dê dois cliques em
+`Iniciar-GestureLab.cmd` no Windows. Escolha um modo com o mouse ou com **1 a 4**.
+O campo **Câmera** começa em 0; experimente 1 se o dispositivo padrão estiver
+indisponível. Na janela de captura, **Q** ou **Esc** retorna ao menu. Se você
+iniciou diretamente com `app.py --mode`, essas teclas encerram o programa.
+O aplicativo roda localmente, e os atalhos só agem na janela em foco.
 
 ## Mãos — hands
 

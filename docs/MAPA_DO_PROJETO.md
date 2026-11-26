@@ -35,6 +35,7 @@ Na raiz, [requirements.txt](../requirements.txt) fixa as dependências de execu�
 
 | Arquivo | Responsabilidade |
 | --- | --- |
+| [launcher.py](../launcher.py) | Menu local em Tkinter: seleção, câmera e retorno entre sessões |
 | [app.py](../app.py) | Lê os argumentos, rejeita combinações incompatíveis e inicia o modo escolhido |
 | [vision_runtime.py](../vision_runtime.py) | Carrega as bibliotecas de visão, lê imagens, converte BGR para RGB e controla os recursos da câmera |
 | [file_io.py](../file_io.py) | Cria saídas sem sobrescrever arquivos existentes e limpa arquivos da tentativa quando ocorre uma falha |

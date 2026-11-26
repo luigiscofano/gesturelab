@@ -7,6 +7,7 @@ entrega como concluída somente depois de executá-la e reunir a evidência indi
 
 | Etapa | Estado inicial | Critério de conclusão |
 | --- | --- | --- |
+| Tela inicial | Menu implementado, com quatro modos | Alternar os quatro modos e testar ida e volta com webcam real |
 | Landmarks em webcam | Código disponível; testar no computador local | Zero, uma e duas mãos e saída correta |
 | Gestos do modelo pronto | Código disponível; testar no computador local | Nomes e rejeição visíveis |
 | Escrita no ar | Código disponível; testar no computador local | Traços separados, pausa e cursor coerente |

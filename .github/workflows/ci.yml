@@ -35,7 +35,7 @@ jobs:
         run: python -m ruff check .
       - name: Compile Python sources
         run: >-
-          python -m compileall -q app.py core.py airwriting.py file_io.py
+          python -m compileall -q app.py launcher.py core.py airwriting.py file_io.py
           hand_app.py pose_matching.py pose_match_app.py vision_runtime.py
           pose_gallery scripts tests
       - name: Check CLI entry points without vision dependencies

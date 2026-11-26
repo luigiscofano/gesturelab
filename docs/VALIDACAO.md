@@ -269,6 +269,18 @@ Essas comparações verificam preservação de comportamento nos casos executado
 Não são uma nova avaliação de acurácia, desempenho ou webcam física. As verificações
 registradas não representam aprovação humana independente.
 
+## Tela inicial
+
+Em 26/11/2026, a abertura do menu e a troca entre os quatro modos foram
+verificadas em uma sessão gráfica Linux, com janelas reais do Tkinter e do
+OpenCV e captura simulada. Também foi conferido o retorno ao menu após
+uma falha de câmera. A suíte determinística passou com 143 testes.
+
+O teste de aceitação em webcam física continua separado: abra cada modo,
+confira a resposta ao vivo, volte com Q ou Esc e abra o modo seguinte sem
+reiniciar o programa. Em escrita no ar, salve com S e confira o PNG e o JSON.
+A janela real do Windows e a fluidez da captura ainda precisam desse teste.
+
 ---
 
 **Próxima leitura:** [executar os testes](../tests/README.md), [avaliar no próprio equipamento](AVALIACAO.md) e [histórico de alterações](../CHANGELOG.md).
