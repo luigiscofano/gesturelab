@@ -2,6 +2,13 @@
 
 [Início](README.md) · [Documentação](docs/README.md) · [Roadmap](docs/ROADMAP.md)
 
+## 26 de novembro de 2026
+
+- Menu de desktop em estilo terminal para abrir os quatro modos por clique ou
+  teclado, com campo de câmera e retorno após cada sessão.
+- Atalho Windows para abrir o menu após a instalação. A CLI existente continua
+  disponível para opções avançadas, fotos, automação e diagnóstico.
+
 ## 30 de outubro de 2026
 
 ### Organização e apresentação no GitHub

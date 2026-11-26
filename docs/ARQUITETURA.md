@@ -18,7 +18,11 @@ os modos de mãos e escrita; [pose_match_app.py](../pose_match_app.py) executa a
 de imagem e câmera. Os módulos de geometria e estado continuam independentes
 dessas bibliotecas.
 
-O programa usa exatamente uma tarefa por execução: Hand Landmarker em `hands`
+[launcher.py](../launcher.py) oferece o menu com Tkinter. O menu não inicia a
+webcam por conta própria. Ao escolher um modo, ele usa o mesmo roteamento da CLI
+e só reaparece depois que a sessão devolve a câmera ao sistema.
+
+O programa usa exatamente uma tarefa por sessão: Hand Landmarker em `hands`
 e `airwrite`, Gesture Recognizer em `gestures` ou Pose Landmarker em `posematch`.
 
 ```mermaid

@@ -59,6 +59,7 @@ virtual. Não é necessário ativar esse ambiente nem alterar a política do Pow
 | Arquivo | Comportamentos cobertos |
 | --- | --- |
 | [test_core.py](test_core.py) | Espelhamento, limites da imagem, coordenadas finitas, classes conhecidas e desconhecidas, limiar de score e timestamps crescentes. |
+| [test_launcher.py](test_launcher.py) | Abertura dos quatro modos, seleção de câmera, retorno ao menu e recuperação de falha, com interface substituída no teste. |
 | [test_cli.py](test_cli.py) | Opções e combinações aceitas, encerramento obrigatório em webcam sem janela, restrições do modo foto e proteção contra sobrescrita durante a exportação. |
 | [test_airwriting.py](test_airwriting.py) | Pose geométrica, confirmação, separação de traços, perda de mão, salto, duas mãos, pausa, limpar, desfazer, suavização, metadados e falhas de exportação. |
 | [test_environment.py](test_environment.py) | Contratos do diagnóstico de instalação, com dependências e arquivos controlados pelo teste. Consulte também o [README dos scripts](../scripts/README.md). |

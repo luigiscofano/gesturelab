@@ -15,7 +15,7 @@
 <details>
 <summary>Expandir o que este projeto faz</summary>
 
-Transforma a webcam em uma interface visual: localiza pontos das mãos ou do corpo e usa essas coordenadas para desenhar conexões, mostrar gestos, produzir traços e comparar poses. É uma aplicação **local de desktop**, iniciada pelo terminal. Usa modelos pré-treinados do MediaPipe e quatro modos selecionáveis; um modo é executado por vez.
+Transforma a webcam em uma interface visual: localiza pontos das mãos ou do corpo e usa essas coordenadas para desenhar conexões, mostrar gestos, produzir traços e comparar poses. É uma aplicação **local de desktop**, com um menu no estilo terminal e comandos opcionais para automação. Usa modelos pré-treinados do MediaPipe e quatro modos selecionáveis; um modo é executado por vez.
 
 
 </details>
@@ -130,10 +130,10 @@ Baixe os modelos, confira o ambiente e inicie a primeira demonstração:
 ```sh
 python scripts/download_models.py
 python scripts/check_environment.py --imports --models all
-python app.py --mode hands
+python launcher.py
 ```
 
-Deve abrir uma janela com a imagem da câmera e os pontos detectados. Pressione **Q** ou **Esc** para sair. Para trocar de função, feche a janela e execute outro `--mode`. Se a câmera não for a de índice zero, tente `--camera 1`.
+No Windows, depois da instalação, você também pode abrir **`Iniciar-GestureLab.cmd`** com dois cliques. No menu, clique em um dos quatro modos ou use as teclas **1 a 4**. A webcam só é aberta ao escolher um modo. Pressione **Q** ou **Esc** na janela de captura para voltar ao menu. Selecione outro número no campo **Câmera** caso o dispositivo padrão não funcione. A CLI `python app.py --mode hands` continua disponível sem Tk.
 
 ### Processar sua própria foto
 
@@ -178,7 +178,7 @@ As competências exercitadas são processamento de imagens, coordenadas, estado 
 
 | Disponível | Em desenvolvimento / evolução proposta |
 | --- | --- |
-| Quatro modos, webcam e processamento de foto onde compatível | Gestos próprios e avaliação ampliada |
+| Menu de seleção, quatro modos, webcam e processamento de foto onde compatível | Gestos próprios e avaliação ampliada |
 | Caneta com traços, desfazer e exportação | Reconhecimento do conteúdo escrito |
 | Comparação com catálogo local e rejeição por limiar | Catálogo maior e benchmark independente |
 | Testes, lint e CI em Windows/Ubuntu | Avaliação sistemática de uso em equipamentos e ambientes diversos |

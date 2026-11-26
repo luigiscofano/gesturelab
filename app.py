@@ -124,15 +124,20 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return args
 
 
+def run_mode(args: argparse.Namespace) -> None:
+    """Executa um modo já validado, sem depender da interface de entrada."""
+    dependencies = load_dependencies()
+    if args.mode == "posematch":
+        run_posematch(args, dependencies)
+    else:
+        run_hand_mode(args, dependencies)
+
+
 def main(argv: list[str] | None = None) -> int:
     """Inicia o modo escolhido e devolve ao terminal zero para sucesso ou um para erro."""
     args = parse_args(argv)
     try:
-        dependencies = load_dependencies()
-        if args.mode == "posematch":
-            run_posematch(args, dependencies)
-        else:
-            run_hand_mode(args, dependencies)
+        run_mode(args)
     except KeyboardInterrupt:
         return 0
     except (RuntimeError, OSError, ValueError) as exc:
